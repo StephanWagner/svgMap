@@ -1,0 +1,29 @@
+{
+  "name": "svg-worldmap",
+  "description": "SVG Worldmap",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "keywords": [
+    "svg",
+    "worldmap",
+    "map",
+    "countries"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StephanWagner/svg-worldmap"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.3",
+    "gulp-concat": "^2.6.1",
+    "gulp-header": "^2.0.5",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.0",
+    "svg-pan-zoom": "^3.5.2"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,471 @@
+
+$breakpointStatic: 960px;
+$breakpointMobile: 600px;
+
+$textcolor: #1e1e1e;
+$branddark: #69665d;
+
+$categorydefault: #cfc8a9;
+$categorynone: #eee;
+$category0: #7f7f7f;
+$category1: #54803a;    
+$category2: #adcf8f;
+$category3: #c5dfb6;
+$category4: #c6d7e9;
+$category5: #fee3a4;
+$category6: #fcd86f;
+
+
+$category7: #eb7d3c;
+
+.svgWorldmap-category-bg-none {background: $categorynone}
+.svgWorldmap-category-bg-default {background: $categorydefault}
+.svgWorldmap-category-bg-0 {background: $category0}
+.svgWorldmap-category-bg-1 {background: $category1}
+.svgWorldmap-category-bg-2 {background: $category2}
+.svgWorldmap-category-bg-3 {background: $category3}
+.svgWorldmap-category-bg-4 {background: $category4}
+.svgWorldmap-category-bg-5 {background: $category5}
+.svgWorldmap-category-bg-6 {background: $category6}
+.svgWorldmap-category-bg-7 {background: yellow       }
+
+
+
+
+.svgWorldmap-country-modal-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 500px;
+  background: #fff;
+  z-index: 4000;
+  display: none;
+  box-shadow: 0 0 3px rgba(0, 0, 0, .2);
+
+  @media (max-width: $breakpointStatic) {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+  }
+
+  &.svgWorldmap-active {
+    display: block;
+  }
+
+  .svgWorldmap-country-modal-header {
+    display: flex;
+  }
+
+  .svgWorldmap-country-modal-header-countries-label {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 5px;
+    transition: opacity .3s;
+
+    @media (max-width: $breakpointMobile) {
+      font-size: 12px;
+    }
+  }
+
+  .svgWorldmap-country-modal-header-countries-container {
+    display: flex;
+    padding: 0 0 5px;
+
+    .svgWorldmap-country-modal-header-country-wrapper {
+      flex-shrink: 0;
+      width: 55px;
+      height: 50px;
+      padding: 0 0 0 5px;
+
+      @media (max-width: $breakpointMobile) {
+        width: 45px;
+        height: 40px;
+      }
+
+      .svgWorldmap-country-modal-header-country {
+        text-align: center;
+        line-height: 50px;
+        font-size: 26px;
+        color: #fff;
+        position: relative;
+        cursor: pointer;
+
+        @media (max-width: $breakpointMobile) {
+          line-height: 40px;
+          font-size: 22px;
+        }
+
+        &.svgWorldmap-category-bg-none {
+          cursor: default;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 0;
+          height: 0;
+          margin-top: -5px;
+          border-left: 12px solid transparent;
+          border-right: 12px solid transparent;
+          border-bottom: 12px solid $branddark;
+          display: none;
+        }
+
+        &.svgWorldmap-active {
+          &:after {
+            display: block;
+          }
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 0;
+          height: 0;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          border-top: 6px solid #fff;
+          display: none;
+        }
+      }
+
+      &.svgWorldmap-tooltip-active {
+        .svgWorldmap-country-modal-header-country {
+          &:before {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  .svgWorldmap-country-modal-title-container {
+    display: flex;
+    justify-content: space-between;
+    background: $branddark;
+    padding: 5px 10px;
+    color: #fff;
+    position: relative;
+    cursor: pointer;
+
+    .svgWorldmap-country-modal-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 40px;
+      text-align: center;
+      transition: transform .2s;
+
+      svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60%;
+        height: 60%;
+
+        path {
+          fill: #fff;
+        }
+      }
+    }
+  }
+
+  &.svgWorldmap-content-active {
+    .svgWorldmap-country-modal-toggle {
+      transform: rotate(-180deg);
+    }
+  }
+
+  .svgWorldmap-country-modal-chosen-country-tooltip {
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 5px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+
+    &.svgWorldmap-active {
+      opacity: 1;
+    }
+  }
+}
+
+// Risk comparison
+
+.svgWorldmap-risk-comparison-container {
+  padding: 5px 5px 0;
+  display: flex;
+
+  &:last-child {
+    padding-bottom: 5px;
+  }
+
+  .svgWorldmap-risk-comparison-icon {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    flex-shrink: 0;
+    margin-right: 10px;
+    font-size: 30px;
+    color: #fff;
+  }
+
+  &.svgWorldmap-risk-comparison-container1 {
+    .svgWorldmap-risk-comparison-icon {
+      background: #eee;
+      color: $category2;
+    }
+  }
+
+  &.svgWorldmap-risk-comparison-container2 {
+    .svgWorldmap-risk-comparison-icon {
+      background: #eee;
+      color: $category7;
+    }
+  }
+
+  .svgWorldmap-risk-comparison-text {
+    align-self: center;
+    line-height: 1.5;
+    font-size: 14px;
+
+    @media (max-width: $breakpointMobile) {
+      font-size: 12px;
+      line-height: 1.4;
+
+      br {
+        display: none;
+      }
+    }
+  }
+}
+
+// Chart
+
+.svgWorldmap-chart-wrapper {
+  border-bottom: 4px solid #eee;
+}
+
+.svgWorldmap-chart-title-container {
+  padding: 5px 10px;
+  color: #fff;
+  background: $branddark;
+}
+
+.svgWorldmap-chart-container {
+  display: flex;
+  background: #eee;
+
+  @media (max-width: $breakpointMobile) {
+    display: block;
+  }
+}
+
+.svgWorldmap-chart-navigation-item {
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 20px;
+  flex-shrink: 0;
+  padding: 5px 0 5px 10px;
+  width: 130px;
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
+  color: #888;
+  transition: color .2s;
+  cursor: pointer;
+
+  &:hover,
+  &.svgWorldmap-active {
+    color: #333;
+  }
+
+  &.svgWorldmap-active {
+    background: #eee;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+
+    @media (max-width: $breakpointMobile) {
+      border-bottom: 1px solid #eee;
+    }
+  }
+}
+
+.svgWorldmap-chart-navigation-container {
+  @media (max-width: $breakpointMobile) {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .svgWorldmap-chart-navigation-item {
+      width: 50%;
+      line-height: 30px;
+    }
+  }
+}
+
+.svgWorldmap-chart-canvas-container {
+  position: relative;
+  width: 100%;
+  height: 185px;
+  background: #fff;
+  padding-top: 10px;
+  overflow: hidden;
+
+  .svgWorldmap-chart-canvas {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Footer
+
+.svgWorldmap-country-modal-footer {
+  padding: 0 0 10px;
+  font-size: 14px;
+
+  @media (max-width: $breakpointMobile) {
+    font-size: 12px;
+  }
+
+  .svgWorldmap-country-modal-footer-headline {
+    padding: 15px;
+    text-align: center;
+    padding: 10px 15px;
+  }
+
+  .svgWorldmap-country-modal-footer-icons {
+    display: flex;
+  }
+
+  .svgWorldmap-country-modal-footer-icon-container {
+    width: 33.333%;
+    text-align: center;
+    flex-shrink: 0;
+    display: block;
+    text-decoration: none;
+    transition: color .2s;
+
+    .svgWorldmap-country-modal-footer-icon {
+      height: 32px;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      path {
+        transition: fill .2s;
+        fill: $branddark;
+      }
+    }
+
+    .svgWorldmap-country-modal-footer-icon-text {
+      margin-top: 8px;
+    }
+  }
+
+  a.svgWorldmap-country-modal-footer-icon-container {
+    color: $textcolor;
+
+    &:hover {
+      .svgWorldmap-country-modal-footer-icon-text {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Search
+
+.svgWorldmap-country-modal-search-wrapper {
+  position: absolute;
+  z-index: 100;
+  width: calc(100% - 340px);
+  top: 30px;
+  right: 5px;
+  height: 50px;
+  display: flex;
+  transition: width .3s;
+
+  @media (max-width: $breakpointMobile) {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100% !important;
+  }
+
+  .svgWorldmap-country-modal-search-input {
+    width: calc(100% - 50px);
+    border: 2px solid $categorynone;
+    border-right: 0;
+    padding: 0 0 0 15px;
+    font-size: 14px;
+    transition: border .2s;
+    background: $categorynone;
+  }
+
+  .svgWorldmap-country-modal-search-button {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    background: $categorynone;
+    transition: background-color .2s;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      margin: 15px;
+
+      path {
+        fill: #aaa;
+        transition: fill .2s;
+      }
+    }
+  }
+
+  .svgWorldmap-country-finder-results {
+    width: 100%;
+  }
+}
+
+.svgWorldmap-country-modal-wrapper.svgWorldmap-search-enabled {
+  .svgWorldmap-country-modal-search-wrapper {
+    width: 490px;
+
+    .svgWorldmap-country-modal-search-input {
+      border-color: $branddark;
+    }
+
+    .svgWorldmap-country-modal-search-button {
+      background: $branddark;
+
+      svg {
+        path {
+          fill: #fff;
+        }
+      }
+    }
+  }
+
+  .svgWorldmap-country-modal-header-countries-label {
+    opacity: 0;
+  }
+}

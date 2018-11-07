@@ -1,0 +1,55 @@
+
+.svgWorldmap-tooltip {
+  box-shadow: 0 0 3px rgba(0, 0, 0, .2);
+  position: absolute;
+  z-index: 10000;
+  border-radius: 2px;
+  background: #fff;
+  transform: translate(-50%, -100%);
+  border-bottom: 1px solid #000;
+  display: none;
+  margin-top: -15px;
+  pointer-events: none;
+  min-width: 60px;
+
+  &.svgWorldmap-active {
+    display: block;
+  }
+
+  .svgWorldmap-tooltip-content {
+    font-size: 15px;
+    padding: 5px 15px;
+    line-height: 1.4;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .svgWorldmap-tooltip-pointer {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    height: 10px;
+    width: 30px;
+
+    &:after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border: 1px solid #000;
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+    }
+  }
+}
+
+
+
+
+h1 {
+  color: red;
+}

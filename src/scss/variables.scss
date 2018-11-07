@@ -1,0 +1,28 @@
+
+$breakpointStatic: 960px;
+$breakpointMobile: 600px;
+
+$textcolor: #1e1e1e;
+$branddark: #69665d;
+
+$categorydefault: #cfc8a9;
+$categorynone: #eee;
+$category0: #7f7f7f;
+$category1: #54803a;
+$category2: #adcf8f;
+$category3: #c5dfb6;
+$category4: #c6d7e9;
+$category5: #fee3a4;
+$category6: #fcd86f;
+$category7: #eb7d3c;
+
+.svgWorldmap-category-bg-none {background: $categorynone}
+.svgWorldmap-category-bg-default {background: $categorydefault}
+.svgWorldmap-category-bg-0 {background: $category0}
+.svgWorldmap-category-bg-1 {background: $category1}
+.svgWorldmap-category-bg-2 {background: $category2}
+.svgWorldmap-category-bg-3 {background: $category3}
+.svgWorldmap-category-bg-4 {background: $category4}
+.svgWorldmap-category-bg-5 {background: $category5}
+.svgWorldmap-category-bg-6 {background: $category6}
+.svgWorldmap-category-bg-7 {background: $category7}

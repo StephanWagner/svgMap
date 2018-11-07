@@ -1,0 +1,179 @@
+
+// Wrappers
+
+$breakpointStatic: 960px;
+$breakpointMobile: 600px;
+
+$textcolor: #1e1e1e;
+$branddark: #69665d;
+
+$categorydefault: #cfc8a9;
+$categorynone: #eee;
+$category0: #7f7f7f;
+$category1: #54803a;
+$category2: #adcf8f;
+$category3: #c5dfb6;
+$category4: #c6d7e9;
+$category5: #fee3a4;
+$category6: #fcd86f;
+$category7: #eb7d3c;
+
+.svgWorldmap-category-bg-none {background: $categorynone}
+.svgWorldmap-category-bg-default {background: $categorydefault}
+.svgWorldmap-category-bg-0 {background: $category0}
+.svgWorldmap-category-bg-1 {background: $category1}
+.svgWorldmap-category-bg-2 {background: $category2}
+.svgWorldmap-category-bg-3 {background: $category3}
+.svgWorldmap-category-bg-4 {background: $category4}
+.svgWorldmap-category-bg-5 {background: $category5}
+.svgWorldmap-category-bg-6 {background: $category6}
+.svgWorldmap-category-bg-7 {background: $category7}
+
+
+.svgWorldmap-map-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #d9ecff;
+
+  @media (max-width: $breakpointStatic) {
+    height: auto;
+  }
+}
+
+.svgWorldmap-map-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+// Controls
+
+.svgWorldmap-map-controls-wrapper {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 50;
+  display: flex;
+}
+
+.svgWorldmap-map-controls-zoom,
+.svgWorldmap-map-controls-move {
+  display: flex;
+  margin-right: 5px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #fff;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.svgWorldmap-control-button {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  position: relative;
+
+  &.svgWorldmap-zoom-button {
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #888;
+      transition: background-color .2s;
+    }
+
+    &:before {
+      width: 11px;
+      height: 3px;
+    }
+
+    &:hover {
+      &:before,
+      &:after {
+        background: $textcolor;
+      }
+    }
+  }
+
+  &.svgWorldmap-zoom-in-button {
+    &:after {
+      width: 3px;
+      height: 11px;
+    }
+  }
+
+  &.svgWorldmap-disabled {
+    cursor: default !important;
+
+    &:before,
+    &:after {
+      background: #ddd !important;
+    }
+  }
+}
+
+// Countries
+
+.svgWorldmap-country {
+  cursor: pointer;
+	fill: #ddd;
+	stroke: #fff;
+	stroke-width: 1;
+	stroke-linejoin: round;
+	vector-effect: non-scaling-stroke;
+  transition: fill .2s, stroke .2s;
+
+  &:hover {
+    stroke: $branddark;
+  }
+
+  &.svgWorldmap-active {
+    stroke: $branddark;
+    stroke-width: 1.5;
+  }
+}
+
+.svgWorldmap-category-default {
+	fill: $categorydefault;
+}
+
+.svgWorldmap-category-0 {
+	fill: $category0;
+}
+
+.svgWorldmap-category-1 {
+	fill: $category1;
+}
+
+.svgWorldmap-category-2 {
+	fill: $category2;
+}
+
+.svgWorldmap-category-3 {
+	fill: $category3;
+}
+
+.svgWorldmap-category-4 {
+	fill: $category4;
+}
+
+.svgWorldmap-category-5 {
+	fill: $category5;
+}
+
+.svgWorldmap-category-6 {
+	fill: $category6;
+}
+
+.svgWorldmap-category-7 {
+	fill: $category7;
+}
