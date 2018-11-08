@@ -8,7 +8,8 @@ var sourcemaps = require('gulp-sourcemaps');
 var header = require('gulp-header');
 var pkg = require('./package.json');
 
-var jsHeader = '/*! svg-worldmap v<%= pkg.version %> | https://github.com/StephanWagner/svg-worldmap | MIT LICENSE | By Stephan Wagner | https://stephanwagner.me */' + "\n";
+var cssHeader = jsHeader = '/*! svg-worldmap v<%= pkg.version %> | https://github.com/StephanWagner/svg-worldmap | MIT License | Copyright Stephan Wagner | https://stephanwagner.me */' + "\n";
+jsHeader += '/*! svg-pan-zoom v3.6.0 | https://github.com/ariutta/svg-pan-zoom | BSD 2-Clause "Simplified" License | Copyright Andrea Leofreddi <a.leofreddi@itcharm.com> */' + "\n";
 
 var paths = {
   styles: {
@@ -16,6 +17,7 @@ var paths = {
   },
   scripts: {
     src: [
+      './node_modules/svg-pan-zoom/dist/svg-pan-zoom.js',
       './src/js/svg-worldmap.js',
       './src/js/svg-worldmap/**/*.js',
       './src/js/stand-alone.js'
@@ -31,6 +33,9 @@ gulp.task('styles-dev', function () {
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('svg-worldmap.css'))
+    .pipe(header(cssHeader, {
+      pkg: pkg
+    }))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.dest));
 });
@@ -39,8 +44,8 @@ gulp.task('styles-prod', ['styles-dev'], function () {
   return gulp
     .src(paths.dest + 'svg-worldmap.css')
     .pipe(rename('svg-worldmap.min.css'))
-    .pipe(cleanCSS())
-    .pipe(header(jsHeader, {
+    .pipe(cleanCSS({level: {1: {specialComments: 0}}}))
+    .pipe(header(cssHeader, {
       pkg: pkg
     }))
     .pipe(gulp.dest(paths.dest));
@@ -50,6 +55,9 @@ gulp.task('scripts-dev', function () {
   return gulp.src(paths.scripts.src)
     .pipe(sourcemaps.init())
     .pipe(concat('svg-worldmap.js'))
+    .pipe(header(jsHeader, {
+      pkg: pkg
+    }))
     .pipe(sourcemaps.init({
       loadMaps: true
     }))

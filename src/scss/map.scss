@@ -33,7 +33,7 @@ $category7: #eb7d3c;
 .svgWorldmap-map-wrapper {
   position: relative;
   width: 100%;
-  height: 100%;
+  padding-top: 50%;
   overflow: hidden;
   background: #d9ecff;
 
@@ -47,6 +47,9 @@ $category7: #eb7d3c;
   width: 100%;
   height: 100%;
   margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 // Controls

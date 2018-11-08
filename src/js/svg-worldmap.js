@@ -1,17 +1,17 @@
 // Wrapper function
-
-var svgWorldmap = function(options) {
+var svgWorldmap = function (options) {
   this.init(options)
 }
 
-
 // Initialize SVG Worldmap
-
-svgWorldmap.prototype.init = function(options) {
+svgWorldmap.prototype.init = function (options) {
 
   // Default options, pass a custom options object to overwrite specific
   var defaultOptions = {
-    
+
+    // Language
+    langauge: 'en',
+
     // The element to render the map in
     targetElementID: '',
 
@@ -35,9 +35,4 @@ svgWorldmap.prototype.init = function(options) {
 
   // Create the map
   this.createMap();
-
-
 }
-
-
-
