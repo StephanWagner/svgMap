@@ -716,7 +716,7 @@
 .svgWorldmap-map-wrapper {
   position: relative;
   width: 100%;
-  height: 100%;
+  padding-top: 50%;
   overflow: hidden;
   background: #d9ecff; }
   @media (max-width: 960px) {
@@ -727,7 +727,10 @@
   display: block;
   width: 100%;
   height: 100%;
-  margin: auto; }
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0; }
 
 .svgWorldmap-map-controls-wrapper {
   position: absolute;
@@ -889,11 +892,9 @@ h1 {
 .svgWorldmap-map-wrapper {
   position: relative;
   width: 100%;
-  /* height: 600px; */
   padding-top: 50%;
   overflow: hidden;
-  background: #d9ecff;
-  }
+  background: #d9ecff; }
   @media (max-width: 960px) {
     .svgWorldmap-map-wrapper {
       height: auto; } }
@@ -905,8 +906,7 @@ h1 {
   margin: auto;
   position: absolute;
   top: 0;
-  left: 0;
-  }
+  left: 0; }
 
 .svgWorldmap-map-controls-wrapper {
   position: absolute;
