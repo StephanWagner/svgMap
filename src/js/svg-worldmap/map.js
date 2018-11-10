@@ -54,8 +54,7 @@ svgWorldmap.prototype.createMap = function () {
     // Tooltip events
     countryElement.addEventListener('mouseenter', function (e) {
       var countryID = countryElement.getAttribute('data-id');
-      this.setTooltipContent(countryID);
-      //this.setTooltipContent(this.data[countryID]['name' + this.options.language]);
+      this.setTooltipContent(svgMapDataCountries[countryID]);
       this.showTooltip(e);
     }.bind(this));
 
