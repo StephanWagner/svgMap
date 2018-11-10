@@ -21,3 +21,8 @@ svgWorldmap.prototype.createElement = function (type, className, appendTo, inner
   appendTo && appendTo.appendChild(element);
   return element;
 };
+
+// Print numbers with commas
+svgWorldmap.prototype.numberWithCommas = function (nr) {
+  return nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};

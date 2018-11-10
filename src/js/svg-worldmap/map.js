@@ -54,7 +54,7 @@ svgWorldmap.prototype.createMap = function () {
     // Tooltip events
     countryElement.addEventListener('mouseenter', function (e) {
       var countryID = countryElement.getAttribute('data-id');
-      this.setTooltipContent(svgMapDataCountries[countryID]);
+      this.setTooltipContent(this.getTooltipContent(countryID));
       this.showTooltip(e);
     }.bind(this));
 
@@ -102,6 +102,25 @@ svgWorldmap.prototype.createMap = function () {
 
   this.setControlStatuses();
 }
+
+// Create the tooltip content
+svgWorldmap.prototype.getTooltipContent = function (countryID) {
+  var tooltipContentWrapper = this.createElement('div', 'svgWorldmap-tooltip-content-container');
+
+  // Flag
+  this.createElement('img', 'svgWorldmap-tooltip-flag', tooltipContentWrapper)
+    .setAttribute('src', this.options.flagURL.replace('{0}', countryID.toLowerCase()));
+
+  // Title
+  this.createElement('div', 'svgWorldmap-tooltip-title', tooltipContentWrapper)
+    .innerHTML = svgMapDataCountries[countryID];
+  
+  // Content
+  this.createElement('div', 'svgWorldmap-tooltip-content', tooltipContentWrapper)
+    .innerHTML = 'Population: ' + this.numberWithCommas(svgMapDataPopulation[countryID]);
+
+  return tooltipContentWrapper;
+};
 
 // Set the disabled statuses for buttons
 svgWorldmap.prototype.setControlStatuses = function () {

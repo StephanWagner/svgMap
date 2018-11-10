@@ -36,9 +36,9 @@ $category7: #eb7d3c;
   padding-top: 50%;
   overflow: hidden;
   background: #d9ecff;
-
-  @media (max-width: $breakpointStatic) {
-    height: auto;
+  
+  * {
+    box-sizing: border-box;
   }
 }
 

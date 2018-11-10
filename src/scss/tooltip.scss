@@ -1,4 +1,3 @@
-
 .svgWorldmap-tooltip {
   box-shadow: 0 0 3px rgba(0, 0, 0, .2);
   position: absolute;
@@ -16,40 +15,55 @@
     display: block;
   }
 
-  .svgWorldmap-tooltip-content {
-    font-size: 15px;
-    padding: 5px 15px;
-    line-height: 1.4;
+  .svgWorldmap-tooltip-content-container {
+    position: relative;
+    padding: 10px 20px;
+
+    .svgWorldmap-tooltip-flag {
+      display: block;
+      margin: auto;
+      width: auto;
+      height: 32px;
+      padding: 2px;
+      background: rgba(0, 0, 0, .15);
+      border-radius: 2px;
+    }
+  }
+
+  .svgWorldmap-tooltip-title {
     white-space: nowrap;
+    font-size: 18px;
+    line-height: 40px;
     text-align: center;
   }
 
-  .svgWorldmap-tooltip-pointer {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    overflow: hidden;
-    height: 10px;
-    width: 30px;
-
-    &:after {
-      content: '';
-      width: 20px;
-      height: 20px;
-      background: #fff;
-      border: 1px solid #000;
-      position: absolute;
-      bottom: 6px;
-      left: 50%;
-      transform: translateX(-50%) rotate(45deg);
-    }
+  .svgWorldmap-tooltip-content {
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    margin: -5px 0 0;
   }
 }
 
+.svgWorldmap-tooltip-pointer {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  height: 10px;
+  width: 30px;
 
-
-
-h1 {
-  color: red;
+  &:after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 1px solid #000;
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
 }

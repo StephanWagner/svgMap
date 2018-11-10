@@ -2421,7 +2421,10 @@ svgWorldmap.prototype.init = function (options) {
     maxZoom: 10,
 
     // Zoom sensitivity
-    zoomScaleSensitivity: 0.2
+    zoomScaleSensitivity: 0.2,
+
+    // The url to the flags, {0} will get replaced with lowercase coutry id
+    flagURL: 'https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg'
   };
 
   this.options = Object.assign({}, defaultOptions, (options || {}));
@@ -2496,7 +2499,7 @@ svgWorldmap.prototype.createMap = function () {
     // Tooltip events
     countryElement.addEventListener('mouseenter', function (e) {
       var countryID = countryElement.getAttribute('data-id');
-      this.setTooltipContent(svgMapDataCountries[countryID]);
+      this.setTooltipContent(this.getTooltipContent(countryID));
       this.showTooltip(e);
     }.bind(this));
 
@@ -2545,6 +2548,25 @@ svgWorldmap.prototype.createMap = function () {
   this.setControlStatuses();
 }
 
+// Create the tooltip content
+svgWorldmap.prototype.getTooltipContent = function (countryID) {
+  var tooltipContentWrapper = this.createElement('div', 'svgWorldmap-tooltip-content-container');
+
+  // Flag
+  this.createElement('img', 'svgWorldmap-tooltip-flag', tooltipContentWrapper)
+    .setAttribute('src', this.options.flagURL.replace('{0}', countryID.toLowerCase()));
+
+  // Title
+  this.createElement('div', 'svgWorldmap-tooltip-title', tooltipContentWrapper)
+    .innerHTML = svgMapDataCountries[countryID];
+  
+  // Content
+  this.createElement('div', 'svgWorldmap-tooltip-content', tooltipContentWrapper)
+    .innerHTML = 'Population: ' + this.numberWithCommas(svgMapDataPopulation[countryID]);
+
+  return tooltipContentWrapper;
+};
+
 // Set the disabled statuses for buttons
 svgWorldmap.prototype.setControlStatuses = function () {
 
@@ -2572,7 +2594,7 @@ svgWorldmap.prototype.createTooltip = function () {
     return false;
   }
   this.tooltip = this.createElement('div', 'svgWorldmap-tooltip', document.getElementsByTagName('body')[0]);
-  this.tooltipContent = this.createElement('div', 'svgWorldmap-tooltip-content', this.tooltip);
+  this.tooltipContent = this.createElement('div', 'svgWorldmap-tooltip-content-wrapper', this.tooltip);
   this.tooltipPointer = this.createElement('div', 'svgWorldmap-tooltip-pointer', this.tooltip);
 };
 
@@ -2581,7 +2603,8 @@ svgWorldmap.prototype.setTooltipContent = function (content) {
   if (!this.tooltip) {
     return;
   }
-  this.tooltipContent.innerHTML = content;
+  this.tooltipContent.innerHTML = '';
+  this.tooltipContent.append(content);
 };
 
 // Show the tooltip
@@ -2592,7 +2615,7 @@ svgWorldmap.prototype.showTooltip = function (e) {
 
 // Hide the tooltip
 svgWorldmap.prototype.hideTooltip = function () {
-  this.tooltip.classList.remove('svgWorldmap-active');
+  //this.tooltip.classList.remove('svgWorldmap-active');
 };
 
 // Move the tooltip
@@ -2639,6 +2662,11 @@ svgWorldmap.prototype.createElement = function (type, className, appendTo, inner
   innerhtml && (element.innerHTML = innerhtml);
   appendTo && appendTo.appendChild(element);
   return element;
+};
+
+// Print numbers with commas
+svgWorldmap.prototype.numberWithCommas = function (nr) {
+  return nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 // UMD module definition
 (function (window, document) {

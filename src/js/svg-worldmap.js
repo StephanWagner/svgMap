@@ -20,7 +20,10 @@ svgWorldmap.prototype.init = function (options) {
     maxZoom: 10,
 
     // Zoom sensitivity
-    zoomScaleSensitivity: 0.2
+    zoomScaleSensitivity: 0.2,
+
+    // The url to the flags, {0} will get replaced with lowercase coutry id
+    flagURL: 'https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg'
   };
 
   this.options = Object.assign({}, defaultOptions, (options || {}));
