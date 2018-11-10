@@ -2622,11 +2622,15 @@ svgWorldmap.prototype.hideTooltip = function () {
 svgWorldmap.prototype.moveTooltip = function (e) {
   var x = e.pageX;
   var y = e.pageY;
+  var offsetToWindow = 6;
+  var offsetToPointer = 12;
+  var offsetToPointerFlipped = 32;
 
   var wWidth = window.innerWidth;
   var tWidth = this.tooltip.offsetWidth;
-  var offsetToWindow = 6;
+  var tHeight = this.tooltip.offsetHeight;
 
+  // Adjust pointer when reaching window sides
   var left = x - tWidth / 2;
   if (left <= offsetToWindow) {
     x = offsetToWindow + (tWidth / 2);
@@ -2636,6 +2640,16 @@ svgWorldmap.prototype.moveTooltip = function (e) {
     this.tooltipPointer.style.marginLeft = ((wWidth - offsetToWindow - e.pageX - (tWidth / 2)) * -1) + 'px';
   } else {
     this.tooltipPointer.style.marginLeft = '0px';
+  }
+
+  // Flip tooltip when reaching top window edge
+  var top = y - offsetToPointer - tHeight;
+  if (top <= offsetToWindow) {
+    this.tooltip.classList.add('svgWorldmap-tooltip-flipped');
+    y += offsetToPointerFlipped;
+  } else {
+    this.tooltip.classList.remove('svgWorldmap-tooltip-flipped');
+    y -= offsetToPointer;
   }
 
   this.tooltip.style.left = x + 'px';

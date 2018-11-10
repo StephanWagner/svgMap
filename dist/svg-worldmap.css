@@ -825,9 +825,12 @@
   transform: translate(-50%, -100%);
   border-bottom: 1px solid #000;
   display: none;
-  margin-top: -15px;
   pointer-events: none;
   min-width: 60px; }
+  .svgWorldmap-tooltip.svgWorldmap-tooltip-flipped {
+    transform: translate(-50%, 0);
+    border-bottom: 0;
+    border-top: 1px solid #000; }
   .svgWorldmap-tooltip.svgWorldmap-active {
     display: block; }
   .svgWorldmap-tooltip .svgWorldmap-tooltip-content-container {
@@ -852,25 +855,28 @@
     font-size: 14px;
     color: #888;
     margin: -5px 0 0; }
-
-.svgWorldmap-tooltip-pointer {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden;
-  height: 10px;
-  width: 30px; }
-  .svgWorldmap-tooltip-pointer:after {
-    content: '';
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    border: 1px solid #000;
+  .svgWorldmap-tooltip .svgWorldmap-tooltip-pointer {
     position: absolute;
-    bottom: 6px;
+    top: 100%;
     left: 50%;
-    transform: translateX(-50%) rotate(45deg); }
+    transform: translateX(-50%);
+    overflow: hidden;
+    height: 10px;
+    width: 30px; }
+    .svgWorldmap-tooltip .svgWorldmap-tooltip-pointer:after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border: 1px solid #000;
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg); }
+  .svgWorldmap-tooltip.svgWorldmap-tooltip-flipped .svgWorldmap-tooltip-pointer {
+    bottom: auto;
+    top: -10px;
+    transform: translateX(-50%) scaleY(-1); }
 
 .svgWorldmap-category-bg-none {
   background: #eee; }
@@ -1014,9 +1020,12 @@
   transform: translate(-50%, -100%);
   border-bottom: 1px solid #000;
   display: none;
-  margin-top: -15px;
   pointer-events: none;
   min-width: 60px; }
+  .svgWorldmap-tooltip.svgWorldmap-tooltip-flipped {
+    transform: translate(-50%, 0);
+    border-bottom: 0;
+    border-top: 1px solid #000; }
   .svgWorldmap-tooltip.svgWorldmap-active {
     display: block; }
   .svgWorldmap-tooltip .svgWorldmap-tooltip-content-container {
@@ -1041,25 +1050,28 @@
     font-size: 14px;
     color: #888;
     margin: -5px 0 0; }
-
-.svgWorldmap-tooltip-pointer {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden;
-  height: 10px;
-  width: 30px; }
-  .svgWorldmap-tooltip-pointer:after {
-    content: '';
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    border: 1px solid #000;
+  .svgWorldmap-tooltip .svgWorldmap-tooltip-pointer {
     position: absolute;
-    bottom: 6px;
+    top: 100%;
     left: 50%;
-    transform: translateX(-50%) rotate(45deg); }
+    transform: translateX(-50%);
+    overflow: hidden;
+    height: 10px;
+    width: 30px; }
+    .svgWorldmap-tooltip .svgWorldmap-tooltip-pointer:after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border: 1px solid #000;
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg); }
+  .svgWorldmap-tooltip.svgWorldmap-tooltip-flipped .svgWorldmap-tooltip-pointer {
+    bottom: auto;
+    top: -10px;
+    transform: translateX(-50%) scaleY(-1); }
 
 .svgWorldmap-category-bg-none {
   background: #eee; }
