@@ -1,10 +1,10 @@
 // Wrapper function
-var svgWorldmap = function (options) {
+var svgMap = function (options) {
   this.init(options)
 }
 
 // Initialize SVG Worldmap
-svgWorldmap.prototype.init = function (options) {
+svgMap.prototype.init = function (options) {
 
   // Default options, pass a custom options object to overwrite specific
   var defaultOptions = {

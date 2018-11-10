@@ -1,4 +1,4 @@
-.svgWorldmap-tooltip {
+.svgMap-tooltip {
   box-shadow: 0 0 3px rgba(0, 0, 0, .2);
   position: absolute;
   z-index: 10000;
@@ -10,21 +10,21 @@
   pointer-events: none;
   min-width: 60px;
 
-  &.svgWorldmap-tooltip-flipped {
+  &.svgMap-tooltip-flipped {
     transform: translate(-50%, 0);
     border-bottom: 0;
     border-top: 1px solid #000;
   }
 
-  &.svgWorldmap-active {
+  &.svgMap-active {
     display: block;
   }
 
-  .svgWorldmap-tooltip-content-container {
+  .svgMap-tooltip-content-container {
     position: relative;
     padding: 10px 20px;
 
-    .svgWorldmap-tooltip-flag {
+    .svgMap-tooltip-flag {
       display: block;
       margin: auto;
       width: auto;
@@ -35,14 +35,14 @@
     }
   }
 
-  .svgWorldmap-tooltip-title {
+  .svgMap-tooltip-title {
     white-space: nowrap;
     font-size: 18px;
     line-height: 40px;
     text-align: center;
   }
 
-  .svgWorldmap-tooltip-content {
+  .svgMap-tooltip-content {
     white-space: nowrap;
     text-align: center;
     font-size: 14px;
@@ -64,7 +64,7 @@
     }
   }
 
-  .svgWorldmap-tooltip-pointer {
+  .svgMap-tooltip-pointer {
     position: absolute;
     top: 100%;
     left: 50%;
@@ -86,8 +86,8 @@
     }
   }
   
-  &.svgWorldmap-tooltip-flipped {
-    .svgWorldmap-tooltip-pointer {
+  &.svgMap-tooltip-flipped {
+    .svgMap-tooltip-pointer {
       bottom: auto;
       top: -10px;
       transform: translateX(-50%) scaleY(-1);

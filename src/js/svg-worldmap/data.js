@@ -1,5 +1,5 @@
 // Apply the data to the map
-svgWorldmap.prototype.applyData = function (data) {
+svgMap.prototype.applyData = function (data) {
 
   var max = null;
   var min = null;

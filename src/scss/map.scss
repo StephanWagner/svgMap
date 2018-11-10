@@ -18,19 +18,19 @@ $category5: #fee3a4;
 $category6: #fcd86f;
 $category7: #eb7d3c;
 
-.svgWorldmap-category-bg-none {background: $categorynone}
-.svgWorldmap-category-bg-default {background: $categorydefault}
-.svgWorldmap-category-bg-0 {background: $category0}
-.svgWorldmap-category-bg-1 {background: $category1}
-.svgWorldmap-category-bg-2 {background: $category2}
-.svgWorldmap-category-bg-3 {background: $category3}
-.svgWorldmap-category-bg-4 {background: $category4}
-.svgWorldmap-category-bg-5 {background: $category5}
-.svgWorldmap-category-bg-6 {background: $category6}
-.svgWorldmap-category-bg-7 {background: $category7}
+.svgMap-category-bg-none {background: $categorynone}
+.svgMap-category-bg-default {background: $categorydefault}
+.svgMap-category-bg-0 {background: $category0}
+.svgMap-category-bg-1 {background: $category1}
+.svgMap-category-bg-2 {background: $category2}
+.svgMap-category-bg-3 {background: $category3}
+.svgMap-category-bg-4 {background: $category4}
+.svgMap-category-bg-5 {background: $category5}
+.svgMap-category-bg-6 {background: $category6}
+.svgMap-category-bg-7 {background: $category7}
 
 
-.svgWorldmap-map-wrapper {
+.svgMap-map-wrapper {
   position: relative;
   width: 100%;
   padding-top: 50%;
@@ -42,7 +42,7 @@ $category7: #eb7d3c;
   }
 }
 
-.svgWorldmap-map-image {
+.svgMap-map-image {
   display: block;
   width: 100%;
   height: 100%;
@@ -54,7 +54,7 @@ $category7: #eb7d3c;
 
 // Controls
 
-.svgWorldmap-map-controls-wrapper {
+.svgMap-map-controls-wrapper {
   position: absolute;
   bottom: 10px;
   left: 10px;
@@ -62,8 +62,8 @@ $category7: #eb7d3c;
   display: flex;
 }
 
-.svgWorldmap-map-controls-zoom,
-.svgWorldmap-map-controls-move {
+.svgMap-map-controls-zoom,
+.svgMap-map-controls-move {
   display: flex;
   margin-right: 5px;
   border-radius: 3px;
@@ -75,13 +75,13 @@ $category7: #eb7d3c;
   }
 }
 
-.svgWorldmap-control-button {
+.svgMap-control-button {
   cursor: pointer;
   width: 30px;
   height: 30px;
   position: relative;
 
-  &.svgWorldmap-zoom-button {
+  &.svgMap-zoom-button {
 
     &:before,
     &:after {
@@ -107,14 +107,14 @@ $category7: #eb7d3c;
     }
   }
 
-  &.svgWorldmap-zoom-in-button {
+  &.svgMap-zoom-in-button {
     &:after {
       width: 3px;
       height: 11px;
     }
   }
 
-  &.svgWorldmap-disabled {
+  &.svgMap-disabled {
     cursor: default !important;
 
     &:before,
@@ -126,7 +126,7 @@ $category7: #eb7d3c;
 
 // Countries
 
-.svgWorldmap-country {
+.svgMap-country {
   cursor: pointer;
 	fill: #ddd;
 	stroke: #fff;
@@ -139,44 +139,44 @@ $category7: #eb7d3c;
     stroke: $branddark;
   }
 
-  &.svgWorldmap-active {
+  &.svgMap-active {
     stroke: $branddark;
     stroke-width: 1.5;
   }
 }
 
-.svgWorldmap-category-default {
+.svgMap-category-default {
 	fill: $categorydefault;
 }
 
-.svgWorldmap-category-0 {
+.svgMap-category-0 {
 	fill: $category0;
 }
 
-.svgWorldmap-category-1 {
+.svgMap-category-1 {
 	fill: $category1;
 }
 
-.svgWorldmap-category-2 {
+.svgMap-category-2 {
 	fill: $category2;
 }
 
-.svgWorldmap-category-3 {
+.svgMap-category-3 {
 	fill: $category3;
 }
 
-.svgWorldmap-category-4 {
+.svgMap-category-4 {
 	fill: $category4;
 }
 
-.svgWorldmap-category-5 {
+.svgMap-category-5 {
 	fill: $category5;
 }
 
-.svgWorldmap-category-6 {
+.svgMap-category-6 {
 	fill: $category6;
 }
 
-.svgWorldmap-category-7 {
+.svgMap-category-7 {
 	fill: $category7;
 }

@@ -1,22 +1,22 @@
 // Create the SVG map
-svgWorldmap.prototype.createMap = function () {
+svgMap.prototype.createMap = function () {
 
   // Create the tooltip
   this.createTooltip();
 
   // Create map wrappers
-  this.mapWrapper = this.createElement('div', 'svgWorldmap-map-wrapper', this.wrapper);
+  this.mapWrapper = this.createElement('div', 'svgMap-map-wrapper', this.wrapper);
   this.mapImage = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   this.mapImage.setAttribute('viewBox', '0 0 2000 1001');
-  this.mapImage.classList.add('svgWorldmap-map-image');
+  this.mapImage.classList.add('svgMap-map-image');
   this.mapWrapper.appendChild(this.mapImage);
 
   // Add controls
-  var mapControlsWrapper = this.createElement('div', 'svgWorldmap-map-controls-wrapper', this.mapWrapper);
-  var zoomContainer = this.createElement('div', 'svgWorldmap-map-controls-zoom', mapControlsWrapper);
+  var mapControlsWrapper = this.createElement('div', 'svgMap-map-controls-wrapper', this.mapWrapper);
+  var zoomContainer = this.createElement('div', 'svgMap-map-controls-zoom', mapControlsWrapper);
   ['in', 'out'].forEach(function (item) {
     var zoomControlName = 'zoomControl' + item.charAt(0).toUpperCase() + item.slice(1);
-    this[zoomControlName] = this.createElement('div', 'svgWorldmap-control-button svgWorldmap-zoom-button svgWorldmap-zoom-' + item + '-button', zoomContainer);
+    this[zoomControlName] = this.createElement('div', 'svgMap-control-button svgMap-zoom-button svgMap-zoom-' + item + '-button', zoomContainer);
     this[zoomControlName].addEventListener('click', function () {
       this.zoomMap(item);
     }.bind(this));
@@ -33,15 +33,15 @@ svgWorldmap.prototype.createMap = function () {
     countryElement.setAttribute('d', countryData.d);
     countryElement.setAttribute('id', this.id + '-map-country-' + countryID);
     countryElement.setAttribute('data-id', countryID);
-    countryElement.classList.add('svgWorldmap-country');
-    // TODO countryElement.classList.add('svgWorldmap-category-' + this.getCountryCategory(countryID));
+    countryElement.classList.add('svgMap-country');
+    // TODO countryElement.classList.add('svgMap-category-' + this.getCountryCategory(countryID));
 
     this.mapImage.appendChild(countryElement);
 
     ['mouseenter', 'touchdown'].forEach(function (event) {
       countryElement.addEventListener(event, function () {
         countryElement.closest('g').appendChild(countryElement);
-        // TODO $('.svgWorldmap-country.svgWorldmap-active').length && me.activateCountry($('.svgWorldmap-country.svgWorldmap-active').attr('data-id'));
+        // TODO $('.svgMap-country.svgMap-active').length && me.activateCountry($('.svgMap-country.svgMap-active').attr('data-id'));
       }.bind(this));
     }.bind(this));
 
@@ -105,19 +105,19 @@ svgWorldmap.prototype.createMap = function () {
 }
 
 // Create the tooltip content
-svgWorldmap.prototype.getTooltipContent = function (countryID) {
-  var tooltipContentWrapper = this.createElement('div', 'svgWorldmap-tooltip-content-container');
+svgMap.prototype.getTooltipContent = function (countryID) {
+  var tooltipContentWrapper = this.createElement('div', 'svgMap-tooltip-content-container');
 
   // Flag
-  this.createElement('img', 'svgWorldmap-tooltip-flag', tooltipContentWrapper)
+  this.createElement('img', 'svgMap-tooltip-flag', tooltipContentWrapper)
     .setAttribute('src', this.options.flagURL.replace('{0}', countryID.toLowerCase()));
 
   // Title
-  this.createElement('div', 'svgWorldmap-tooltip-title', tooltipContentWrapper)
+  this.createElement('div', 'svgMap-tooltip-title', tooltipContentWrapper)
     .innerHTML = svgMapDataCountries[countryID];
   
   // Content
-  var tooltipContent = this.createElement('div', 'svgWorldmap-tooltip-content', tooltipContentWrapper);
+  var tooltipContent = this.createElement('div', 'svgMap-tooltip-content', tooltipContentWrapper);
   tooltipContentTable = '<table>';
   tooltipContentTable += '<tr><td>Area</td><td>' + this.numberWithCommas(svgMapDataPopulation[countryID].area) + ' km<sup>2</sup></td></tr>';
   tooltipContentTable += '<tr><td>Population</td><td>' + this.numberWithCommas(svgMapDataPopulation[countryID].population) + '</td></tr>';
@@ -129,22 +129,22 @@ svgWorldmap.prototype.getTooltipContent = function (countryID) {
 };
 
 // Set the disabled statuses for buttons
-svgWorldmap.prototype.setControlStatuses = function () {
+svgMap.prototype.setControlStatuses = function () {
 
-  this.zoomControlIn.classList.remove('svgWorldmap-disabled');
-  this.zoomControlOut.classList.remove('svgWorldmap-disabled');
+  this.zoomControlIn.classList.remove('svgMap-disabled');
+  this.zoomControlOut.classList.remove('svgMap-disabled');
 
   if (this.mapPanZoom.getZoom().toFixed(3) <= this.options.minZoom) {
-    this.zoomControlOut.classList.add('svgWorldmap-disabled');
+    this.zoomControlOut.classList.add('svgMap-disabled');
   }
   if (this.mapPanZoom.getZoom().toFixed(3) >= this.options.maxZoom) {
-    this.zoomControlIn.classList.add('svgWorldmap-disabled');
+    this.zoomControlIn.classList.add('svgMap-disabled');
   }
 };
 
 // Zoom map
-svgWorldmap.prototype.zoomMap = function (direction) {
-  if (this['zoomControl' + direction.charAt(0).toUpperCase() + direction.slice(1)].classList.contains('svgWorldmap-disabled')) {
+svgMap.prototype.zoomMap = function (direction) {
+  if (this['zoomControl' + direction.charAt(0).toUpperCase() + direction.slice(1)].classList.contains('svgMap-disabled')) {
     return false;
   }
   this.mapPanZoom[direction == 'in' ? 'zoomIn' : 'zoomOut']();

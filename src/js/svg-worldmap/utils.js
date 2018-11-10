@@ -1,15 +1,15 @@
 // Log error to console
-svgWorldmap.prototype.error = function (error) {
+svgMap.prototype.error = function (error) {
   (console.error || console.log)('SVG Worldmap Error: ' + (error || 'Unknown error'));
 };
 
 // Get the category of a country by its ISO ID
-svgWorldmap.prototype.getCountryCategory = function (countryID) {
+svgMap.prototype.getCountryCategory = function (countryID) {
   return this.data && this.data[countryID] ? (this.data[countryID].category || 0) : 'default';
 };
 
 // Helper to create an element with a class name
-svgWorldmap.prototype.createElement = function (type, className, appendTo, innerhtml) {
+svgMap.prototype.createElement = function (type, className, appendTo, innerhtml) {
   var element = document.createElement(type);
   if (className) {
     className = className.split(' ');
@@ -23,12 +23,12 @@ svgWorldmap.prototype.createElement = function (type, className, appendTo, inner
 };
 
 // Print numbers with commas
-svgWorldmap.prototype.numberWithCommas = function (nr) {
+svgMap.prototype.numberWithCommas = function (nr) {
   return nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
 // Get a color between two other colors
-svgWorldmap.prototype.getColor = function (color1, color2, ratio) {
+svgMap.prototype.getColor = function (color1, color2, ratio) {
   color1 = color1.slice(-6);
   color2 = color2.slice(-6);
   var r = Math.ceil(parseInt(color1.substring(0, 2), 16) * ratio + parseInt(color2.substring(0, 2), 16) * (1 - ratio));
@@ -38,7 +38,7 @@ svgWorldmap.prototype.getColor = function (color1, color2, ratio) {
 };
 
 // Get a hex value
-svgWorldmap.prototype.getHex = function (value) {
+svgMap.prototype.getHex = function (value) {
   value = value.toString(16);
   return ('0' + value).slice(-2);
 };

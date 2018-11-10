@@ -1,15 +1,15 @@
 // Create the tooltip
-svgWorldmap.prototype.createTooltip = function () {
+svgMap.prototype.createTooltip = function () {
   if (this.tooltip) {
     return false;
   }
-  this.tooltip = this.createElement('div', 'svgWorldmap-tooltip', document.getElementsByTagName('body')[0]);
-  this.tooltipContent = this.createElement('div', 'svgWorldmap-tooltip-content-wrapper', this.tooltip);
-  this.tooltipPointer = this.createElement('div', 'svgWorldmap-tooltip-pointer', this.tooltip);
+  this.tooltip = this.createElement('div', 'svgMap-tooltip', document.getElementsByTagName('body')[0]);
+  this.tooltipContent = this.createElement('div', 'svgMap-tooltip-content-wrapper', this.tooltip);
+  this.tooltipPointer = this.createElement('div', 'svgMap-tooltip-pointer', this.tooltip);
 };
 
 // Set the tooltips content
-svgWorldmap.prototype.setTooltipContent = function (content) {
+svgMap.prototype.setTooltipContent = function (content) {
   if (!this.tooltip) {
     return;
   }
@@ -18,18 +18,18 @@ svgWorldmap.prototype.setTooltipContent = function (content) {
 };
 
 // Show the tooltip
-svgWorldmap.prototype.showTooltip = function (e) {
-  this.tooltip.classList.add('svgWorldmap-active');
+svgMap.prototype.showTooltip = function (e) {
+  this.tooltip.classList.add('svgMap-active');
   this.moveTooltip(e);
 };
 
 // Hide the tooltip
-svgWorldmap.prototype.hideTooltip = function () {
-  this.tooltip.classList.remove('svgWorldmap-active');
+svgMap.prototype.hideTooltip = function () {
+  this.tooltip.classList.remove('svgMap-active');
 };
 
 // Move the tooltip
-svgWorldmap.prototype.moveTooltip = function (e) {
+svgMap.prototype.moveTooltip = function (e) {
   var x = e.pageX;
   var y = e.pageY;
   var offsetToWindow = 6;
@@ -55,10 +55,10 @@ svgWorldmap.prototype.moveTooltip = function (e) {
   // Flip tooltip when reaching top window edge
   var top = y - offsetToPointer - tHeight;
   if (top <= offsetToWindow) {
-    this.tooltip.classList.add('svgWorldmap-tooltip-flipped');
+    this.tooltip.classList.add('svgMap-tooltip-flipped');
     y += offsetToPointerFlipped;
   } else {
-    this.tooltip.classList.remove('svgWorldmap-tooltip-flipped');
+    this.tooltip.classList.remove('svgMap-tooltip-flipped');
     y -= offsetToPointer;
   }
 
