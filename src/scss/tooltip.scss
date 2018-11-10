@@ -46,8 +46,22 @@
     white-space: nowrap;
     text-align: center;
     font-size: 14px;
-    color: #888;
+    color: #777;
     margin: -5px 0 0;
+
+    table {
+      padding: 0;
+      border-spacing: 0px;
+
+      td {
+        padding: 2px 0;
+        text-align: left;
+
+        &:first-child {
+          padding-right: 10px;
+        }
+      }
+    }
   }
 
   .svgWorldmap-tooltip-pointer {

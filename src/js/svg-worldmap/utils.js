@@ -26,3 +26,19 @@ svgWorldmap.prototype.createElement = function (type, className, appendTo, inner
 svgWorldmap.prototype.numberWithCommas = function (nr) {
   return nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
+
+// Get a color between two other colors
+svgWorldmap.prototype.getColor = function (color1, color2, ratio) {
+  color1 = color1.slice(-6);
+  color2 = color2.slice(-6);
+  var r = Math.ceil(parseInt(color1.substring(0, 2), 16) * ratio + parseInt(color2.substring(0, 2), 16) * (1 - ratio));
+  var g = Math.ceil(parseInt(color1.substring(2, 4), 16) * ratio + parseInt(color2.substring(2, 4), 16) * (1 - ratio));
+  var b = Math.ceil(parseInt(color1.substring(4, 6), 16) * ratio + parseInt(color2.substring(4, 6), 16) * (1 - ratio));
+  return '#' + this.getHex(r) + this.getHex(g) + this.getHex(b);
+};
+
+// Get a hex value
+svgWorldmap.prototype.getHex = function (value) {
+  value = value.toString(16);
+  return ('0' + value).slice(-2);
+};

@@ -853,8 +853,16 @@
     white-space: nowrap;
     text-align: center;
     font-size: 14px;
-    color: #888;
+    color: #777;
     margin: -5px 0 0; }
+    .svgWorldmap-tooltip .svgWorldmap-tooltip-content table {
+      padding: 0;
+      border-spacing: 0px; }
+      .svgWorldmap-tooltip .svgWorldmap-tooltip-content table td {
+        padding: 2px 0;
+        text-align: left; }
+        .svgWorldmap-tooltip .svgWorldmap-tooltip-content table td:first-child {
+          padding-right: 10px; }
   .svgWorldmap-tooltip .svgWorldmap-tooltip-pointer {
     position: absolute;
     top: 100%;
@@ -1048,8 +1056,16 @@
     white-space: nowrap;
     text-align: center;
     font-size: 14px;
-    color: #888;
+    color: #777;
     margin: -5px 0 0; }
+    .svgWorldmap-tooltip .svgWorldmap-tooltip-content table {
+      padding: 0;
+      border-spacing: 0px; }
+      .svgWorldmap-tooltip .svgWorldmap-tooltip-content table td {
+        padding: 2px 0;
+        text-align: left; }
+        .svgWorldmap-tooltip .svgWorldmap-tooltip-content table td:first-child {
+          padding-right: 10px; }
   .svgWorldmap-tooltip .svgWorldmap-tooltip-pointer {
     position: absolute;
     top: 100%;

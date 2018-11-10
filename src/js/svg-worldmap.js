@@ -9,9 +9,6 @@ svgWorldmap.prototype.init = function (options) {
   // Default options, pass a custom options object to overwrite specific
   var defaultOptions = {
 
-    // Language
-    langauge: 'en',
-
     // The element to render the map in
     targetElementID: '',
 
@@ -21,6 +18,10 @@ svgWorldmap.prototype.init = function (options) {
 
     // Zoom sensitivity
     zoomScaleSensitivity: 0.2,
+
+    // Data colors
+    colorMax: '#FF0000',
+    colorMin: '#00FF00',
 
     // The url to the flags, {0} will get replaced with lowercase coutry id
     flagURL: 'https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg'
@@ -33,9 +34,15 @@ svgWorldmap.prototype.init = function (options) {
     this.error('Target element not found');
   }
 
+  // Global id
+  this.id = this.options.targetElementID;
+
   // Cache wrapper element
   this.wrapper = document.getElementById(this.options.targetElementID);
 
   // Create the map
   this.createMap();
+
+  // Apply map data
+  this.applyData(svgMapDataPopulation);
 }

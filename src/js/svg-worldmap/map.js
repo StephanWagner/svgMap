@@ -31,6 +31,7 @@ svgWorldmap.prototype.createMap = function () {
     var countryElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
     countryElement.setAttribute('d', countryData.d);
+    countryElement.setAttribute('id', this.id + '-map-country-' + countryID);
     countryElement.setAttribute('data-id', countryID);
     countryElement.classList.add('svgWorldmap-country');
     // TODO countryElement.classList.add('svgWorldmap-category-' + this.getCountryCategory(countryID));
@@ -116,8 +117,13 @@ svgWorldmap.prototype.getTooltipContent = function (countryID) {
     .innerHTML = svgMapDataCountries[countryID];
   
   // Content
-  this.createElement('div', 'svgWorldmap-tooltip-content', tooltipContentWrapper)
-    .innerHTML = 'Population: ' + this.numberWithCommas(svgMapDataPopulation[countryID]);
+  var tooltipContent = this.createElement('div', 'svgWorldmap-tooltip-content', tooltipContentWrapper);
+  tooltipContentTable = '<table>';
+  tooltipContentTable += '<tr><td>Area</td><td>' + this.numberWithCommas(svgMapDataPopulation[countryID].area) + ' km<sup>2</sup></td></tr>';
+  tooltipContentTable += '<tr><td>Population</td><td>' + this.numberWithCommas(svgMapDataPopulation[countryID].population) + '</td></tr>';
+  tooltipContentTable += '<tr><td>Density</td><td>' + this.numberWithCommas(svgMapDataPopulation[countryID].density) + ' per km<sup>2</sup></td></tr>';
+  tooltipContentTable += '</table>';
+  tooltipContent.innerHTML = tooltipContentTable;
 
   return tooltipContentWrapper;
 };
