@@ -12,15 +12,15 @@ svgWorldmap.prototype.createMap = function () {
   this.mapWrapper.appendChild(this.mapImage);
 
   // Add controls
-  var mapControlsWrapper = $('<div class="svgWorldmap-map-controls-wrapper"/>').appendTo(this.mapWrapper);
-  var zoomContainer = $('<div class="svgWorldmap-map-controls-zoom"/>').appendTo(mapControlsWrapper);
-  $.each(['in', 'out'], function (index, item) {
-    $('<div class="svgWorldmap-control-button svgWorldmap-zoom-button svgWorldmap-zoom-' + item + '-button"/>')
-      .on('click', function () {
-        me.zoomMap(item);
-      })
-      .appendTo(zoomContainer);
-  });
+  var mapControlsWrapper = this.createElement('div', 'svgWorldmap-map-controls-wrapper', this.mapWrapper);
+  var zoomContainer = this.createElement('div', 'svgWorldmap-map-controls-zoom', mapControlsWrapper);
+  ['in', 'out'].forEach(function (item) {
+    var zoomControlName = 'zoomControl' + item.charAt(0).toUpperCase() + item.slice(1);
+    this[zoomControlName] = this.createElement('div', 'svgWorldmap-control-button svgWorldmap-zoom-button svgWorldmap-zoom-' + item + '-button', zoomContainer);
+    this[zoomControlName].addEventListener('click', function () {
+      this.zoomMap(item);
+    }.bind(this));
+  }.bind(this));
 
   Object.keys(this.countries).forEach(function (countryID) {
     var countryData = this.countries[countryID];
@@ -70,7 +70,7 @@ svgWorldmap.prototype.createMap = function () {
 
   var me = this;
 
-  // Expose to window namespace for testing purposes
+  // Init pan zoom
   this.mapPanZoom = svgPanZoom(this.mapImage, {
     zoomEnabled: true,
     fit: 1,
@@ -101,24 +101,25 @@ svgWorldmap.prototype.createMap = function () {
   this.mapPanZoom.zoomIn();
 
   this.setControlStatuses();
-
 }
 
 // Set the disabled statuses for buttons
 svgWorldmap.prototype.setControlStatuses = function () {
-  $('.svgWorldmap-control-button').removeClass('svgWorldmap-disabled');
+
+  this.zoomControlIn.classList.remove('svgWorldmap-disabled');
+  this.zoomControlOut.classList.remove('svgWorldmap-disabled');
 
   if (this.mapPanZoom.getZoom().toFixed(3) <= this.options.minZoom) {
-    $('.svgWorldmap-zoom-out-button').addClass('svgWorldmap-disabled');
+    this.zoomControlOut.classList.add('svgWorldmap-disabled');
   }
   if (this.mapPanZoom.getZoom().toFixed(3) >= this.options.maxZoom) {
-    $('.svgWorldmap-zoom-in-button').addClass('svgWorldmap-disabled');
+    this.zoomControlIn.classList.add('svgWorldmap-disabled');
   }
 };
 
 // Zoom map
 svgWorldmap.prototype.zoomMap = function (direction) {
-  if ($('.svgWorldmap-zoom-' + direction + '-button').hasClass('svgWorldmap-disabled')) {
+  if (this['zoomControl' + direction.charAt(0).toUpperCase() + direction.slice(1)].classList.contains('svgWorldmap-disabled')) {
     return false;
   }
   this.mapPanZoom[direction == 'in' ? 'zoomIn' : 'zoomOut']();
