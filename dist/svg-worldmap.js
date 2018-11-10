@@ -1919,6 +1919,9 @@ svgMap.prototype.init = function (options) {
     minZoom: 1,
     maxZoom: 10,
 
+    // Initial zoom
+    initialZoom: 1.2,
+
     // Zoom sensitivity
     zoomScaleSensitivity: 0.2,
 
@@ -2589,7 +2592,7 @@ svgMap.prototype.createMap = function () {
   });
 
   // Init pan zoom
-  this.mapPanZoom.zoomIn();
+  this.mapPanZoom.zoom(this.options.initialZoom);
 
   // Initial zoom statuses
   this.setControlStatuses();

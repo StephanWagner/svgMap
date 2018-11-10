@@ -99,7 +99,7 @@ svgMap.prototype.createMap = function () {
   });
 
   // Init pan zoom
-  this.mapPanZoom.zoomIn();
+  this.mapPanZoom.zoom(this.options.initialZoom);
 
   // Initial zoom statuses
   this.setControlStatuses();

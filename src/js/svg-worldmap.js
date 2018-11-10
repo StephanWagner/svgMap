@@ -16,6 +16,9 @@ svgMap.prototype.init = function (options) {
     minZoom: 1,
     maxZoom: 10,
 
+    // Initial zoom
+    initialZoom: 1.2,
+
     // Zoom sensitivity
     zoomScaleSensitivity: 0.2,
 
