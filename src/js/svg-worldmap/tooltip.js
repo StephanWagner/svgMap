@@ -25,7 +25,7 @@ svgWorldmap.prototype.showTooltip = function (e) {
 
 // Hide the tooltip
 svgWorldmap.prototype.hideTooltip = function () {
-  //this.tooltip.classList.remove('svgWorldmap-active');
+  this.tooltip.classList.remove('svgWorldmap-active');
 };
 
 // Move the tooltip
@@ -35,16 +35,17 @@ svgWorldmap.prototype.moveTooltip = function (e) {
 
   var wWidth = window.innerWidth;
   var tWidth = this.tooltip.offsetWidth;
+  var offsetToWindow = 6;
 
   var left = x - tWidth / 2;
-  if (left <= 10) {
-    x = 10 + (tWidth / 2);
-    this.tooltipPointer.style.marginLeft = left - 10;
-  } else if (left + tWidth >= wWidth - 10) {
-    x = wWidth - 10 - (tWidth / 2);
-    this.tooltipPointer.style.marginLeft = (wWidth - 10 - e.pageX - (tWidth / 2)) * -1;
+  if (left <= offsetToWindow) {
+    x = offsetToWindow + (tWidth / 2);
+    this.tooltipPointer.style.marginLeft = (left - offsetToWindow) + 'px';
+  } else if (left + tWidth >= wWidth - offsetToWindow) {
+    x = wWidth - offsetToWindow - (tWidth / 2);
+    this.tooltipPointer.style.marginLeft = ((wWidth - offsetToWindow - e.pageX - (tWidth / 2)) * -1) + 'px';
   } else {
-    this.tooltipPointer.style.marginLeft = 0;
+    this.tooltipPointer.style.marginLeft = '0px';
   }
 
   this.tooltip.style.left = x + 'px';
