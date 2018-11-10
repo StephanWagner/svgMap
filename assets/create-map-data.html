@@ -2,7 +2,7 @@
 <title>Create map data</title>
 <meta charset="utf-8">
 
-<script src="../data/countries.js"></script>
+<script src="../src/js/data/countries.js"></script>
 
 <div style="width: 600px; margin: 20px auto 60px;">
   <object id="map" data="map-optimized.svg" type="image/svg+xml"></object>
@@ -26,15 +26,15 @@ map.addEventListener('load', function () {
 
 	var allPaths = svg.querySelectorAll('path');
 
-	svgMapDataCountries.forEach(function (item) {
-		var pathElement = svg.getElementById(item.code);
+	Object.keys(svgMapDataCountries).forEach(function (countryID) {
+		var pathElement = svg.getElementById(countryID);
 		if (!pathElement) {
 			var element = document.createElement('div');
-			element.innerHTML = item.code + ' | ' + item.name;
+			element.innerHTML = countryID + ' | ' + svgMapDataCountries[countryID];
 			missingCountriesOutput.appendChild(element);
 			return;
 		}
-		data[item.code] = {
+		data[countryID] = {
 			d: pathElement.getAttribute('d') ? pathElement.getAttribute('d').replace(/(?:\r\n|\r|\n)/g, '').replace(/(?:\t)/g, ' ') : null
 		};
 	});
