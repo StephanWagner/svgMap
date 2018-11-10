@@ -4,9 +4,11 @@
   padding-top: 50%;
   overflow: hidden;
   background: $oceanColor;
-  
+  color: $textColor;
+
   * {
     box-sizing: border-box;
+    outline: none;
   }
 
   .svgMap-map-image {
@@ -18,87 +20,98 @@
     height: 100%;
     margin: 0;
   }
-}
 
-// Controls
+  // Controls
 
-.svgMap-map-controls-wrapper {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  z-index: 50;
-  display: flex;
-}
-
-.svgMap-map-controls-zoom,
-.svgMap-map-controls-move {
-  display: flex;
-  margin-right: 5px;
-  border-radius: 3px;
-  overflow: hidden;
-  background: #fff;
-
-  &:last-child {
-    margin-right: 0;
+  .svgMap-map-controls-wrapper {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 50;
+    display: flex;
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
   }
-}
 
-.svgMap-control-button {
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  position: relative;
+  .svgMap-map-controls-zoom,
+  .svgMap-map-controls-move {
+    display: flex;
+    margin-right: 5px;
+    overflow: hidden;
+    background: #fff;
 
-  &.svgMap-zoom-button {
-
-    &:before,
-    &:after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #888;
-      transition: background-color .2s;
+    &:last-child {
+      margin-right: 0;
     }
+  }
 
-    &:before {
-      width: 11px;
-      height: 3px;
-    }
+  .svgMap-control-button {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    position: relative;
 
-    &:hover {
+    &.svgMap-zoom-button {
+
       &:before,
       &:after {
-        background: $textColor;
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #666;
+        transition: background-color .2s;
+      }
+
+      &:before {
+        width: 11px;
+        height: 3px;
+      }
+
+      &:hover {
+
+        &:before,
+        &:after {
+          background: $textColor;
+        }
+      }
+
+      &.svgMap-disabled {
+
+        &:before,
+        &:after {
+          background: #ccc;
+        }
+      }
+    }
+
+    &.svgMap-zoom-in-button {
+      &:after {
+        width: 3px;
+        height: 11px;
       }
     }
   }
 
-  &.svgMap-zoom-in-button {
-    &:after {
-      width: 3px;
-      height: 11px;
+  // Countries
+
+  .svgMap-country {
+    cursor: pointer;
+    stroke: #fff;
+    stroke-width: 1;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+    transition: fill .2s, stroke .2s;
+
+    &:hover,
+    &.svgMap-active {
+      stroke: $mapActiveStrokeColor;
     }
-  }
-}
 
-// Countries
-
-.svgMap-country {
-  cursor: pointer;
-	stroke: #fff;
-	stroke-width: 1;
-	stroke-linejoin: round;
-	vector-effect: non-scaling-stroke;
-  transition: fill .2s, stroke .2s;
-
-  &:hover,
-  &.svgMap-active {
-    stroke: $mapActiveStrokeColor;
-  }
-
-  &.svgMap-active {
-    stroke-width: $mapActiveStrokeWidth;
+    &.svgMap-active {
+      stroke-width: $mapActiveStrokeWidth;
+    }
   }
 }

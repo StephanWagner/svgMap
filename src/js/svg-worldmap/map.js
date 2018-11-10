@@ -34,23 +34,20 @@ svgMap.prototype.createMap = function () {
     countryElement.setAttribute('id', this.id + '-map-country-' + countryID);
     countryElement.setAttribute('data-id', countryID);
     countryElement.classList.add('svgMap-country');
-    // TODO countryElement.classList.add('svgMap-category-' + this.getCountryCategory(countryID));
 
     this.mapImage.appendChild(countryElement);
 
     ['mouseenter', 'touchdown'].forEach(function (event) {
       countryElement.addEventListener(event, function () {
         countryElement.closest('g').appendChild(countryElement);
-        // TODO $('.svgMap-country.svgMap-active').length && me.activateCountry($('.svgMap-country.svgMap-active').attr('data-id'));
       }.bind(this));
     }.bind(this));
 
-    // Tooltip events
-    countryElement.addEventListener('click', function () {
+    // TODO Tooltip events
+    /* countryElement.addEventListener('click', function () {
       var countryID = countryElement.getAttribute('data-id');
       console.log(countryID);
-      // me.showCountry(countryID);
-    });
+    });*/
 
     // Tooltip events
     countryElement.addEventListener('mouseenter', function (e) {
@@ -69,6 +66,7 @@ svgMap.prototype.createMap = function () {
 
   }.bind(this));
 
+  // Expose instance
   var me = this;
 
   // Init pan zoom
@@ -99,8 +97,11 @@ svgMap.prototype.createMap = function () {
       }
     }
   });
+
+  // Init pan zoom
   this.mapPanZoom.zoomIn();
 
+  // Initial zoom statuses
   this.setControlStatuses();
 }
 

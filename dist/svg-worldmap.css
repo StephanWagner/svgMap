@@ -4,9 +4,11 @@
   width: 100%;
   padding-top: 50%;
   overflow: hidden;
-  background: #d9ecff; }
+  background: #d9ecff;
+  color: #111; }
   .svgMap-map-wrapper * {
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    outline: none; }
   .svgMap-map-wrapper .svgMap-map-image {
     display: block;
     position: absolute;
@@ -15,60 +17,58 @@
     width: 100%;
     height: 100%;
     margin: 0; }
-
-.svgMap-map-controls-wrapper {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  z-index: 50;
-  display: flex; }
-
-.svgMap-map-controls-zoom,
-.svgMap-map-controls-move {
-  display: flex;
-  margin-right: 5px;
-  border-radius: 3px;
-  overflow: hidden;
-  background: #fff; }
-  .svgMap-map-controls-zoom:last-child,
-  .svgMap-map-controls-move:last-child {
-    margin-right: 0; }
-
-.svgMap-control-button {
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  position: relative; }
-  .svgMap-control-button.svgMap-zoom-button:before, .svgMap-control-button.svgMap-zoom-button:after {
-    content: '';
+  .svgMap-map-wrapper .svgMap-map-controls-wrapper {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #888;
-    transition: background-color .2s; }
-  .svgMap-control-button.svgMap-zoom-button:before {
-    width: 11px;
-    height: 3px; }
-  .svgMap-control-button.svgMap-zoom-button:hover:before, .svgMap-control-button.svgMap-zoom-button:hover:after {
-    background: #111; }
-  .svgMap-control-button.svgMap-zoom-in-button:after {
-    width: 3px;
-    height: 11px; }
-
-.svgMap-country {
-  cursor: pointer;
-  stroke: #fff;
-  /* fill: #ff0000; */
-  stroke-width: 1;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-  transition: fill .2s, stroke .2s;
-  }
-  .svgMap-country:hover, .svgMap-country.svgMap-active {
-    stroke: #111; }
-  .svgMap-country.svgMap-active {
-    stroke-width: 1.5; }
+    bottom: 10px;
+    left: 10px;
+    z-index: 50;
+    display: flex;
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); }
+  .svgMap-map-wrapper .svgMap-map-controls-zoom,
+  .svgMap-map-wrapper .svgMap-map-controls-move {
+    display: flex;
+    margin-right: 5px;
+    overflow: hidden;
+    background: #fff; }
+    .svgMap-map-wrapper .svgMap-map-controls-zoom:last-child,
+    .svgMap-map-wrapper .svgMap-map-controls-move:last-child {
+      margin-right: 0; }
+  .svgMap-map-wrapper .svgMap-control-button {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    position: relative; }
+    .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #666;
+      transition: background-color .2s; }
+    .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:before {
+      width: 11px;
+      height: 3px; }
+    .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:after {
+      background: #111; }
+    .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:after {
+      background: #ccc; }
+    .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-in-button:after {
+      width: 3px;
+      height: 11px; }
+  .svgMap-map-wrapper .svgMap-country {
+    cursor: pointer;
+    stroke: #fff;
+    stroke-width: 1;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+    transition: fill .2s, stroke .2s; }
+    .svgMap-map-wrapper .svgMap-country:hover, .svgMap-map-wrapper .svgMap-country.svgMap-active {
+      stroke: #111; }
+    .svgMap-map-wrapper .svgMap-country.svgMap-active {
+      stroke-width: 1.5; }
 
 .svgMap-tooltip {
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
