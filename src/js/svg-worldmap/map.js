@@ -22,8 +22,8 @@ svgWorldmap.prototype.createMap = function () {
     }.bind(this));
   }.bind(this));
 
-  Object.keys(this.countries).forEach(function (countryID) {
-    var countryData = this.countries[countryID];
+  Object.keys(this.mapPaths).forEach(function (countryID) {
+    var countryData = this.mapPaths[countryID];
     if (!countryData.d) {
       return;
     }

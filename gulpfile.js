@@ -18,8 +18,8 @@ var paths = {
   scripts: {
     src: [
       './node_modules/svg-pan-zoom/dist/svg-pan-zoom.js',
-      './src/js/data/**/*.js',
       './src/js/svg-worldmap.js',
+      './src/js/data/**/*.js',
       './src/js/svg-worldmap/**/*.js',
       './src/js/stand-alone.js'
     ],
