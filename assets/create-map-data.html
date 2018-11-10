@@ -9,38 +9,39 @@
 </div>
 
 <div style="padding: 20px 80px; font-family: monospace; font-size: 12px">
-	<b>Missing countries in map</b>
-	<div id="missing-countries" style="padding: 15px 0"></div>
-	<b>Map data</b>
-	<div id="data" style="padding: 15px 0; word-break: break-all"></div>
+  <b>Missing countries in map</b>
+  <div id="missing-countries" style="padding: 15px 0"></div>
+  <b>Map data</b>
+  <div id="data" style="padding: 15px 0; word-break: break-all"></div>
 </div>
 
 <script>
-var missingCountriesOutput = document.getElementById('missing-countries');
-var dataOutput = document.getElementById('data');
-var map = document.getElementById('map');
-var data = {};
+  var missingCountriesOutput = document.getElementById('missing-countries');
+  var dataOutput = document.getElementById('data');
+  var map = document.getElementById('map');
+  var data = {};
 
-map.addEventListener('load', function () {
-	var svg = map.contentDocument;
+  map.addEventListener('load', function () {
+    var svg = map.contentDocument;
 
-	var allPaths = svg.querySelectorAll('path');
+    var allPaths = svg.querySelectorAll('path');
 
-	Object.keys(svgMapDataCountries).forEach(function (countryID) {
-		var pathElement = svg.getElementById(countryID);
-		if (!pathElement) {
-			var element = document.createElement('div');
-			element.innerHTML = countryID + ' | ' + svgMapDataCountries[countryID];
-			missingCountriesOutput.appendChild(element);
-			return;
-		}
-		data[countryID] = {
-			d: pathElement.getAttribute('d') ? pathElement.getAttribute('d').replace(/(?:\r\n|\r|\n)/g, '').replace(/(?:\t)/g, ' ') : null
-		};
-	});
+    Object.keys(svgMapDataCountries).forEach(function (countryID) {
+      var pathElement = svg.getElementById(countryID);
+      if (!pathElement) {
+        var element = document.createElement('div');
+        element.innerHTML = countryID + ' | ' + svgMapDataCountries[countryID];
+        missingCountriesOutput.appendChild(element);
+        return;
+      }
+      data[countryID] = {
+        d: pathElement.getAttribute('d') ? pathElement.getAttribute('d').replace(/(?:\r\n|\r|\n)/g, '').replace(
+          /(?:\t)/g, ' ') : null
+      };
+    });
 
-	var element = document.createElement('div');
-	element.innerHTML = JSON.stringify(data);
-	dataOutput.appendChild(element);
-});
+    var element = document.createElement('div');
+    element.innerHTML = JSON.stringify(data);
+    dataOutput.appendChild(element);
+  });
 </script>
