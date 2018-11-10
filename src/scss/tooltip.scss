@@ -52,13 +52,25 @@
     table {
       padding: 0;
       border-spacing: 0px;
+      margin: auto;
 
       td {
         padding: 2px 0;
         text-align: left;
 
+        span {
+          color: #000;
+        }
+
         &:first-child {
           padding-right: 10px;
+          text-align: right;
+        }
+
+        sup {
+          vertical-align: baseline;
+          position: relative;
+          top: -5px;
         }
       }
     }

@@ -119,9 +119,9 @@ svgMap.prototype.getTooltipContent = function (countryID) {
   // Content
   var tooltipContent = this.createElement('div', 'svgMap-tooltip-content', tooltipContentWrapper);
   tooltipContentTable = '<table>';
-  tooltipContentTable += '<tr><td>Area</td><td>' + this.numberWithCommas(svgMapDataPopulation[countryID].area) + ' km<sup>2</sup></td></tr>';
-  tooltipContentTable += '<tr><td>Population</td><td>' + this.numberWithCommas(svgMapDataPopulation[countryID].population) + '</td></tr>';
-  tooltipContentTable += '<tr><td>Density</td><td>' + this.numberWithCommas(svgMapDataPopulation[countryID].density) + ' per km<sup>2</sup></td></tr>';
+  tooltipContentTable += '<tr><td>Area</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].area) + '</span> km<sup>2</sup></td></tr>';
+  tooltipContentTable += '<tr><td>Population</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].population) + '</span></td></tr>';
+  tooltipContentTable += '<tr><td>Density</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].density) + '</span> per km<sup>2</sup></td></tr>';
   tooltipContentTable += '</table>';
   tooltipContent.innerHTML = tooltipContentTable;
 

@@ -1925,6 +1925,11 @@ svgMap.prototype.init = function (options) {
     // Data colors
     colorMax: '#FF0000',
     colorMin: '#00FF00',
+    colorNoData: '#DDDDDD',
+
+    // Data thresholds
+    thresholdMax: null,
+    thresholdMin: null,
 
     // The url to the flags, {0} will get replaced with lowercase coutry id
     flagURL: 'https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg'
@@ -2457,12 +2462,15 @@ svgMap.prototype.applyData = function (data) {
 
   // Get highest and lowest value
   Object.keys(data).forEach(function (countryID) {
-    var value = parseInt(data[countryID], 10);
+    var value = parseInt(data[countryID].density, 10);
     max === null && (max = value);
     min === null && (min = value);
     value > max && (max = value);
     value < min && (min = value);
   });
+
+  this.options.thresholdMax && (max = Math.min(max, this.options.thresholdMax));
+  this.options.thresholdMin && (min = Math.max(min, this.options.thresholdMin));
 
   // Loop through countries and set colors
   Object.keys(data).forEach(function (countryID) {
@@ -2471,8 +2479,8 @@ svgMap.prototype.applyData = function (data) {
       return;
     }
 
-    var value = parseInt(data[countryID], 10);
-    var ratio = value / max;
+    var value = parseInt(data[countryID].density, 10);
+    var ratio = Math.max(0, Math.min(1, value / max));
     var color = this.getColor(this.options.colorMax, this.options.colorMin, ratio);
     element.setAttribute('fill', color);
 
@@ -2601,9 +2609,9 @@ svgMap.prototype.getTooltipContent = function (countryID) {
   // Content
   var tooltipContent = this.createElement('div', 'svgMap-tooltip-content', tooltipContentWrapper);
   tooltipContentTable = '<table>';
-  tooltipContentTable += '<tr><td>Area</td><td>' + this.numberWithCommas(svgMapDataPopulation[countryID].area) + ' km<sup>2</sup></td></tr>';
-  tooltipContentTable += '<tr><td>Population</td><td>' + this.numberWithCommas(svgMapDataPopulation[countryID].population) + '</td></tr>';
-  tooltipContentTable += '<tr><td>Density</td><td>' + this.numberWithCommas(svgMapDataPopulation[countryID].density) + ' per km<sup>2</sup></td></tr>';
+  tooltipContentTable += '<tr><td>Area</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].area) + '</span> km<sup>2</sup></td></tr>';
+  tooltipContentTable += '<tr><td>Population</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].population) + '</span></td></tr>';
+  tooltipContentTable += '<tr><td>Density</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].density) + '</span> per km<sup>2</sup></td></tr>';
   tooltipContentTable += '</table>';
   tooltipContent.innerHTML = tooltipContentTable;
 

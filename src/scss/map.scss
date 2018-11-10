@@ -1,55 +1,23 @@
-
-// Wrappers
-
-$breakpointStatic: 960px;
-$breakpointMobile: 600px;
-
-$textcolor: #1e1e1e;
-$branddark: #69665d;
-
-$categorydefault: #cfc8a9;
-$categorynone: #eee;
-$category0: #7f7f7f;
-$category1: #54803a;
-$category2: #adcf8f;
-$category3: #c5dfb6;
-$category4: #c6d7e9;
-$category5: #fee3a4;
-$category6: #fcd86f;
-$category7: #eb7d3c;
-
-.svgMap-category-bg-none {background: $categorynone}
-.svgMap-category-bg-default {background: $categorydefault}
-.svgMap-category-bg-0 {background: $category0}
-.svgMap-category-bg-1 {background: $category1}
-.svgMap-category-bg-2 {background: $category2}
-.svgMap-category-bg-3 {background: $category3}
-.svgMap-category-bg-4 {background: $category4}
-.svgMap-category-bg-5 {background: $category5}
-.svgMap-category-bg-6 {background: $category6}
-.svgMap-category-bg-7 {background: $category7}
-
-
 .svgMap-map-wrapper {
   position: relative;
   width: 100%;
   padding-top: 50%;
   overflow: hidden;
-  background: #d9ecff;
+  background: $oceanColor;
   
   * {
     box-sizing: border-box;
   }
-}
 
-.svgMap-map-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
+  .svgMap-map-image {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
 }
 
 // Controls
@@ -102,7 +70,7 @@ $category7: #eb7d3c;
     &:hover {
       &:before,
       &:after {
-        background: $textcolor;
+        background: $textColor;
       }
     }
   }
@@ -113,70 +81,24 @@ $category7: #eb7d3c;
       height: 11px;
     }
   }
-
-  &.svgMap-disabled {
-    cursor: default !important;
-
-    &:before,
-    &:after {
-      background: #ddd !important;
-    }
-  }
 }
 
 // Countries
 
 .svgMap-country {
   cursor: pointer;
-	fill: #ddd;
 	stroke: #fff;
 	stroke-width: 1;
 	stroke-linejoin: round;
 	vector-effect: non-scaling-stroke;
   transition: fill .2s, stroke .2s;
 
-  &:hover {
-    stroke: $branddark;
+  &:hover,
+  &.svgMap-active {
+    stroke: $mapActiveStrokeColor;
   }
 
   &.svgMap-active {
-    stroke: $branddark;
-    stroke-width: 1.5;
+    stroke-width: $mapActiveStrokeWidth;
   }
-}
-
-.svgMap-category-default {
-	fill: $categorydefault;
-}
-
-.svgMap-category-0 {
-	fill: $category0;
-}
-
-.svgMap-category-1 {
-	fill: $category1;
-}
-
-.svgMap-category-2 {
-	fill: $category2;
-}
-
-.svgMap-category-3 {
-	fill: $category3;
-}
-
-.svgMap-category-4 {
-	fill: $category4;
-}
-
-.svgMap-category-5 {
-	fill: $category5;
-}
-
-.svgMap-category-6 {
-	fill: $category6;
-}
-
-.svgMap-category-7 {
-	fill: $category7;
 }

@@ -1,28 +1,7 @@
+// General
+$textColor: #111;
+$oceanColor: #d9ecff;
 
-$breakpointStatic: 960px;
-$breakpointMobile: 600px;
-
-$textcolor: #1e1e1e;
-$branddark: #69665d;
-
-$categorydefault: #cfc8a9;
-$categorynone: #eee;
-$category0: #7f7f7f;
-$category1: #54803a;
-$category2: #adcf8f;
-$category3: #c5dfb6;
-$category4: #c6d7e9;
-$category5: #fee3a4;
-$category6: #fcd86f;
-$category7: #eb7d3c;
-
-.svgMap-category-bg-none {background: $categorynone}
-.svgMap-category-bg-default {background: $categorydefault}
-.svgMap-category-bg-0 {background: $category0}
-.svgMap-category-bg-1 {background: $category1}
-.svgMap-category-bg-2 {background: $category2}
-.svgMap-category-bg-3 {background: $category3}
-.svgMap-category-bg-4 {background: $category4}
-.svgMap-category-bg-5 {background: $category5}
-.svgMap-category-bg-6 {background: $category6}
-.svgMap-category-bg-7 {background: $category7}
+// Map
+$mapActiveStrokeColor: #111;
+$mapActiveStrokeWidth: 1.5;

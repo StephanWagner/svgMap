@@ -13,7 +13,8 @@ jsHeader += '/*! svg-pan-zoom v3.6.0 | https://github.com/ariutta/svg-pan-zoom |
 
 var paths = {
   styles: {
-    src: './src/scss/**/*.scss',
+    src: './src/scss/main.scss',
+    watch: './src/scss/**/*.scss',
   },
   scripts: {
     src: [
@@ -81,6 +82,6 @@ gulp.task('build', ['styles-prod', 'scripts-prod']);
 gulp.task('default', ['styles-dev', 'scripts-dev']);
 
 gulp.task('watch', ['styles-dev', 'scripts-dev'], function () {
-  gulp.watch([paths.styles.src], ['styles-dev']);
+  gulp.watch([paths.styles.watch], ['styles-dev']);
   gulp.watch([paths.scripts.src], ['scripts-dev']);
 });

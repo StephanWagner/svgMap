@@ -22,6 +22,11 @@ svgMap.prototype.init = function (options) {
     // Data colors
     colorMax: '#FF0000',
     colorMin: '#00FF00',
+    colorNoData: '#DDDDDD',
+
+    // Data thresholds
+    thresholdMax: null,
+    thresholdMin: null,
 
     // The url to the flags, {0} will get replaced with lowercase coutry id
     flagURL: 'https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg'
