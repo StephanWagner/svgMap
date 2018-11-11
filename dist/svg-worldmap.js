@@ -1995,7 +1995,6 @@ svgMap.prototype.countries = {
   BO: 'Bolivia',
   BA: 'Bosnia and Herzegovina',
   BW: 'Botswana',
-  BV: 'Bouvet Island',
   BR: 'Brazil',
   IO: 'British Indian Ocean Territory',
   VG: 'British Virgin Islands',
@@ -2062,7 +2061,6 @@ svgMap.prototype.countries = {
   GW: 'Guinea-Bissau',
   GY: 'Guyana',
   HT: 'Haiti',
-  HM: 'Heard Island and Mcdonald Islands',
   HN: 'Honduras',
   HK: 'Hong Kong',
   HU: 'Hungary',
@@ -2120,7 +2118,6 @@ svgMap.prototype.countries = {
   NR: 'Nauru',
   NP: 'Nepal',
   NL: 'Netherlands',
-  AN: 'Netherlands Antilles',
   NC: 'New Caledonia',
   NZ: 'New Zealand',
   NI: 'Nicaragua',
@@ -2380,6 +2377,7 @@ svgMap.prototype.getTooltipContent = function (countryID) {
     Object.keys(this.options.data.data).forEach(function (key) {
       var item = this.options.data.data[key];
       var value = this.options.data.values[countryID][key];
+      item.floatingNumbers && (value = value.toFixed(1));
       item.thousandSeparator && (value = this.numberWithCommas(value, item.thousandSeparator));
       value = item.format ? item.format.replace('{0}', '<span>' + value + '</span>') : '<span>' + value + '</span>';
       tooltipContentTable += '<tr><td>' + (item.name || '') + '</td><td>' + value + '</td></tr>';
@@ -2388,11 +2386,6 @@ svgMap.prototype.getTooltipContent = function (countryID) {
     tooltipContent.innerHTML = tooltipContentTable;
   }
   return tooltipContentWrapper;
-};
-
-// Get the name of a country by its ID
-svgMap.prototype.getCountryName = function (countryID) {
-  return this.countries[countryID];
 };
 
 // Set the disabled statuses for buttons
@@ -2521,6 +2514,12 @@ svgMap.prototype.getColor = function (color1, color2, ratio) {
 svgMap.prototype.getHex = function (value) {
   value = value.toString(16);
   return ('0' + value).slice(-2);
+};
+
+// Get the name of a country by its ID
+svgMap.prototype.getCountryName = function (countryID) {
+  console.log(this.options.countryNames);
+  return this.options.countryNames && this.options.countryNames[countryID] ? this.options.countryNames[countryID] : this.countries[countryID];
 };
 // UMD module definition
 (function (window, document) {

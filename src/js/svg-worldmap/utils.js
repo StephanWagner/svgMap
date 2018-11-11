@@ -37,3 +37,9 @@ svgMap.prototype.getHex = function (value) {
   value = value.toString(16);
   return ('0' + value).slice(-2);
 };
+
+// Get the name of a country by its ID
+svgMap.prototype.getCountryName = function (countryID) {
+  console.log(this.options.countryNames);
+  return this.options.countryNames && this.options.countryNames[countryID] ? this.options.countryNames[countryID] : this.countries[countryID];
+};

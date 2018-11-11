@@ -127,6 +127,7 @@ svgMap.prototype.getTooltipContent = function (countryID) {
     Object.keys(this.options.data.data).forEach(function (key) {
       var item = this.options.data.data[key];
       var value = this.options.data.values[countryID][key];
+      item.floatingNumbers && (value = value.toFixed(1));
       item.thousandSeparator && (value = this.numberWithCommas(value, item.thousandSeparator));
       value = item.format ? item.format.replace('{0}', '<span>' + value + '</span>') : '<span>' + value + '</span>';
       tooltipContentTable += '<tr><td>' + (item.name || '') + '</td><td>' + value + '</td></tr>';
@@ -135,11 +136,6 @@ svgMap.prototype.getTooltipContent = function (countryID) {
     tooltipContent.innerHTML = tooltipContentTable;
   }
   return tooltipContentWrapper;
-};
-
-// Get the name of a country by its ID
-svgMap.prototype.getCountryName = function (countryID) {
-  return this.countries[countryID];
 };
 
 // Set the disabled statuses for buttons
