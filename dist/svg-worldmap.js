@@ -1,4 +1,4 @@
-/*! svg-worldmap v0.0.1 | https://github.com/StephanWagner/svg-worldmap | MIT License | Copyright Stephan Wagner | https://stephanwagner.me */
+/*! svgMap v1.0.0 | https://github.com/StephanWagner/svgMap | MIT License | Copyright Stephan Wagner | https://stephanwagner.me */
 /*! svg-pan-zoom v3.6.0 | https://github.com/ariutta/svg-pan-zoom | BSD 2-Clause "Simplified" License | Copyright Andrea Leofreddi <a.leofreddi@itcharm.com> */
 // svg-pan-zoom v3.6.0
 // https://github.com/ariutta/svg-pan-zoom

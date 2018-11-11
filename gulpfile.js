@@ -8,7 +8,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var header = require('gulp-header');
 var pkg = require('./package.json');
 
-var cssHeader = jsHeader = '/*! svg-worldmap v<%= pkg.version %> | https://github.com/StephanWagner/svg-worldmap | MIT License | Copyright Stephan Wagner | https://stephanwagner.me */' + "\n";
+var cssHeader = jsHeader = '/*! svgMap v<%= pkg.version %> | https://github.com/StephanWagner/svgMap | MIT License | Copyright Stephan Wagner | https://stephanwagner.me */' + "\n";
 jsHeader += '/*! svg-pan-zoom v3.6.0 | https://github.com/ariutta/svg-pan-zoom | BSD 2-Clause "Simplified" License | Copyright Andrea Leofreddi <a.leofreddi@itcharm.com> */' + "\n";
 
 var paths = {

@@ -8,19 +8,24 @@
   <link href="demo.css" rel="stylesheet">
   <link href="../dist/svg-worldmap.css" rel="stylesheet">
   <script src="../dist/svg-worldmap.js"></script>
-  <script src="../data/population.js"></script>
 </head>
 
 <body>
 
   <div class="container">
+
+    <!-- Demo Population -->
     <div id="svgMapPopulation"></div>
+    <script src="../data/population.js"></script>
     <script>
       new svgMap({
         targetElementID: 'svgMapPopulation',
         data: svgMapDataPopulation
       });
     </script>
+
+    
+
   </div>
 
 </body>
