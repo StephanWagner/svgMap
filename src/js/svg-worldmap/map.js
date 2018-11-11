@@ -120,13 +120,17 @@ svgMap.prototype.getTooltipContent = function (countryID) {
   
   // Content
   var tooltipContent = this.createElement('div', 'svgMap-tooltip-content', tooltipContentWrapper);
-  if (!svgMapDataPopulation[countryID]) {
+  if (!this.options.data.values[countryID]) {
     this.createElement('div', 'svgMap-tooltip-no-data', tooltipContent).innerHTML = 'No data available';
   } else {
     tooltipContentTable = '<table>';
-    tooltipContentTable += '<tr><td>Area</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].area) + '</span> km<sup>2</sup></td></tr>';
-    tooltipContentTable += '<tr><td>Population</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].population) + '</span></td></tr>';
-    tooltipContentTable += '<tr><td>Density</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].density) + '</span> per km<sup>2</sup></td></tr>';
+    Object.keys(this.options.data.data).forEach(function (key) {
+      var item = this.options.data.data[key];
+      var value = this.options.data.values[countryID][key];
+      item.thousandSeparator && (value = this.numberWithCommas(value, item.thousandSeparator));
+      value = item.format ? item.format.replace('{0}', '<span>' + value + '</span>') : '<span>' + value + '</span>';
+      tooltipContentTable += '<tr><td>' + (item.name || '') + '</td><td>' + value + '</td></tr>';
+    }.bind(this));
     tooltipContentTable += '</table>';
     tooltipContent.innerHTML = tooltipContentTable;
   }

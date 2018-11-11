@@ -3,11 +3,6 @@ svgMap.prototype.error = function (error) {
   (console.error || console.log)('SVG Worldmap Error: ' + (error || 'Unknown error'));
 };
 
-// Get the category of a country by its ISO ID
-svgMap.prototype.getCountryCategory = function (countryID) {
-  return this.data && this.data[countryID] ? (this.data[countryID].category || 0) : 'default';
-};
-
 // Helper to create an element with a class name
 svgMap.prototype.createElement = function (type, className, appendTo, innerhtml) {
   var element = document.createElement(type);
@@ -23,8 +18,8 @@ svgMap.prototype.createElement = function (type, className, appendTo, innerhtml)
 };
 
 // Print numbers with commas
-svgMap.prototype.numberWithCommas = function (nr) {
-  return nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+svgMap.prototype.numberWithCommas = function (nr, separator) {
+  return nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, (separator || ','));
 };
 
 // Get a color between two other colors

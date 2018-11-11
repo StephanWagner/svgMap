@@ -45,6 +45,11 @@ svgMap.prototype.init = function (options) {
     this.error('Target element not found');
   }
 
+  // Abort if no data
+  if (!this.options.data) {
+    this.error('No data');
+  }
+
   // Global id
   this.id = this.options.targetElementID;
 
@@ -55,5 +60,5 @@ svgMap.prototype.init = function (options) {
   this.createMap();
 
   // Apply map data
-  this.applyData(svgMapDataPopulation);
+  this.applyData(this.options.data);
 }

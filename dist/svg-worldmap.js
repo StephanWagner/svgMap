@@ -1948,6 +1948,11 @@ svgMap.prototype.init = function (options) {
     this.error('Target element not found');
   }
 
+  // Abort if no data
+  if (!this.options.data) {
+    this.error('No data');
+  }
+
   // Global id
   this.id = this.options.targetElementID;
 
@@ -1958,7 +1963,7 @@ svgMap.prototype.init = function (options) {
   this.createMap();
 
   // Apply map data
-  this.applyData(svgMapDataPopulation);
+  this.applyData(this.options.data);
 }
 svgMap.prototype.countries = {
   AF: 'Afghanistan',
@@ -2216,16 +2221,16 @@ svgMap.prototype.applyData = function (data) {
   var min = null;
 
   // Get highest and lowest value
-  Object.keys(data).forEach(function (countryID) {
-    var value = parseInt(data[countryID].density, 10);
+  Object.keys(data.values).forEach(function (countryID) {
+    var value = parseInt(data.values[countryID][data.applyData], 10);
     max === null && (max = value);
     min === null && (min = value);
     value > max && (max = value);
     value < min && (min = value);
   });
 
-  this.options.thresholdMax && (max = Math.min(max, this.options.thresholdMax));
-  this.options.thresholdMin && (min = Math.max(min, this.options.thresholdMin));
+  data.data[data.applyData].thresholdMax && (max = Math.min(max, data.data[data.applyData].thresholdMax));
+  data.data[data.applyData].thresholdMin && (min = Math.max(min, data.data[data.applyData].thresholdMin));
 
   // Loop through countries and set colors
   Object.keys(this.countries).forEach(function (countryID) {
@@ -2233,11 +2238,11 @@ svgMap.prototype.applyData = function (data) {
     if (!element) {
       return;
     }
-    if (!data[countryID]) {
+    if (!data.values[countryID]) {
       element.setAttribute('fill', this.options.colorNoData);
       return;
     }
-    var value = Math.max(min, parseInt(data[countryID].density, 10));
+    var value = Math.max(min, parseInt(data.values[countryID][data.applyData], 10));
     var ratio = Math.max(0, Math.min(1, (value - min) / (max - min)));
     var color = this.getColor(this.options.colorMax, this.options.colorMin, ratio);
     element.setAttribute('fill', color);
@@ -2368,13 +2373,17 @@ svgMap.prototype.getTooltipContent = function (countryID) {
   
   // Content
   var tooltipContent = this.createElement('div', 'svgMap-tooltip-content', tooltipContentWrapper);
-  if (!svgMapDataPopulation[countryID]) {
+  if (!this.options.data.values[countryID]) {
     this.createElement('div', 'svgMap-tooltip-no-data', tooltipContent).innerHTML = 'No data available';
   } else {
     tooltipContentTable = '<table>';
-    tooltipContentTable += '<tr><td>Area</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].area) + '</span> km<sup>2</sup></td></tr>';
-    tooltipContentTable += '<tr><td>Population</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].population) + '</span></td></tr>';
-    tooltipContentTable += '<tr><td>Density</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].density) + '</span> per km<sup>2</sup></td></tr>';
+    Object.keys(this.options.data.data).forEach(function (key) {
+      var item = this.options.data.data[key];
+      var value = this.options.data.values[countryID][key];
+      item.thousandSeparator && (value = this.numberWithCommas(value, item.thousandSeparator));
+      value = item.format ? item.format.replace('{0}', '<span>' + value + '</span>') : '<span>' + value + '</span>';
+      tooltipContentTable += '<tr><td>' + (item.name || '') + '</td><td>' + value + '</td></tr>';
+    }.bind(this));
     tooltipContentTable += '</table>';
     tooltipContent.innerHTML = tooltipContentTable;
   }
@@ -2479,11 +2488,6 @@ svgMap.prototype.error = function (error) {
   (console.error || console.log)('SVG Worldmap Error: ' + (error || 'Unknown error'));
 };
 
-// Get the category of a country by its ISO ID
-svgMap.prototype.getCountryCategory = function (countryID) {
-  return this.data && this.data[countryID] ? (this.data[countryID].category || 0) : 'default';
-};
-
 // Helper to create an element with a class name
 svgMap.prototype.createElement = function (type, className, appendTo, innerhtml) {
   var element = document.createElement(type);
@@ -2499,8 +2503,8 @@ svgMap.prototype.createElement = function (type, className, appendTo, innerhtml)
 };
 
 // Print numbers with commas
-svgMap.prototype.numberWithCommas = function (nr) {
-  return nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+svgMap.prototype.numberWithCommas = function (nr, separator) {
+  return nr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, (separator || ','));
 };
 
 // Get a color between two other colors
