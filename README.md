@@ -18,3 +18,7 @@ PD License
 Copyright Hampus Nilsson
 
 The flags are served by jsDelivr (https://www.jsdelivr.com/)
+
+Country name translations were taken from https://github.com/umpirsky/country-list/
+
+Most data in the examples is taken from Wikipedia https://www.wikipedia.org/
