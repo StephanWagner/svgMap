@@ -2,7 +2,9 @@
 <title>Create map data</title>
 <meta charset="utf-8">
 
-<script src="../src/js/data/countries.js"></script>
+<script>var svgMap = function () {};</script>
+<script src="../src/js/svg-worldmap/countries.js"></script>
+<script>var svgMapCountries = new svgMap();</script>
 
 <div style="width: 600px; margin: 20px auto 60px;">
   <object id="map" data="map-optimized.svg" type="image/svg+xml"></object>
@@ -19,6 +21,7 @@
   var missingCountriesOutput = document.getElementById('missing-countries');
   var dataOutput = document.getElementById('data');
   var map = document.getElementById('map');
+  var countries = svgMapCountries.countries;
   var data = {};
 
   map.addEventListener('load', function () {
@@ -26,11 +29,11 @@
 
     var allPaths = svg.querySelectorAll('path');
 
-    Object.keys(this.countries).forEach(function (countryID) {
+    Object.keys(countries).forEach(function (countryID) {
       var pathElement = svg.getElementById(countryID);
       if (!pathElement) {
         var element = document.createElement('div');
-        element.innerHTML = countryID + ' | ' + this.countries[countryID];
+        element.innerHTML = countryID + ' | ' + countries[countryID];
         missingCountriesOutput.appendChild(element);
         return;
       }
