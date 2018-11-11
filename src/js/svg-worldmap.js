@@ -17,15 +17,18 @@ svgMap.prototype.init = function (options) {
     maxZoom: 10,
 
     // Initial zoom
-    initialZoom: 1.2,
+    initialZoom: 1.06,
 
     // Zoom sensitivity
     zoomScaleSensitivity: 0.2,
 
+    // Zoom with mousewheel
+    mouseWheelZoomEnabled: true,
+
     // Data colors
-    colorMax: '#FF0000',
-    colorMin: '#00FF00',
-    colorNoData: '#DDDDDD',
+    colorMax: '#CC0033',
+    colorMin: '#FFE5D9',
+    colorNoData: '#E2E2E2',
 
     // Data thresholds
     thresholdMax: null,

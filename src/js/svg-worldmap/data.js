@@ -17,18 +17,19 @@ svgMap.prototype.applyData = function (data) {
   this.options.thresholdMin && (min = Math.max(min, this.options.thresholdMin));
 
   // Loop through countries and set colors
-  Object.keys(data).forEach(function (countryID) {
+  Object.keys(this.countries).forEach(function (countryID) {
     var element = document.getElementById(this.id + '-map-country-' + countryID);
     if (!element) {
       return;
     }
-
-    var value = parseInt(data[countryID].density, 10);
-    var ratio = Math.max(0, Math.min(1, value / max));
+    if (!data[countryID]) {
+      element.setAttribute('fill', this.options.colorNoData);
+      return;
+    }
+    var value = Math.max(min, parseInt(data[countryID].density, 10));
+    var ratio = Math.max(0, Math.min(1, (value - min) / (max - min)));
     var color = this.getColor(this.options.colorMax, this.options.colorMin, ratio);
     element.setAttribute('fill', color);
-
-
   }.bind(this));
 
 };

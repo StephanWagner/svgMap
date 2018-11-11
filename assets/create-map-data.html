@@ -26,11 +26,11 @@
 
     var allPaths = svg.querySelectorAll('path');
 
-    Object.keys(svgMapDataCountries).forEach(function (countryID) {
+    Object.keys(this.countries).forEach(function (countryID) {
       var pathElement = svg.getElementById(countryID);
       if (!pathElement) {
         var element = document.createElement('div');
-        element.innerHTML = countryID + ' | ' + svgMapDataCountries[countryID];
+        element.innerHTML = countryID + ' | ' + this.countries[countryID];
         missingCountriesOutput.appendChild(element);
         return;
       }

@@ -22,6 +22,7 @@ svgMap.prototype.createMap = function () {
     }.bind(this));
   }.bind(this));
 
+  // Add map elements
   Object.keys(this.mapPaths).forEach(function (countryID) {
     var countryData = this.mapPaths[countryID];
     if (!countryData.d) {
@@ -44,6 +45,7 @@ svgMap.prototype.createMap = function () {
     }.bind(this));
 
     // TODO Tooltip events
+    // Make Country fixed on click
     /* countryElement.addEventListener('click', function () {
       var countryID = countryElement.getAttribute('data-id');
       console.log(countryID);
@@ -72,14 +74,13 @@ svgMap.prototype.createMap = function () {
   // Init pan zoom
   this.mapPanZoom = svgPanZoom(this.mapImage, {
     zoomEnabled: true,
-    fit: 1,
-    center: 1,
+    fit: true,
+    center: true,
     minZoom: this.options.minZoom,
     maxZoom: this.options.maxZoom,
     zoomScaleSensitivity: this.options.zoomScaleSensitivity,
     controlIconsEnabled: false,
-    mouseWheelZoomEnabled: true,
-    preventMouseEventsDefault: true,
+    mouseWheelZoomEnabled: this.options.mouseWheelZoomEnabled, // TODO Only with key pressed
     onZoom: function () {
       me.setControlStatuses();
     },
@@ -87,7 +88,7 @@ svgMap.prototype.createMap = function () {
       var gutterWidth = me.mapWrapper.offsetWidth * 0.85;
       var gutterHeight = me.mapWrapper.offsetHeight * 0.85;
       var sizes = this.getSizes();
-      var leftLimit = -((sizes.viewBox.x + sizes.viewBox.width) * sizes.realZoom) + gutterWidth - 260;
+      var leftLimit = -((sizes.viewBox.x + sizes.viewBox.width) * sizes.realZoom) + gutterWidth;
       var rightLimit = sizes.width - gutterWidth - (sizes.viewBox.x * sizes.realZoom);
       var topLimit = -((sizes.viewBox.y + sizes.viewBox.height) * sizes.realZoom) + gutterHeight;
       var bottomLimit = sizes.height - gutterHeight - (sizes.viewBox.y * sizes.realZoom);
@@ -115,18 +116,26 @@ svgMap.prototype.getTooltipContent = function (countryID) {
 
   // Title
   this.createElement('div', 'svgMap-tooltip-title', tooltipContentWrapper)
-    .innerHTML = svgMapDataCountries[countryID];
+    .innerHTML = this.getCountryName(countryID);
   
   // Content
   var tooltipContent = this.createElement('div', 'svgMap-tooltip-content', tooltipContentWrapper);
-  tooltipContentTable = '<table>';
-  tooltipContentTable += '<tr><td>Area</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].area) + '</span> km<sup>2</sup></td></tr>';
-  tooltipContentTable += '<tr><td>Population</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].population) + '</span></td></tr>';
-  tooltipContentTable += '<tr><td>Density</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].density) + '</span> per km<sup>2</sup></td></tr>';
-  tooltipContentTable += '</table>';
-  tooltipContent.innerHTML = tooltipContentTable;
-
+  if (!svgMapDataPopulation[countryID]) {
+    this.createElement('div', 'svgMap-tooltip-no-data', tooltipContent).innerHTML = 'No data available';
+  } else {
+    tooltipContentTable = '<table>';
+    tooltipContentTable += '<tr><td>Area</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].area) + '</span> km<sup>2</sup></td></tr>';
+    tooltipContentTable += '<tr><td>Population</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].population) + '</span></td></tr>';
+    tooltipContentTable += '<tr><td>Density</td><td><span>' + this.numberWithCommas(svgMapDataPopulation[countryID].density) + '</span> per km<sup>2</sup></td></tr>';
+    tooltipContentTable += '</table>';
+    tooltipContent.innerHTML = tooltipContentTable;
+  }
   return tooltipContentWrapper;
+};
+
+// Get the name of a country by its ID
+svgMap.prototype.getCountryName = function (countryID) {
+  return this.countries[countryID];
 };
 
 // Set the disabled statuses for buttons

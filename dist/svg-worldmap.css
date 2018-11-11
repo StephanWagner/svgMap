@@ -66,7 +66,7 @@
     vector-effect: non-scaling-stroke;
     transition: fill .2s, stroke .2s; }
     .svgMap-map-wrapper .svgMap-country:hover, .svgMap-map-wrapper .svgMap-country.svgMap-active {
-      stroke: #111; }
+      stroke: #333; }
     .svgMap-map-wrapper .svgMap-country.svgMap-active {
       stroke-width: 1.5; }
 
@@ -117,7 +117,7 @@
         padding: 2px 0;
         text-align: left; }
         .svgMap-tooltip .svgMap-tooltip-content table td span {
-          color: #000; }
+          color: #111; }
         .svgMap-tooltip .svgMap-tooltip-content table td:first-child {
           padding-right: 10px;
           text-align: right; }
@@ -125,6 +125,10 @@
           vertical-align: baseline;
           position: relative;
           top: -5px; }
+    .svgMap-tooltip .svgMap-tooltip-content .svgMap-tooltip-no-data {
+      padding: 2px 0;
+      color: #777;
+      font-style: italic; }
   .svgMap-tooltip .svgMap-tooltip-pointer {
     position: absolute;
     top: 100%;

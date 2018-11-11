@@ -8,6 +8,7 @@
   <link href="demo.css" rel="stylesheet">
   <link href="../dist/svg-worldmap.css" rel="stylesheet">
   <script src="../dist/svg-worldmap.js"></script>
+  <script src="../assets/data/population.js"></script>
 </head>
 
 <body>
@@ -17,10 +18,9 @@
     <script>
       new svgMap({
         targetElementID: 'svgMap',
-        thresholdMax: 200,
-        thresholdMin: 200,
-        colorMin: '#feebe4',
-        colorMax: '#781675',
+        data: svgMapDataPopulation,
+        thresholdMax: 280,
+        thresholdMin: 20
       });
     </script>
   </div>

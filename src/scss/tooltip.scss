@@ -46,7 +46,7 @@
     white-space: nowrap;
     text-align: center;
     font-size: 14px;
-    color: #777;
+    color: $textColorLight;
     margin: -5px 0 0;
 
     table {
@@ -59,7 +59,7 @@
         text-align: left;
 
         span {
-          color: #000;
+          color: $textColor;
         }
 
         &:first-child {
@@ -73,6 +73,12 @@
           top: -5px;
         }
       }
+    }
+
+    .svgMap-tooltip-no-data {
+      padding: 2px 0;
+      color: $textColorLight;
+      font-style: italic;
     }
   }
 
