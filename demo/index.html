@@ -12,19 +12,41 @@
 
 <body>
 
-  <div class="container">
+  <div class="demo-wrapper">
 
-    <!-- Demo Population -->
-    <div id="svgMapPopulation"></div>
-    <script src="../data/population.js"></script>
-    <script>
-      new svgMap({
-        targetElementID: 'svgMapPopulation',
-        data: svgMapDataPopulation
-      });
-    </script>
+    <!-- Demo population -->
 
-    
+    <div class="demo-container">
+      <h2>Population desity</h2>
+
+      <div id="svgMapPopulation"></div>
+      <script src="../data/population.js"></script>
+      <script>
+        new svgMap({
+          targetElementID: 'svgMapPopulation',
+          data: svgMapDataPopulation
+        });
+      </script>
+    </div>
+
+    <!-- Demo person height in German -->
+
+    <div class="demo-container">
+      <h2>Average person height in German</h2>
+
+      <div id="svgMapPersonHeight"></div>
+      <script src="../data/personHeight.js"></script>
+      <script src="../local/countries-de_DE.js"></script>
+      <script>
+        new svgMap({
+          targetElementID: 'svgMapPersonHeight',
+          countryNames: svgMapCountryNames_de_DE,
+          data: svgMapDataPersonHeight,
+          colorMin: '#FFF0F9',
+          colorMax: '#730B62'
+        });
+      </script>
+    </div>
 
   </div>
 
