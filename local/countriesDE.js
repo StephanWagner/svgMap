@@ -1,4 +1,4 @@
-var svgMapCountryNames_de_DE = {
+var svgMapCountryNamesDE = {
   AF: 'Afghanistan',
   AX: 'Ålandinseln',
   AL: 'Albanien',
@@ -38,6 +38,7 @@ var svgMapCountryNames_de_DE = {
   KH: 'Kambodscha',
   CM: 'Kamerun',
   CA: 'Kanada',
+  XK: 'Kosovo',
   CV: 'Cabo Verde',
   BQ: 'Bonaire, Sint Eustatius und Saba',
   KY: 'Kaimaninseln',
@@ -125,7 +126,7 @@ var svgMapCountryNames_de_DE = {
   LI: 'Liechtenstein',
   LT: 'Litauen',
   LU: 'Luxemburg',
-  MO: 'Sonderverwaltungsregion Macau',
+  MO: 'Macau',
   MK: 'Mazedonien',
   MG: 'Madagaskar',
   MW: 'Malawi',

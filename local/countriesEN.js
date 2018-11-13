@@ -1,4 +1,4 @@
-svgMap.prototype.countries = {
+var svgMapCountryNamesEN = {
   AF: 'Afghanistan',
   AX: 'Åland Islands',
   AL: 'Albania',
