@@ -14,6 +14,21 @@
 
   <div class="demo-wrapper">
 
+    <!-- Demo GPD -->
+
+    <div class="demo-container">
+      <h2>GDP per capita (PPP)</h2>
+
+      <div id="svgMapGPD"></div>
+      <script src="../data/gdp.js"></script>
+      <script>
+        new svgMap({
+          targetElementID: 'svgMapGPD',
+          data: svgMapDataGPD
+        });
+      </script>
+    </div>
+
     <!-- Demo population -->
 
     <div class="demo-container">
@@ -32,15 +47,15 @@
     <!-- Demo person height in German -->
 
     <div class="demo-container">
-      <h2>Average person height in German</h2>
+      <h2>Average person height (German)</h2>
 
       <div id="svgMapPersonHeight"></div>
       <script src="../data/personHeight.js"></script>
-      <script src="../local/countries-de_DE.js"></script>
+      <script src="../local/countriesDE.js"></script>
       <script>
         new svgMap({
           targetElementID: 'svgMapPersonHeight',
-          countryNames: svgMapCountryNames_de_DE,
+          countryNames: svgMapCountryNamesDE,
           data: svgMapDataPersonHeight,
           colorMin: '#FFF0F9',
           colorMax: '#730B62'
