@@ -111,8 +111,14 @@ svgMap.prototype.getTooltipContent = function (countryID) {
   var tooltipContentWrapper = this.createElement('div', 'svgMap-tooltip-content-container');
 
   // Flag
-  this.createElement('img', 'svgMap-tooltip-flag', tooltipContentWrapper)
-    .setAttribute('src', this.options.flagURL.replace('{0}', countryID.toLowerCase()));
+  var flagContainer = this.createElement('div', 'svgMap-tooltip-flag-container svgMap-tooltip-flag-container-' + this.options.flagType, tooltipContentWrapper)
+
+  if (this.options.flagType === 'image') {
+    this.createElement('img', 'svgMap-tooltip-flag', flagContainer)
+      .setAttribute('src', this.options.flagURL.replace('{0}', countryID.toLowerCase()));
+  } else {
+    flagContainer.innerHTML = this.emojiFlags[countryID];
+  }
 
   // Title
   this.createElement('div', 'svgMap-tooltip-title', tooltipContentWrapper)

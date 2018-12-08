@@ -32,14 +32,15 @@
     <!-- Demo population -->
 
     <div class="demo-container">
-      <h2>Population desity</h2>
+      <h2>Population desity (Images as Flags)</h2>
 
       <div id="svgMapPopulation"></div>
       <script src="../data/population.js"></script>
       <script>
         new svgMap({
           targetElementID: 'svgMapPopulation',
-          data: svgMapDataPopulation
+          data: svgMapDataPopulation,
+          flagType: 'image'
         });
       </script>
     </div>
@@ -47,7 +48,7 @@
     <!-- Demo person height in German -->
 
     <div class="demo-container">
-      <h2>Average person height (German)</h2>
+      <h2>Average person height (In German language)</h2>
 
       <div id="svgMapPersonHeight"></div>
       <script src="../data/personHeight.js"></script>

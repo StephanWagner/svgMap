@@ -24,14 +24,24 @@
     position: relative;
     padding: 10px 20px;
 
-    .svgMap-tooltip-flag {
-      display: block;
-      margin: auto;
-      width: auto;
-      height: 32px;
-      padding: 2px;
-      background: rgba(0, 0, 0, .15);
-      border-radius: 2px;
+    .svgMap-tooltip-flag-container {
+      text-align: center;
+
+      &.svgMap-tooltip-flag-container-emoji {
+        font-size: 50px;
+        line-height: 0;
+        padding: 25px 0 15px;
+      }
+
+      .svgMap-tooltip-flag {
+        display: block;
+        margin: auto;
+        width: auto;
+        height: 32px;
+        padding: 2px;
+        background: rgba(0, 0, 0, .15);
+        border-radius: 2px;
+      }
     }
   }
 
