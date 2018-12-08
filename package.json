@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/StephanWagner/svg-worldmap"
+    "url": "https://github.com/StephanWagner/svgMap"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
