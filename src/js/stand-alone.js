@@ -3,7 +3,7 @@
 
   // AMD
   if (typeof define === 'function' && define.amd) {
-    define('svg-worldmap', function () {
+    define('svgMap', function () {
       return svgMap;
     });
 

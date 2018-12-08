@@ -1,7 +1,9 @@
 // Wrapper function
 var svgMap = function (options) {
   this.init(options)
-}
+};
+
+console.log('aaa', svgMap);
 
 // Initialize SVG Worldmap
 svgMap.prototype.init = function (options) {
@@ -61,4 +63,4 @@ svgMap.prototype.init = function (options) {
 
   // Apply map data
   this.applyData(this.options.data);
-}
+};

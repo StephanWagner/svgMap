@@ -19,9 +19,9 @@ var paths = {
   scripts: {
     src: [
       './node_modules/svg-pan-zoom/dist/svg-pan-zoom.js',
-      './src/js/svg-worldmap.js',
+      './src/js/svgMap.js',
       './src/js/data/**/*.js',
-      './src/js/svg-worldmap/**/*.js',
+      './src/js/svgMap/**/*.js',
       './src/js/stand-alone.js'
     ],
     entries: './src/js/stand-alone.js',
@@ -34,7 +34,7 @@ gulp.task('styles-dev', function () {
     .src(paths.styles.src)
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
-    .pipe(concat('svg-worldmap.css'))
+    .pipe(concat('svgMap.css'))
     .pipe(header(cssHeader, {
       pkg: pkg
     }))
@@ -44,8 +44,8 @@ gulp.task('styles-dev', function () {
 
 gulp.task('styles-prod', ['styles-dev'], function () {
   return gulp
-    .src(paths.dest + 'svg-worldmap.css')
-    .pipe(rename('svg-worldmap.min.css'))
+    .src(paths.dest + 'svgMap.css')
+    .pipe(rename('svgMap.min.css'))
     .pipe(cleanCSS({level: {1: {specialComments: 0}}}))
     .pipe(header(cssHeader, {
       pkg: pkg
@@ -56,7 +56,7 @@ gulp.task('styles-prod', ['styles-dev'], function () {
 gulp.task('scripts-dev', function () {
   return gulp.src(paths.scripts.src)
     .pipe(sourcemaps.init())
-    .pipe(concat('svg-worldmap.js'))
+    .pipe(concat('svgMap.js'))
     .pipe(header(jsHeader, {
       pkg: pkg
     }))
@@ -68,8 +68,8 @@ gulp.task('scripts-dev', function () {
 });
 
 gulp.task('scripts-prod', ['scripts-dev'], function () {
-  return gulp.src(paths.dest + 'svg-worldmap.js')
-    .pipe(rename('svg-worldmap.min.js'))
+  return gulp.src(paths.dest + 'svgMap.js')
+    .pipe(rename('svgMap.min.js'))
     .pipe(uglify())
     .pipe(header(jsHeader, {
       pkg: pkg

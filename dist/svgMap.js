@@ -1904,7 +1904,9 @@ function requestTimeout(timeout) {
 // Wrapper function
 var svgMap = function (options) {
   this.init(options)
-}
+};
+
+console.log('aaa', svgMap);
 
 // Initialize SVG Worldmap
 svgMap.prototype.init = function (options) {
@@ -1964,7 +1966,7 @@ svgMap.prototype.init = function (options) {
 
   // Apply map data
   this.applyData(this.options.data);
-}
+};
 svgMap.prototype.countries = {
   AF: 'Afghanistan',
   AX: 'Åland Islands',
@@ -2526,7 +2528,7 @@ svgMap.prototype.getCountryName = function (countryID) {
 
   // AMD
   if (typeof define === 'function' && define.amd) {
-    define('svg-worldmap', function () {
+    define('svgMap', function () {
       return svgMap;
     });
 
@@ -2536,4 +2538,4 @@ svgMap.prototype.getCountryName = function (countryID) {
     window.svgMap = svgMap;
   }
 })(window, document)
-//# sourceMappingURL=svg-worldmap.js.map
+//# sourceMappingURL=svgMap.js.map
