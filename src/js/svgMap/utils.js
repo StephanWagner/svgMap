@@ -1,6 +1,6 @@
 // Log error to console
 svgMap.prototype.error = function (error) {
-  (console.error || console.log)('SVG Worldmap Error: ' + (error || 'Unknown error'));
+  (console.error || console.log)('svgMap error: ' + (error || 'Unknown error'));
 };
 
 // Helper to create an element with a class name
