@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var cleanCSS = require('gulp-clean-css');
@@ -8,15 +10,23 @@ var sourcemaps = require('gulp-sourcemaps');
 var header = require('gulp-header');
 var pkg = require('./package.json');
 
-var cssHeader = jsHeader = '/*! svgMap v<%= pkg.version %> | https://github.com/StephanWagner/svgMap | MIT License | Copyright Stephan Wagner | https://stephanwagner.me */' + "\n";
-jsHeader += '/*! svg-pan-zoom v3.6.0 | https://github.com/ariutta/svg-pan-zoom | BSD 2-Clause "Simplified" License | Copyright Andrea Leofreddi <a.leofreddi@itcharm.com> */' + "\n";
+var cssHeader = '/*! svgMap v<%= pkg.version %> | https://github.com/StephanWagner/svgMap | MIT License | Copyright Stephan Wagner | https://stephanwagner.me */' + "\n";
+var jsHeader = cssHeader + '/*! svg-pan-zoom v3.6.0 | https://github.com/ariutta/svg-pan-zoom | BSD 2-Clause "Simplified" License | Copyright Andrea Leofreddi <a.leofreddi@itcharm.com> */' + "\n";
 
-var paths = {
-  styles: {
-    src: './src/scss/main.scss',
-    watch: './src/scss/**/*.scss',
-  },
-  scripts: {
+// CSS
+var styles = [
+  {
+    name: 'svgMap',
+    src: ['./src/scss/main.scss'],
+    srcWatch: ['./src/scss/**/*.scss'],
+    dest: './dist/'
+  }
+];
+
+// JavaScript
+var scripts = [
+  {
+    name: 'svgMap',
     src: [
       './node_modules/svg-pan-zoom/dist/svg-pan-zoom.js',
       './src/js/svgMap.js',
@@ -24,64 +34,117 @@ var paths = {
       './src/js/svgMap/**/*.js',
       './src/js/stand-alone.js'
     ],
-    entries: './src/js/stand-alone.js',
-  },
-  dest: './dist/'
-};
+    dest: './dist/'
+  }
+];
 
-gulp.task('styles-dev', function () {
-  return gulp
-    .src(paths.styles.src)
-    .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
-    .pipe(concat('svgMap.css'))
-    .pipe(header(cssHeader, {
-      pkg: pkg
-    }))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(paths.dest));
-});
+// Config tasks
+let defaultTasks = [];
+let buildTasks = [];
+let watchTasks = [];
 
-gulp.task('styles-prod', ['styles-dev'], function () {
-  return gulp
-    .src(paths.dest + 'svgMap.css')
-    .pipe(rename('svgMap.min.css'))
-    .pipe(cleanCSS({level: {1: {specialComments: 0}}}))
-    .pipe(header(cssHeader, {
-      pkg: pkg
-    }))
-    .pipe(gulp.dest(paths.dest));
-});
+// Config CSS tasks
+for (const item of styles) {
 
-gulp.task('scripts-dev', function () {
-  return gulp.src(paths.scripts.src)
-    .pipe(sourcemaps.init())
-    .pipe(concat('svgMap.js'))
-    .pipe(header(jsHeader, {
-      pkg: pkg
-    }))
-    .pipe(sourcemaps.init({
-      loadMaps: true
-    }))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(paths.dest));
-});
+  // Concat CSS
+  const cssConcat = function() {
+    return gulp
+      .src(item.src)
+      .pipe(sourcemaps.init())
+      .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+      .pipe(concat(item.name + '.css'))
+      .pipe(header(cssHeader, {
+        pkg: pkg
+      }))
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest(item.dest));
+  };
 
-gulp.task('scripts-prod', ['scripts-dev'], function () {
-  return gulp.src(paths.dest + 'svgMap.js')
-    .pipe(rename('svgMap.min.js'))
-    .pipe(uglify())
-    .pipe(header(jsHeader, {
-      pkg: pkg
-    }))
-    .pipe(gulp.dest(paths.dest));
-});
+  // Store as a task
+  gulp.task('cssConcat-' + item.name, cssConcat);
 
-gulp.task('build', ['styles-prod', 'scripts-prod']);
+  // Add to default tasks
+  defaultTasks.push('cssConcat-' + item.name);
 
-gulp.task('default', ['styles-dev', 'scripts-dev']);
+  // Add to watch tasks
+  watchTasks.push({
+    src: item.src,
+    task: cssConcat
+  });
 
-gulp.task('watch', ['styles-dev', 'scripts-dev'], function () {
-  gulp.watch([paths.styles.watch], ['styles-dev']);
-  gulp.watch([paths.scripts.src], ['scripts-dev']);
-});
+  // Build CSS
+  const cssBuild = function() {
+    return gulp
+      .src(item.dest + item.name + '.css')
+      .pipe(rename(item.name + '.min.css'))
+      .pipe(cleanCSS({level: {1: {specialComments: 0}}}))
+      .pipe(header(cssHeader, {
+        pkg: pkg
+      }))
+      .pipe(gulp.dest(item.dest));
+  };
+
+  // Store as a task
+  gulp.task('cssBuild-' + item.name, cssBuild);
+  
+  // Add to build tasks
+  buildTasks.push('cssBuild-' + item.name);
+}
+
+// Config JavaScript tasks
+for (let item of scripts) {
+
+  // Concat JavaScript
+  const jsConcat = function() {
+    return gulp
+      .src(item.src)
+      .pipe(sourcemaps.init())
+      .pipe(concat(item.name + '.js'))
+      .pipe(header(jsHeader, {
+        pkg: pkg
+      }))
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest(item.dest));
+  };
+
+  // Store as a task
+  gulp.task('jsConcat-' + item.name, jsConcat);
+
+  // Add to default tasks
+  defaultTasks.push('jsConcat-' + item.name);
+
+  // Add to watch tasks
+  watchTasks.push({
+    src: item.src,
+    task: jsConcat
+  });
+
+  // Build JavaScript
+  const jsBuild = function() {
+    return gulp
+      .src(item.dest + item.name + '.js')
+      .pipe(rename(item.name + '.min.js'))
+      .pipe(uglify())
+      .pipe(header(jsHeader, {
+        pkg: pkg
+      }))
+      .pipe(gulp.dest(item.dest));
+  };
+
+  // Store as a task
+  gulp.task('jsBuild-' + item.name, jsBuild);
+  
+  // Add to build tasks
+  buildTasks.push('jsBuild-' + item.name);
+}
+
+// Watch tasks
+function watch() {
+  for (const watchTask of watchTasks) {
+    gulp.watch(watchTask.src, watchTask.task);
+  }
+}
+
+exports.default = gulp.series(defaultTasks);
+exports.watch = gulp.series(defaultTasks, watch);
+exports.build = gulp.series(defaultTasks, buildTasks);

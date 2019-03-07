@@ -15,16 +15,17 @@
     "url": "https://github.com/StephanWagner/svgMap"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-clean-css": "^3.9.3",
+    "gulp": "^4.0.0",
+    "gulp-clean-css": "^4.0.0",
     "gulp-concat": "^2.6.1",
-    "gulp-header": "^2.0.5",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglify": "^3.0.0"
+    "gulp-header": "^2.0.7",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.1",
+    "jest": "^24.1.0"
   },
   "dependencies": {
-    "svg-pan-zoom": "^3.5.2"
+    "svg-pan-zoom": "^3.6.0"
   }
 }
