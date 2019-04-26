@@ -15,8 +15,8 @@
     "url": "https://github.com/StephanWagner/svgMap"
   },
   "devDependencies": {
-    "gulp": "^4.0.0",
-    "gulp-clean-css": "^4.0.0",
+    "gulp": "^4.0.1",
+    "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
     "gulp-header": "^2.0.7",
     "gulp-rename": "^1.4.0",
