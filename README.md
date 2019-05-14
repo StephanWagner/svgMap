@@ -10,7 +10,7 @@ npm install svgmap
 
 ## Usage
 
-Include or require `svgMap.min.js` and you are ready to go
+Include or require `svgMap.min.js` and you are ready to go:
 
 ```html
 <div id="svgMap"></div>
@@ -62,10 +62,10 @@ You can pass the following options into svgMap:
 * `colorMax`, `colorMin`, `colorNoData` (`string`) The color values in hex for highest value `colorMax`, lowest value `colorMin` and no data available `colorNoData`. Default: `#CC0033` for `colorMax`, `#FFE5D9` for `colorMin`, `#E2E2E2` for `colorNoData`
 
 * `flagType` (`'emoji'`, `'image'`) The type of the flag in the tooltip. Default: `emoji`
-  
+
 * `flagURL` (`string`) The URL to the flags when using flag type `image`. The placeholder `{0}` will get replaced with the lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. Default: `https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg`
 
-* `data` (`object`) The chart data to use for coloring and to show in the tooltip. Use a unique data-id as key and provide 
+* `data` (`object`) The chart data to use for coloring and to show in the tooltip. Use a unique data-id as key and provide
 
   * `name` (`string`) The name of the data, it will be shown in the tooltip
 
