@@ -30,10 +30,6 @@ svgMap.prototype.init = function (options) {
     colorMin: '#FFE5D9',
     colorNoData: '#E2E2E2',
 
-    // Data thresholds
-    thresholdMax: null,
-    thresholdMin: null,
-
     // The flag type can be 'image' or 'emoji'
     flagType: 'emoji',
 
