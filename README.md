@@ -2,7 +2,7 @@
 
 svgMap is a JavaScript library that lets you easily create an interactable world map comparing customizable data for each country.
 
-https://stephanwagner.me/
+https://stephanwagner.me
 
 
 ## Attribution
@@ -17,8 +17,8 @@ https://github.com/hjnilsson/country-flags
 PD License
 Copyright Hampus Nilsson
 
-The flags are served by jsDelivr (https://www.jsdelivr.com/)
+The flags are served by jsDelivr (https://www.jsdelivr.com)
 
-Country name translations were taken from https://github.com/umpirsky/country-list/
+Country name translations were taken from https://github.com/umpirsky/country-list
 
-Most data in the examples is taken from Wikipedia https://www.wikipedia.org/
+Most data in the examples is taken from Wikipedia https://www.wikipedia.org

@@ -11,7 +11,7 @@ var header = require('gulp-header');
 var pkg = require('./package.json');
 
 var cssHeader = '/*! svgMap v<%= pkg.version %> | https://github.com/StephanWagner/svgMap | MIT License | Copyright Stephan Wagner | https://stephanwagner.me */' + "\n";
-var jsHeader = cssHeader + '/*! svg-pan-zoom v3.6.0 | https://github.com/ariutta/svg-pan-zoom | BSD 2-Clause "Simplified" License | Copyright Andrea Leofreddi <a.leofreddi@itcharm.com> */' + "\n";
+var jsHeader = cssHeader + '/*! svg-pan-zoom | https://github.com/ariutta/svg-pan-zoom | BSD 2-Clause "Simplified" License | Copyright Andrea Leofreddi <a.leofreddi@itcharm.com> */' + "\n";
 
 // CSS
 var styles = [
@@ -86,7 +86,7 @@ for (const item of styles) {
 
   // Store as a task
   gulp.task('cssBuild-' + item.name, cssBuild);
-  
+
   // Add to build tasks
   buildTasks.push('cssBuild-' + item.name);
 }
@@ -133,7 +133,7 @@ for (let item of scripts) {
 
   // Store as a task
   gulp.task('jsBuild-' + item.name, jsBuild);
-  
+
   // Add to build tasks
   buildTasks.push('jsBuild-' + item.name);
 }
