@@ -5,10 +5,8 @@
   "private": false,
   "license": "MIT",
   "keywords": [
-    "svg",
-    "worldmap",
-    "map",
-    "countries",
+    "svg-map",
+    "world-map",
     "chart"
   ],
   "repository": {
