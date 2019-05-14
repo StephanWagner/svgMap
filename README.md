@@ -2,6 +2,8 @@
 
 svgMap is a JavaScript library that lets you easily create an interactable world map comparing customizable data for each country.
 
+Live demo: https://stephanwagner.me/create-world-map-charts-with-svgmap#svgMapDemoGDP
+
 ## Install
 
 ```
