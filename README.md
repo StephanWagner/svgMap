@@ -97,4 +97,4 @@ svgMap uses [svg-pan-zoom](https://github.com/ariutta/svg-pan-zoom) by [Anders R
 
 The country flag images are from [country-flags](https://github.com/hjnilsson/country-flags) by [Hampus Nilsson](https://github.com/hjnilsson).
 
-Most data in the demos was taken from Wikipedia [Wikipedia](https://www.wikipedia.org).
+Most data in the demos was taken from [Wikipedia](https://www.wikipedia.org).
