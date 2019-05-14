@@ -32,7 +32,7 @@ var scripts = [
       './src/js/svgMap.js',
       './src/js/data/**/*.js',
       './src/js/svgMap/**/*.js',
-      './src/js/stand-alone.js'
+      './src/js/umd.js'
     ],
     dest: './dist/'
   }
