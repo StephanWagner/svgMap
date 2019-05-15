@@ -1,4 +1,4 @@
-/*! svgMap v1.0.0 | https://github.com/StephanWagner/svgMap | MIT License | Copyright Stephan Wagner | https://stephanwagner.me */
+/*! svgMap | https://github.com/StephanWagner/svgMap | MIT License | Copyright Stephan Wagner | https://stephanwagner.me */
 /*! svg-pan-zoom | https://github.com/ariutta/svg-pan-zoom | BSD 2-Clause "Simplified" License | Copyright Andrea Leofreddi <a.leofreddi@itcharm.com> */
 // svg-pan-zoom v3.6.0
 // https://github.com/ariutta/svg-pan-zoom
@@ -1934,7 +1934,7 @@ svgMap.prototype.init = function (options) {
     colorNoData: '#E2E2E2',
 
     // The flag type can be 'image' or 'emoji'
-    flagType: 'emoji',
+    flagType: 'image',
 
     // The URL to the flags when using flag type 'image', {0} will get replaced with the lowercase country id
     flagURL: 'https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg'
