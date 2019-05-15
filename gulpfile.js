@@ -52,9 +52,7 @@ for (const item of styles) {
       .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
       .pipe(concat(item.name + '.css'))
-      .pipe(header(cssHeader, {
-        pkg: pkg
-      }))
+      .pipe(header(cssHeader))
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(item.dest));
   };
@@ -77,9 +75,7 @@ for (const item of styles) {
       .src(item.dest + item.name + '.css')
       .pipe(rename(item.name + '.min.css'))
       .pipe(cleanCSS({level: {1: {specialComments: 0}}}))
-      .pipe(header(cssHeader, {
-        pkg: pkg
-      }))
+      .pipe(header(cssHeader))
       .pipe(gulp.dest(item.dest));
   };
 
@@ -99,9 +95,7 @@ for (let item of scripts) {
       .src(item.src)
       .pipe(sourcemaps.init())
       .pipe(concat(item.name + '.js'))
-      .pipe(header(jsHeader, {
-        pkg: pkg
-      }))
+      .pipe(header(jsHeader))
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(item.dest));
   };
@@ -124,9 +118,7 @@ for (let item of scripts) {
       .src(item.dest + item.name + '.js')
       .pipe(rename(item.name + '.min.js'))
       .pipe(uglify())
-      .pipe(header(jsHeader, {
-        pkg: pkg
-      }))
+      .pipe(header(jsHeader))
       .pipe(gulp.dest(item.dest));
   };
 
