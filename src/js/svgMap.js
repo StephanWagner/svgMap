@@ -31,7 +31,7 @@ svgMap.prototype.init = function (options) {
     colorNoData: '#E2E2E2',
 
     // The flag type can be 'image' or 'emoji'
-    flagType: 'emoji',
+    flagType: 'image',
 
     // The URL to the flags when using flag type 'image', {0} will get replaced with the lowercase country id
     flagURL: 'https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg'
