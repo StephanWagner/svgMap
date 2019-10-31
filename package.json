@@ -18,13 +18,13 @@
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
-    "gulp-header": "^2.0.7",
+    "gulp-header": "^2.0.9",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
-    "jest": "^24.8.0",
-    "svg-pan-zoom": "^3.6.0"
+    "jest": "^24.9.0",
+    "svg-pan-zoom": "^3.6.1"
   },
   "dependencies": {},
   "scripts": {
