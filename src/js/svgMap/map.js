@@ -129,7 +129,7 @@ svgMap.prototype.getTooltipContent = function (countryID) {
   // Content
   var tooltipContent = this.createElement('div', 'svgMap-tooltip-content', tooltipContentWrapper);
   if (!this.options.data.values[countryID]) {
-    this.createElement('div', 'svgMap-tooltip-no-data', tooltipContent).innerHTML = 'No data available';
+    this.createElement('div', 'svgMap-tooltip-no-data', tooltipContent).innerHTML = this.options.noDataText;
   } else {
     tooltipContentTable = '<table>';
     Object.keys(this.options.data.data).forEach(function (key) {
