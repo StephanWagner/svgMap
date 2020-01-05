@@ -116,7 +116,7 @@ svgMap.prototype.getTooltipContent = function (countryID) {
   if (this.options.flagType === 'image') {
     this.createElement('img', 'svgMap-tooltip-flag', flagContainer)
       .setAttribute('src', this.options.flagURL.replace('{0}', countryID.toLowerCase()));
-  } else {
+  } else if(this.options.flagType === 'emoji') {
     flagContainer.innerHTML = this.emojiFlags[countryID];
   }
 
