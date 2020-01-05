@@ -110,14 +110,16 @@ svgMap.prototype.createMap = function () {
 svgMap.prototype.getTooltipContent = function (countryID) {
   var tooltipContentWrapper = this.createElement('div', 'svgMap-tooltip-content-container');
 
-  // Flag
-  var flagContainer = this.createElement('div', 'svgMap-tooltip-flag-container svgMap-tooltip-flag-container-' + this.options.flagType, tooltipContentWrapper)
+  if (this.options.hideFlag === false) {
+    // Flag
+    var flagContainer = this.createElement('div', 'svgMap-tooltip-flag-container svgMap-tooltip-flag-container-' + this.options.flagType, tooltipContentWrapper)
 
-  if (this.options.flagType === 'image') {
-    this.createElement('img', 'svgMap-tooltip-flag', flagContainer)
-      .setAttribute('src', this.options.flagURL.replace('{0}', countryID.toLowerCase()));
-  } else if(this.options.flagType === 'emoji') {
-    flagContainer.innerHTML = this.emojiFlags[countryID];
+    if (this.options.flagType === 'image') {
+      this.createElement('img', 'svgMap-tooltip-flag', flagContainer)
+          .setAttribute('src', this.options.flagURL.replace('{0}', countryID.toLowerCase()));
+    } else if (this.options.flagType === 'emoji') {
+      flagContainer.innerHTML = this.emojiFlags[countryID];
+    }
   }
 
   // Title
