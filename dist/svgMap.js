@@ -2278,6 +2278,12 @@ svgMap.prototype.init = function (options) {
     // The flag type can be 'image' or 'emoji'
     flagType: 'image',
 
+    // Decide whether to show the flag option or not
+    hideFlag: false,
+
+    // The default text to be shown when no data is present
+    noDataText: 'No data available',
+
     // The URL to the flags when using flag type 'image', {0} will get replaced with the lowercase country id
     flagURL: 'https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg'
   };
@@ -2948,14 +2954,16 @@ svgMap.prototype.createMap = function () {
 svgMap.prototype.getTooltipContent = function (countryID) {
   var tooltipContentWrapper = this.createElement('div', 'svgMap-tooltip-content-container');
 
-  // Flag
-  var flagContainer = this.createElement('div', 'svgMap-tooltip-flag-container svgMap-tooltip-flag-container-' + this.options.flagType, tooltipContentWrapper)
+  if (this.options.hideFlag === false) {
+    // Flag
+    var flagContainer = this.createElement('div', 'svgMap-tooltip-flag-container svgMap-tooltip-flag-container-' + this.options.flagType, tooltipContentWrapper)
 
-  if (this.options.flagType === 'image') {
-    this.createElement('img', 'svgMap-tooltip-flag', flagContainer)
-      .setAttribute('src', this.options.flagURL.replace('{0}', countryID.toLowerCase()));
-  } else {
-    flagContainer.innerHTML = this.emojiFlags[countryID];
+    if (this.options.flagType === 'image') {
+      this.createElement('img', 'svgMap-tooltip-flag', flagContainer)
+          .setAttribute('src', this.options.flagURL.replace('{0}', countryID.toLowerCase()));
+    } else if (this.options.flagType === 'emoji') {
+      flagContainer.innerHTML = this.emojiFlags[countryID];
+    }
   }
 
   // Title
@@ -2965,7 +2973,7 @@ svgMap.prototype.getTooltipContent = function (countryID) {
   // Content
   var tooltipContent = this.createElement('div', 'svgMap-tooltip-content', tooltipContentWrapper);
   if (!this.options.data.values[countryID]) {
-    this.createElement('div', 'svgMap-tooltip-no-data', tooltipContent).innerHTML = 'No data available';
+    this.createElement('div', 'svgMap-tooltip-no-data', tooltipContent).innerHTML = this.options.noDataText;
   } else {
     tooltipContentTable = '<table>';
     Object.keys(this.options.data.data).forEach(function (key) {
