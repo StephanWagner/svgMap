@@ -33,6 +33,12 @@ svgMap.prototype.init = function (options) {
     // The flag type can be 'image' or 'emoji'
     flagType: 'image',
 
+    // Decide whether to show the flag option or not
+    hideFlag: false,
+
+    // The default text to be shown when no data is present
+    noDataText: 'No data available',
+
     // The URL to the flags when using flag type 'image', {0} will get replaced with the lowercase country id
     flagURL: 'https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg'
   };
