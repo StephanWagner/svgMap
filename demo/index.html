@@ -48,7 +48,7 @@
     <!-- Demo person height in German -->
 
     <div class="demo-container">
-      <h2>Average person height (in German language)</h2>
+      <h2>Average person height (no flags, German language)</h2>
 
       <div id="svgMapPersonHeight"></div>
       <script src="../data/personHeight.js"></script>
@@ -59,7 +59,9 @@
           countryNames: svgMapCountryNamesDE,
           data: svgMapDataPersonHeight,
           colorMin: '#FFF0F9',
-          colorMax: '#730B62'
+          colorMax: '#730B62',
+          hideFlag: true,
+          noDataText: 'Keine Daten vorhanden'
         });
       </script>
     </div>
