@@ -129,6 +129,7 @@
 
 .svgMap-tooltip .svgMap-tooltip-content-container .svgMap-tooltip-flag-container {
   text-align: center;
+  margin: 2px 0 5px;
 }
 
 .svgMap-tooltip .svgMap-tooltip-content-container .svgMap-tooltip-flag-container.svgMap-tooltip-flag-container-emoji {
@@ -150,7 +151,8 @@
 .svgMap-tooltip .svgMap-tooltip-title {
   white-space: nowrap;
   font-size: 18px;
-  line-height: 40px;
+  line-height: 28px;
+  padding: 0 0 8px;
   text-align: center;
 }
 
