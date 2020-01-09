@@ -61,7 +61,7 @@ for (const item of styles) {
 
   // Add to watch tasks
   watchTasks.push({
-    src: item.src,
+    src: item.srcWatch ? item.srcWatch : item.src,
     task: cssConcat
   });
 
@@ -110,7 +110,7 @@ for (let item of scripts) {
 
   // Add to watch tasks
   watchTasks.push({
-    src: item.src,
+    src: item.srcWatch ? item.srcWatch : item.src,
     task: jsConcat
   });
 
