@@ -26,6 +26,7 @@
 
     .svgMap-tooltip-flag-container {
       text-align: center;
+      margin: 2px 0 5px;
 
       &.svgMap-tooltip-flag-container-emoji {
         font-size: 50px;
@@ -48,7 +49,8 @@
   .svgMap-tooltip-title {
     white-space: nowrap;
     font-size: 18px;
-    line-height: 40px;
+    line-height: 28px;
+    padding: 0 0 8px;
     text-align: center;
   }
 
@@ -100,7 +102,7 @@
     overflow: hidden;
     height: 10px;
     width: 30px;
-  
+
     &:after {
       content: '';
       width: 20px;
@@ -113,7 +115,7 @@
       transform: translateX(-50%) rotate(45deg);
     }
   }
-  
+
   &.svgMap-tooltip-flipped {
     .svgMap-tooltip-pointer {
       bottom: auto;
