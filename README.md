@@ -106,3 +106,11 @@ svgMap uses [svg-pan-zoom](https://github.com/ariutta/svg-pan-zoom) by [Anders R
 The country flag images are from [country-flags](https://github.com/hjnilsson/country-flags) by [Hampus Nilsson](https://github.com/hjnilsson).
 
 Most data in the demos was taken from [Wikipedia](https://www.wikipedia.org).
+
+
+## Appendix - Internet Explorer 11 Support
+The library uses both Object.assign and classlist.add which are not supported by IE11. In order to use the library you need to use a polyfill which adds this functionalty to the browser. You can create a bundle by going to https://polyfill.io/v3/ or can use the pre-defined one below which adds both of these two polyfills
+
+```<script src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.classList%2CObject.assign"></script>```
+
+Ensure to include this script before the svgMap
