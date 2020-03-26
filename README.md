@@ -6,7 +6,7 @@ Live demo: https://stephanwagner.me/create-world-map-charts-with-svgmap#svgMapDe
 
 ## Install
 
-```
+```bash
 npm install svgmap
 ```
 
@@ -73,7 +73,11 @@ You can pass the following options into svgMap:
 
 * `noDataText` (`string`) The default text to be shown when no data is present
 
-* `data` (`object`) The chart data to use for coloring and to show in the tooltip. Use a unique data-id as key and provide
+* `countries` (`object`) Additional options specific to countries:
+
+  * `EH` (`boolean`) When set to `false`, Western Sahara (EH) will be combined with Morocco (MA)
+
+* `data` (`object`) The chart data to use for coloring and to show in the tooltip. Use a unique data-id as key and provide following options:
 
   * `name` (`string`) The name of the data, it will be shown in the tooltip
 
@@ -107,10 +111,14 @@ The country flag images are from [country-flags](https://github.com/hjnilsson/co
 
 Most data in the demos was taken from [Wikipedia](https://www.wikipedia.org).
 
+---
 
 ## Appendix - Internet Explorer 11 Support
-The library uses both Object.assign and classlist.add which are not supported by IE11. In order to use the library you need to use a polyfill which adds this functionalty to the browser. You can create a bundle by going to https://polyfill.io/v3/ or can use the pre-defined one below which adds both of these two polyfills
 
-```<script src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.classList%2CObject.assign"></script>```
+The library uses both `Object.assign` and `classlist.add`, which are not supported by IE11. In order to make this library work in IE11, you need to use a polyfill, which adds this functionalty to the browser. You can create a bundle by going to https://polyfill.io/v3/, or can use the pre-defined one below, which adds both of these two polyfills.
 
-Ensure to include this script before the svgMap
+```html
+<script src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.classList%2CObject.assign"></script>
+```
+
+Ensure to include this script before the svgMap scripts.
