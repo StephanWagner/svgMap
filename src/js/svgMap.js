@@ -45,7 +45,7 @@ svgMap.prototype.init = function (options) {
     // Country options
     countries: {
       // Western Sahara: Set to false to combine Morocco (MA) and Western Sahara (EH)
-      EH: false
+      EH: true
     }
   };
 
