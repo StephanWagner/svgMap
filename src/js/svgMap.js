@@ -42,7 +42,7 @@ svgMap.prototype.init = function (options) {
     // The default text to be shown when no data is present
     noDataText: 'No data available',
 
-    // Country options
+    // Country specific options
     countries: {
       // Western Sahara: Set to false to combine Morocco (MA) and Western Sahara (EH)
       EH: true

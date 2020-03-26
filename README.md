@@ -55,9 +55,9 @@ You can pass the following options into svgMap:
 
 * `targetElementID` (`string`) The ID of the element where the world map will render (Required)
 
-* `minZoom`, `maxZoom` (`float`) Minimal and maximal zoom level between 1 and 10. Default: `1` for `minZoom`, `10` for `maxZoom`
+* `minZoom`, `maxZoom` (`float`) Minimal and maximal zoom level. Default: `1` for `minZoom`, `25` for `maxZoom`
 
-* `initialZoom` (`float`) Initial zoom level between 1 and 10. Default: `1.06`
+* `initialZoom` (`float`) Initial zoom level. Default: `1.06`
 
 * `zoomScaleSensitivity` (`float`) Sensitivity when zooming. Default: `0.2`
 
@@ -77,7 +77,7 @@ You can pass the following options into svgMap:
 
   * `EH` (`boolean`) When set to `false`, Western Sahara (EH) will be combined with Morocco (MA)
 
-* `data` (`object`) The chart data to use for coloring and to show in the tooltip. Use a unique data-id as key and provide following options:
+* `data` (`object`) The chart data to use for coloring and to show in the tooltip. Use a unique data-id as key and provide following options as value:
 
   * `name` (`string`) The name of the data, it will be shown in the tooltip
 
