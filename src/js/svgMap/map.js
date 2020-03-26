@@ -22,8 +22,17 @@ svgMap.prototype.createMap = function () {
     }.bind(this));
   }.bind(this));
 
+  // Fix countries
+  var mapPaths = Object.assign({}, this.mapPaths);
+
+  if (!this.options.countries.EH) {
+    mapPaths.MA.d = mapPaths['MA-EH'].d;
+    delete mapPaths.EH;
+  }
+  delete mapPaths['MA-EH'];
+
   // Add map elements
-  Object.keys(this.mapPaths).forEach(function (countryID) {
+  Object.keys(mapPaths).forEach(function (countryID) {
     var countryData = this.mapPaths[countryID];
     if (!countryData.d) {
       return;
@@ -125,7 +134,7 @@ svgMap.prototype.getTooltipContent = function (countryID) {
   // Title
   this.createElement('div', 'svgMap-tooltip-title', tooltipContentWrapper)
     .innerHTML = this.getCountryName(countryID);
-  
+
   // Content
   var tooltipContent = this.createElement('div', 'svgMap-tooltip-content', tooltipContentWrapper);
   if (!this.options.data.values[countryID]) {
