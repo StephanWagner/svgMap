@@ -2,9 +2,6 @@
 *.js.map
 *.css.map
 
-# Other
-parseData.html
-
 # npm
 node_modules
 
