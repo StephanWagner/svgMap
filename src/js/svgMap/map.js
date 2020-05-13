@@ -61,6 +61,14 @@ svgMap.prototype.createMap = function () {
     });*/
 
     // Tooltip events
+    // Add tooltip when touch is used
+    countryElement.addEventListener('touchstart', function (e) {
+      var countryID = countryElement.getAttribute('data-id');
+      this.setTooltipContent(this.getTooltipContent(countryID));
+      this.showTooltip(e);
+      this.moveTooltip(e);
+    }.bind(this));
+
     countryElement.addEventListener('mouseenter', function (e) {
       var countryID = countryElement.getAttribute('data-id');
       this.setTooltipContent(this.getTooltipContent(countryID));
@@ -71,8 +79,11 @@ svgMap.prototype.createMap = function () {
       this.moveTooltip(e);
     }.bind(this));
 
-    countryElement.addEventListener('mouseleave', function () {
-      this.hideTooltip();
+    // Hide tooltip when event is mouseleav or touchend
+    ['mouseleave', 'touchend'].forEach(function (event) {
+      countryElement.addEventListener(event, function () {
+        this.hideTooltip();
+      }.bind(this));
     }.bind(this));
 
   }.bind(this));

@@ -30,8 +30,8 @@ svgMap.prototype.hideTooltip = function () {
 
 // Move the tooltip
 svgMap.prototype.moveTooltip = function (e) {
-  var x = e.pageX;
-  var y = e.pageY;
+  var x = e.pageX || e.touches[0].pageX;
+  var y = e.pageY || e.touches[0].pageY;
   var offsetToWindow = 6;
   var offsetToPointer = 12;
   var offsetToPointerFlipped = 32;
