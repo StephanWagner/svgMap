@@ -3718,8 +3718,13 @@ svgMap.prototype.hideTooltip = function () {
 
 // Move the tooltip
 svgMap.prototype.moveTooltip = function (e) {
-  var x = e.pageX || e.touches[0].pageX;
-  var y = e.pageY || e.touches[0].pageY;
+  var x = e.pageX || (e.touches && e.touches[0] ? e.touches[0].pageX : null);
+  var y = e.pageY || (e.touches && e.touches[0] ? e.touches[0].pageY : null);
+
+  if (x === null || y === null) {
+    return;
+  }
+
   var offsetToWindow = 6;
   var offsetToPointer = 12;
   var offsetToPointerFlipped = 32;
@@ -3753,6 +3758,7 @@ svgMap.prototype.moveTooltip = function (e) {
   this.tooltip.style.left = x + 'px';
   this.tooltip.style.top = y + 'px';
 };
+
 // Log error to console
 svgMap.prototype.error = function (error) {
   (console.error || console.log)('svgMap error: ' + (error || 'Unknown error'));
