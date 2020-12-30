@@ -171,13 +171,17 @@ svgMap.prototype.getTooltipContent = function (countryID) {
 svgMap.prototype.setControlStatuses = function () {
 
   this.zoomControlIn.classList.remove('svgMap-disabled');
+  this.zoomControlIn.setAttribute('aria-disabled', 'false');
   this.zoomControlOut.classList.remove('svgMap-disabled');
+  this.zoomControlOut.setAttribute('aria-disabled', 'false');
 
   if (this.mapPanZoom.getZoom().toFixed(3) <= this.options.minZoom) {
     this.zoomControlOut.classList.add('svgMap-disabled');
+    this.zoomControlOut.setAttribute('aria-disabled', 'true');
   }
   if (this.mapPanZoom.getZoom().toFixed(3) >= this.options.maxZoom) {
     this.zoomControlIn.classList.add('svgMap-disabled');
+    this.zoomControlIn.setAttribute('aria-disabled', 'true');
   }
 };
 
