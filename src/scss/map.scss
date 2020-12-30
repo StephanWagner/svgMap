@@ -8,7 +8,10 @@
 
   * {
     box-sizing: border-box;
-    outline: none;
+  }
+  
+  :focus:not(:focus-visible) {
+    outline: 0;
   }
 
   .svgMap-map-image {
@@ -47,6 +50,19 @@
   }
 
   .svgMap-control-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    text-transform: none;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+  	        appearance: none;
     cursor: pointer;
     width: 30px;
     height: 30px;

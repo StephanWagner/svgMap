@@ -2866,11 +2866,16 @@ svgMap.prototype.createMap = function () {
   var zoomContainer = this.createElement('div', 'svgMap-map-controls-zoom', mapControlsWrapper);
   ['in', 'out'].forEach(function (item) {
     var zoomControlName = 'zoomControl' + item.charAt(0).toUpperCase() + item.slice(1);
-    this[zoomControlName] = this.createElement('div', 'svgMap-control-button svgMap-zoom-button svgMap-zoom-' + item + '-button', zoomContainer);
+    this[zoomControlName] = this.createElement('button', 'svgMap-control-button svgMap-zoom-button svgMap-zoom-' + item + '-button', zoomContainer);
+    this[zoomControlName].type = 'button';
     this[zoomControlName].addEventListener('click', function () {
       this.zoomMap(item);
     }.bind(this));
   }.bind(this));
+  
+  // Add accessible names to zoom controls
+  this.zoomControlIn.setAttribute('aria-label', 'Zoom in');
+  this.zoomControlOut.setAttribute('aria-label', 'Zoom out');
 
   // Fix countries
   var mapPaths = Object.assign({}, this.mapPaths);
@@ -3020,13 +3025,17 @@ svgMap.prototype.getTooltipContent = function (countryID) {
 svgMap.prototype.setControlStatuses = function () {
 
   this.zoomControlIn.classList.remove('svgMap-disabled');
+  this.zoomControlIn.setAttribute('aria-disabled', 'false');
   this.zoomControlOut.classList.remove('svgMap-disabled');
+  this.zoomControlOut.setAttribute('aria-disabled', 'false');
 
   if (this.mapPanZoom.getZoom().toFixed(3) <= this.options.minZoom) {
     this.zoomControlOut.classList.add('svgMap-disabled');
+    this.zoomControlOut.setAttribute('aria-disabled', 'true');
   }
   if (this.mapPanZoom.getZoom().toFixed(3) >= this.options.maxZoom) {
     this.zoomControlIn.classList.add('svgMap-disabled');
+    this.zoomControlIn.setAttribute('aria-disabled', 'true');
   }
 };
 
