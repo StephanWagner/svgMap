@@ -16,7 +16,8 @@ svgMap.prototype.createMap = function () {
   var zoomContainer = this.createElement('div', 'svgMap-map-controls-zoom', mapControlsWrapper);
   ['in', 'out'].forEach(function (item) {
     var zoomControlName = 'zoomControl' + item.charAt(0).toUpperCase() + item.slice(1);
-    this[zoomControlName] = this.createElement('div', 'svgMap-control-button svgMap-zoom-button svgMap-zoom-' + item + '-button', zoomContainer);
+    this[zoomControlName] = this.createElement('button', 'svgMap-control-button svgMap-zoom-button svgMap-zoom-' + item + '-button', zoomContainer);
+    this[zoomControlName].type = 'button';
     this[zoomControlName].addEventListener('click', function () {
       this.zoomMap(item);
     }.bind(this));
