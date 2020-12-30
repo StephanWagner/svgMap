@@ -22,6 +22,10 @@ svgMap.prototype.createMap = function () {
       this.zoomMap(item);
     }.bind(this));
   }.bind(this));
+  
+  // Add accessible names to zoom controls
+  this.zoomControlIn.setAttribute('aria-label', 'Zoom in');
+  this.zoomControlOut.setAttribute('aria-label', 'Zoom out');
 
   // Fix countries
   var mapPaths = Object.assign({}, this.mapPaths);
