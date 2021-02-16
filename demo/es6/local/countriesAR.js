@@ -1,4 +1,4 @@
-var svgMapCountryNamesAR = {
+export default {
   AF: 'أفغانستان',
   AX: 'جزر آلاند',
   AL: 'ألبانيا',

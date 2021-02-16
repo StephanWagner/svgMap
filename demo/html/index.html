@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>svgMap demos</title>
+  <title>svgMap HTML demos</title>
+
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
-  <link href="demo.css" rel="stylesheet">
-  <link href="../dist/svgMap.css" rel="stylesheet">
-  <script src="../dist/svgMap.js"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+
+  <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+
+  <link href="./demo.css" rel="stylesheet">
+  <link href="../../dist/svgMap.css" rel="stylesheet">
+  <script src="../../dist/svgMap.js"></script>
 </head>
 
 <body>
@@ -20,7 +23,7 @@
       <h2>GDP per capita (PPP)</h2>
 
       <div id="svgMapGPD"></div>
-      <script src="../data/gdp.js"></script>
+      <script src="./data/gdp.js"></script>
       <script>
         new svgMap({
           targetElementID: 'svgMapGPD',
@@ -35,7 +38,7 @@
       <h2>Population desity (emojis as flags)</h2>
 
       <div id="svgMapPopulation"></div>
-      <script src="../data/population.js"></script>
+      <script src="./data/population.js"></script>
       <script>
         new svgMap({
           targetElementID: 'svgMapPopulation',
@@ -51,8 +54,8 @@
       <h2>Average person height (no flags, German language)</h2>
 
       <div id="svgMapPersonHeight"></div>
-      <script src="../data/personHeight.js"></script>
-      <script src="../local/countriesDE.js"></script>
+      <script src="./data/personHeight.js"></script>
+      <script src="./local/countriesDE.js"></script>
       <script>
         new svgMap({
           targetElementID: 'svgMapPersonHeight',
@@ -69,5 +72,4 @@
   </div>
 
 </body>
-
 </html>
