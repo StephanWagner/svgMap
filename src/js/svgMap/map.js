@@ -22,7 +22,7 @@ svgMap.prototype.createMap = function () {
       this.zoomMap(item);
     }.bind(this));
   }.bind(this));
-  
+
   // Add accessible names to zoom controls
   this.zoomControlIn.setAttribute('aria-label', 'Zoom in');
   this.zoomControlOut.setAttribute('aria-label', 'Zoom out');
@@ -156,7 +156,7 @@ svgMap.prototype.getTooltipContent = function (countryID) {
   if (!this.options.data.values[countryID]) {
     this.createElement('div', 'svgMap-tooltip-no-data', tooltipContent).innerHTML = this.options.noDataText;
   } else {
-    tooltipContentTable = '<table>';
+    var tooltipContentTable = '<table>';
     Object.keys(this.options.data.data).forEach(function (key) {
       var item = this.options.data.data[key];
       var value = this.options.data.values[countryID][key];
