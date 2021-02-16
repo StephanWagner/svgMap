@@ -1,15 +1,14 @@
-// UMD module definition
-(function (window, document) {
-
-  // AMD
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    define('svgMap', function () {
-      return svgMap;
+    define(['svgPanZoom'], function (svgPanZoom) {
+      return (root.svgMap = factory(svgPanZoom));
     });
-
-  // CMD
-  } else if (typeof module !== 'undefined' && module.exports) {
-    module.exports = svgMap;
-    window.svgMap = svgMap;
+  } else if (typeof module === 'object' && module.exports) {
+    module.exports = root.svgMap = factory(require('svgPanZoom'));
+  } else {
+    root.svgMap = factory(svgPanZoom);
   }
-})(window, document)
+})(this, function (svgPanZoom) {
+  var svgMap = svgMapWrapper(svgPanZoom);
+  return svgMap;
+});

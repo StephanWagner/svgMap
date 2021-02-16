@@ -7,8 +7,7 @@ var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var header = require('gulp-header');
 
-var cssHeader = '/*! svgMap | https://github.com/StephanWagner/svgMap | MIT License | Copyright Stephan Wagner | https://stephanwagner.me */' + "\n";
-var jsHeader = cssHeader + '/*! svg-pan-zoom | https://github.com/ariutta/svg-pan-zoom | BSD 2-Clause "Simplified" License | Copyright Andrea Leofreddi <a.leofreddi@itcharm.com> */' + "\n";
+var fileHeader = '/*! svgMap | https://github.com/StephanWagner/svgMap | MIT License | Copyright Stephan Wagner | https://stephanwagner.me */' + "\n";
 
 // CSS
 var styles = [{
@@ -22,7 +21,6 @@ var styles = [{
 var scripts = [{
   name: 'svgMap',
   src: [
-    './node_modules/svg-pan-zoom/dist/svg-pan-zoom.js',
     './src/js/svgMap.js',
     './src/js/data/**/*.js',
     './src/js/svgMap/**/*.js',
@@ -48,7 +46,7 @@ for (const item of styles) {
         outputStyle: 'expanded'
       }).on('error', sass.logError))
       .pipe(concat(item.name + '.css'))
-      .pipe(header(cssHeader))
+      .pipe(header(fileHeader))
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(item.dest));
   };
@@ -77,7 +75,7 @@ for (const item of styles) {
           }
         }
       }))
-      .pipe(header(cssHeader))
+      .pipe(header(fileHeader))
       .pipe(gulp.dest(item.dest));
   };
 
@@ -97,7 +95,7 @@ for (let item of scripts) {
       .src(item.src)
       .pipe(sourcemaps.init())
       .pipe(concat(item.name + '.js'))
-      .pipe(header(jsHeader))
+      .pipe(header(fileHeader))
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(item.dest));
   };
@@ -120,7 +118,7 @@ for (let item of scripts) {
       .src(item.dest + item.name + '.js')
       .pipe(rename(item.name + '.min.js'))
       .pipe(uglify())
-      .pipe(header(jsHeader))
+      .pipe(header(fileHeader))
       .pipe(gulp.dest(item.dest));
   };
 
