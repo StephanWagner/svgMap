@@ -15,7 +15,7 @@ npm install --save svgmap
 ```
 
 ```javascript
-import svgMap from 'svgMap';
+import svgMap from 'svgmap';
 import 'svgmap/dist/svgMap.min.css';
 ```
 
@@ -26,6 +26,8 @@ import 'svgmap/dist/svgMap.min.css';
 <script src="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.0.3/dist/svgMap.min.js"></script>
 <link href="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.0.3/dist/svgMap.min.css" rel="stylesheet">
 ```
+
+---
 
 ## Usage
 
@@ -65,6 +67,8 @@ new svgMap({
 
 This example code creates a world map with the GDP per capita and its change to the previous year:
 https://stephanwagner.me/create-world-map-charts-with-svgmap#svgMapDemoGDP
+
+---
 
 ## Options
 
@@ -112,11 +116,15 @@ You can pass the following options into svgMap:
 
 * `countryNames` (`object`) An object with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code as key and the country name as value
 
+---
+
 ## Localize
 
-Use the option `countryNames` to translate country names. In the folder `local` you can find translations in following languages: Arabic, Chinese, English, French, German, Hindi, Portuguese, Russian, Spanish, Urdu
+Use the option `countryNames` to translate country names. In the folder `demo/html/local` or `demo/es6/local` you can find translations in following languages: Arabic, Chinese, English, French, German, Hindi, Portuguese, Russian, Spanish, Urdu.
 
 To create your own translations, check out [country-list](https://github.com/umpirsky/country-list) by [Saša Stamenković](https://github.com/umpirsky).
+
+---
 
 ## Attribution
 
