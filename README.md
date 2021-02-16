@@ -4,15 +4,32 @@ svgMap is a JavaScript library that lets you easily create an interactable world
 
 Live demo: https://stephanwagner.me/create-world-map-charts-with-svgmap#svgMapDemoGDP
 
+---
+
 ## Install
 
+### ES6
+
 ```bash
-npm install svgmap
+npm install --save svgmap
+```
+
+```javascript
+import svgMap from 'svgMap';
+import 'svgmap/dist/svgMap.min.css';
+```
+
+### CDN
+
+```html
+  <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.0.0/dist/svgMap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.0.0/dist/svgMap.min.css" rel="stylesheet">
 ```
 
 ## Usage
 
-Include or require `svgMap.min.js` and you are ready to go:
+Create an HTML element where to show your map, then use JavaScript to initialize:
 
 ```html
 <div id="svgMap"></div>
