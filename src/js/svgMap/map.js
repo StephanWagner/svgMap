@@ -20,7 +20,7 @@ svgMap.prototype.createMap = function () {
     this[zoomControlName].type = 'button';
     this[zoomControlName].addEventListener('click', function () {
       this.zoomMap(item);
-    }.bind(this));
+    }.bind(this), { passive: true });
   }.bind(this));
 
   // Add accessible names to zoom controls
@@ -55,7 +55,7 @@ svgMap.prototype.createMap = function () {
     ['mouseenter', 'touchdown'].forEach(function (event) {
       countryElement.addEventListener(event, function () {
         countryElement.closest('g').appendChild(countryElement);
-      }.bind(this));
+      }.bind(this), { passive: true });
     }.bind(this));
 
     // TODO Tooltip events
@@ -63,7 +63,7 @@ svgMap.prototype.createMap = function () {
     /* countryElement.addEventListener('click', function () {
       var countryID = countryElement.getAttribute('data-id');
       console.log(countryID);
-    });*/
+    }, { passive: true });*/
 
     // Tooltip events
     // Add tooltip when touch is used
@@ -72,23 +72,23 @@ svgMap.prototype.createMap = function () {
       this.setTooltipContent(this.getTooltipContent(countryID));
       this.showTooltip(e);
       this.moveTooltip(e);
-    }.bind(this));
+    }.bind(this), { passive: true });
 
     countryElement.addEventListener('mouseenter', function (e) {
       var countryID = countryElement.getAttribute('data-id');
       this.setTooltipContent(this.getTooltipContent(countryID));
       this.showTooltip(e);
-    }.bind(this));
+    }.bind(this), { passive: true });
 
     countryElement.addEventListener('mousemove', function (e) {
       this.moveTooltip(e);
-    }.bind(this));
+    }.bind(this), { passive: true });
 
     // Hide tooltip when event is mouseleav or touchend
     ['mouseleave', 'touchend'].forEach(function (event) {
       countryElement.addEventListener(event, function () {
         this.hideTooltip();
-      }.bind(this));
+      }.bind(this), { passive: true });
     }.bind(this));
 
   }.bind(this));
