@@ -758,18 +758,20 @@ function svgMapWrapper(svgPanZoom) {
           { passive: true }
         );
 
-        if (typeof this.options.data.values[countryID] !== "undefined"
-          && typeof this.options.data.values[countryID]['link'] !== 'undefined') {
-          countryElement.setAttribute('data-link', this.options.data.values[countryID]['link']);
-          countryElement.addEventListener(
-            'click',
-            function (e) {
-              location = countryElement.getAttribute('data-link');
-            }
+        if (
+          typeof this.options.data.values[countryID] !== 'undefined' &&
+          typeof this.options.data.values[countryID]['link'] !== 'undefined'
+        ) {
+          countryElement.setAttribute(
+            'data-link',
+            this.options.data.values[countryID]['link']
           );
+          countryElement.addEventListener('click', function (e) {
+            window.location.href = countryElement.getAttribute('data-link');
+          });
         }
 
-        // Hide tooltip when event is mouseleav or touchend
+        // Hide tooltip when event is mouseleave or touchend
         ['mouseleave', 'touchend'].forEach(
           function (event) {
             countryElement.addEventListener(
