@@ -1915,6 +1915,7 @@ function svgMapWrapper(svgPanZoom) {
   svgMap.prototype.getColor = function (color1, color2, ratio) {
     color1 = color1.slice(-6);
     color2 = color2.slice(-6);
+    ratio = parseFloat(ratio).toFixed(1);
     var r = Math.ceil(
       parseInt(color1.substring(0, 2), 16) * ratio +
         parseInt(color2.substring(0, 2), 16) * (1 - ratio)
