@@ -107,12 +107,15 @@
 }
 
 .svgMap-map-wrapper .svgMap-country {
-  cursor: pointer;
   stroke: #fff;
   stroke-width: 1;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
   transition: fill 0.2s, stroke 0.2s;
+}
+
+.svgMap-map-wrapper .svgMap-country[data-link] {
+  cursor: pointer;
 }
 
 .svgMap-map-wrapper .svgMap-country:hover, .svgMap-map-wrapper .svgMap-country.svgMap-active {
