@@ -766,7 +766,7 @@ function svgMapWrapper(svgPanZoom) {
             this.options.data.values[countryID]['link']
           );
           countryElement.addEventListener('click', function (e) {
-            location = countryElement.getAttribute('data-link');
+            window.location.href = countryElement.getAttribute('data-link');
           });
         }
 
