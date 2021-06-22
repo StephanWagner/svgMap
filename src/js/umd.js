@@ -4,7 +4,7 @@
       return (root.svgMap = factory(svgPanZoom));
     });
   } else if (typeof module === 'object' && module.exports) {
-    module.exports = (root.svgMap = factory(require('svg-pan-zoom')));
+    module.exports = root.svgMap = factory(require('svg-pan-zoom'));
   } else {
     root.svgMap = factory(root.svgPanZoom);
   }
