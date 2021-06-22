@@ -114,7 +114,9 @@ You can pass the following options into svgMap:
 
   * `values` (`object`) An object with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code as key and the chart data for each country as value
 
-  * `values.link` (`string`) A target URL to redirect to when clicking the country
+  * `values.link` (`string`) An URL to redirect to when clicking the country
+
+  * `values.linkTarget` (`string`) The target of the link. By default the link will be opend in the same tab
 
 * `countryNames` (`object`) An object with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code as key and the country name as value
 

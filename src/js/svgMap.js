@@ -758,15 +758,29 @@ function svgMapWrapper(svgPanZoom) {
         );
 
         if (
-          typeof this.options.data.values[countryID] !== 'undefined' &&
-          typeof this.options.data.values[countryID]['link'] !== 'undefined'
+          this.options.data.values &&
+          this.options.data.values[countryID] &&
+          this.options.data.values[countryID]['link']
         ) {
           countryElement.setAttribute(
             'data-link',
             this.options.data.values[countryID]['link']
           );
+          if (this.options.data.values[countryID]['linkTarget']) {
+            countryElement.setAttribute(
+              'data-link-target',
+              this.options.data.values[countryID]['linkTarget']
+            );
+          }
           countryElement.addEventListener('click', function (e) {
-            window.location.href = countryElement.getAttribute('data-link');
+            const link = countryElement.getAttribute('data-link');
+            const target = countryElement.getAttribute('data-link-target');
+
+            if (target) {
+              window.open(link, target);
+            } else {
+              window.location.href = link;
+            }
           });
         }
 
