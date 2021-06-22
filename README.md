@@ -116,7 +116,7 @@ You can pass the following options into svgMap:
 
   * `values.link` (`string`) An URL to redirect to when clicking the country
 
-  * `values.linkTarget` (`string`) The target of the link. By default the link will be opend in the same tab
+  * `values.linkTarget` (`string`) The target of the link. By default the link will be opened in the same tab. Use `_blank` to open the link in a new tab.
 
 * `countryNames` (`object`) An object with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code as key and the country name as value
 
