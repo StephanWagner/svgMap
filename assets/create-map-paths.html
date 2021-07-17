@@ -2,9 +2,7 @@
 <title>Create map data</title>
 <meta charset="utf-8">
 
-<script>var svgMap = function () {};</script>
 <script src="./countries.js"></script>
-<script>var svgMapCountries = new svgMap();</script>
 
 <div style="width: 600px; margin: 20px auto 60px;">
   <svg id ="map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1001">
@@ -1005,7 +1003,6 @@
   var missingCountriesOutput = document.getElementById('missing-countries');
   var dataOutput = document.getElementById('data');
   var map = document.getElementById('map');
-  var countries = svgMapCountries.countries;
   var data = {};
 
   countries['MA-EH'] = countries['MA'];
