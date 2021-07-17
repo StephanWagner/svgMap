@@ -7,15 +7,12 @@
   background: #d9ecff;
   color: #111;
 }
-
 .svgMap-map-wrapper * {
   box-sizing: border-box;
 }
-
 .svgMap-map-wrapper :focus:not(:focus-visible) {
   outline: 0;
 }
-
 .svgMap-map-wrapper .svgMap-map-image {
   display: block;
   position: absolute;
@@ -25,7 +22,6 @@
   height: 100%;
   margin: 0;
 }
-
 .svgMap-map-wrapper .svgMap-map-controls-wrapper {
   position: absolute;
   bottom: 10px;
@@ -36,7 +32,6 @@
   border-radius: 2px;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
-
 .svgMap-map-wrapper .svgMap-map-controls-zoom,
 .svgMap-map-wrapper .svgMap-map-controls-move {
   display: flex;
@@ -44,12 +39,10 @@
   overflow: hidden;
   background: #fff;
 }
-
 .svgMap-map-wrapper .svgMap-map-controls-zoom:last-child,
 .svgMap-map-wrapper .svgMap-map-controls-move:last-child {
   margin-right: 0;
 }
-
 .svgMap-map-wrapper .svgMap-control-button {
   background-color: transparent;
   border: none;
@@ -69,9 +62,8 @@
   height: 30px;
   position: relative;
 }
-
 .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -79,33 +71,26 @@
   background: #666;
   transition: background-color 0.2s;
 }
-
 .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:before {
   width: 11px;
   height: 3px;
 }
-
 .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:after {
   background: #111;
 }
-
 .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:after {
   background: #ccc;
 }
-
 .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-in-button {
   margin: 1px 0 1px 1px;
 }
-
 .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-in-button:after {
   width: 3px;
   height: 11px;
 }
-
 .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-out-button {
   margin: 1px 1px 1px 0;
 }
-
 .svgMap-map-wrapper .svgMap-country {
   stroke: #fff;
   stroke-width: 1;
@@ -113,15 +98,12 @@
   vector-effect: non-scaling-stroke;
   transition: fill 0.2s, stroke 0.2s;
 }
-
 .svgMap-map-wrapper .svgMap-country[data-link] {
   cursor: pointer;
 }
-
 .svgMap-map-wrapper .svgMap-country:hover, .svgMap-map-wrapper .svgMap-country.svgMap-active {
   stroke: #333;
 }
-
 .svgMap-map-wrapper .svgMap-country.svgMap-active {
   stroke-width: 1.5;
 }
@@ -138,33 +120,27 @@
   pointer-events: none;
   min-width: 60px;
 }
-
 .svgMap-tooltip.svgMap-tooltip-flipped {
   transform: translate(-50%, 0);
   border-bottom: 0;
   border-top: 1px solid #000;
 }
-
 .svgMap-tooltip.svgMap-active {
   display: block;
 }
-
 .svgMap-tooltip .svgMap-tooltip-content-container {
   position: relative;
   padding: 10px 20px;
 }
-
 .svgMap-tooltip .svgMap-tooltip-content-container .svgMap-tooltip-flag-container {
   text-align: center;
   margin: 2px 0 5px;
 }
-
 .svgMap-tooltip .svgMap-tooltip-content-container .svgMap-tooltip-flag-container.svgMap-tooltip-flag-container-emoji {
   font-size: 50px;
   line-height: 0;
   padding: 25px 0 15px;
 }
-
 .svgMap-tooltip .svgMap-tooltip-content-container .svgMap-tooltip-flag-container .svgMap-tooltip-flag {
   display: block;
   margin: auto;
@@ -174,7 +150,6 @@
   background: rgba(0, 0, 0, 0.15);
   border-radius: 2px;
 }
-
 .svgMap-tooltip .svgMap-tooltip-title {
   white-space: nowrap;
   font-size: 18px;
@@ -182,7 +157,6 @@
   padding: 0 0 8px;
   text-align: center;
 }
-
 .svgMap-tooltip .svgMap-tooltip-content {
   white-space: nowrap;
   text-align: center;
@@ -190,39 +164,32 @@
   color: #777;
   margin: -5px 0 0;
 }
-
 .svgMap-tooltip .svgMap-tooltip-content table {
   padding: 0;
   border-spacing: 0px;
   margin: auto;
 }
-
 .svgMap-tooltip .svgMap-tooltip-content table td {
   padding: 2px 0;
   text-align: left;
 }
-
 .svgMap-tooltip .svgMap-tooltip-content table td span {
   color: #111;
 }
-
 .svgMap-tooltip .svgMap-tooltip-content table td:first-child {
   padding-right: 10px;
   text-align: right;
 }
-
 .svgMap-tooltip .svgMap-tooltip-content table td sup {
   vertical-align: baseline;
   position: relative;
   top: -5px;
 }
-
 .svgMap-tooltip .svgMap-tooltip-content .svgMap-tooltip-no-data {
   padding: 2px 0;
   color: #777;
   font-style: italic;
 }
-
 .svgMap-tooltip .svgMap-tooltip-pointer {
   position: absolute;
   top: 100%;
@@ -232,9 +199,8 @@
   height: 10px;
   width: 30px;
 }
-
 .svgMap-tooltip .svgMap-tooltip-pointer:after {
-  content: '';
+  content: "";
   width: 20px;
   height: 20px;
   background: #fff;
@@ -244,11 +210,9 @@
   left: 50%;
   transform: translateX(-50%) rotate(45deg);
 }
-
 .svgMap-tooltip.svgMap-tooltip-flipped .svgMap-tooltip-pointer {
   bottom: auto;
   top: -10px;
   transform: translateX(-50%) scaleY(-1);
 }
-
 /*# sourceMappingURL=svgMap.css.map */
