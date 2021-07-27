@@ -45,6 +45,9 @@ function svgMapWrapper(svgPanZoom) {
       // Click on the link when you touch on a mobile = true.  Show info on touch = false(default)
       touchLink: false,
 
+      // Called when a tooltip is created.  Return a new countryID or a html element.
+      onGetToolTip: function(tooltipDiv, countryID, countryValues) { return null; },
+
       // Country specific options
       countries: {
         // Western Sahara: Set to false to combine Morocco (MA) and Western Sahara (EH)
@@ -855,6 +858,11 @@ function svgMapWrapper(svgPanZoom) {
   // Create the tooltip content
 
   svgMap.prototype.getTooltipContent = function (countryID) {
+    if(this.options.onGetTooltip) {
+      var customDiv = this.options.onGetTooltip(this.tooltip, countryID, this.options.data.values[countryID]);
+      if(customDiv)
+        return customDiv;
+    }
     var tooltipContentWrapper = this.createElement(
       'div',
       'svgMap-tooltip-content-container'
