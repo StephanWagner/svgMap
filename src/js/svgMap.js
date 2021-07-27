@@ -42,7 +42,7 @@ function svgMapWrapper(svgPanZoom) {
       // The default text to be shown when no data is present
       noDataText: 'No data available',
 
-      // Click on the link when you touch on a mobile = true.  Show info on touch = false(default)
+      // Click on the link when you touch on a mobile = true. Show info on touch = false (default)
       touchLink: false,
 
       // Country specific options
