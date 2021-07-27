@@ -736,9 +736,10 @@ function svgMapWrapper(svgPanZoom) {
           function (e) {
             var countryID = countryElement.getAttribute('data-id');
             var countryLink = countryElement.getAttribute('data-link');
-            if(this.options.touchLink) {
-              if(countryLink) {
+            if (this.options.touchLink) {
+              if (countryLink) {
                 window.location.href = countryLink;
+                return;
               }
             }
             this.setTooltipContent(this.getTooltipContent(countryID));
