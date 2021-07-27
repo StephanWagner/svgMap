@@ -42,6 +42,9 @@ function svgMapWrapper(svgPanZoom) {
       // The default text to be shown when no data is present
       noDataText: 'No data available',
 
+      // Click on the link when you touch on a mobile = true.  Show info on touch = false(default)
+      touchLink: false,
+
       // Country specific options
       countries: {
         // Western Sahara: Set to false to combine Morocco (MA) and Western Sahara (EH)
@@ -732,6 +735,12 @@ function svgMapWrapper(svgPanZoom) {
           'touchstart',
           function (e) {
             var countryID = countryElement.getAttribute('data-id');
+            var countryLink = countryElement.getAttribute('data-link');
+            if(this.options.touchLink) {
+              if(countryLink) {
+                window.location.href = countryLink;
+              }
+            }
             this.setTooltipContent(this.getTooltipContent(countryID));
             this.showTooltip(e);
             this.moveTooltip(e);
