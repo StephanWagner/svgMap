@@ -1,12 +1,12 @@
 {
   "name": "svgmap-es6-demo",
   "description": "",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Stephan Wagner <stephanwagner.me@gmail.com> (https://stephanwagner.me)",
   "license": "MIT",
   "main": "index.js",
   "dependencies": {
-    "svgmap": "^2.1.1"
+    "svgmap": "^2.3.0"
   },
   "devDependencies": {
     "snowpack": "^3.5.9"
