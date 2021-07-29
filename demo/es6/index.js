@@ -90,10 +90,10 @@ var svgMapEuroCurrency = new svgMap({
 
     if (countryValues && countryValues.euro == 1) {
       innerHTML +=
-        '<div style="text-align:center"><span style="color: #6d0; margin-right: 8px">✔</span>Uses euro</div>';
+        '<div style="text-align:center"><span style="color: #6d0; margin-right: 8px">✔</span>Uses Euro</div>';
     } else {
       innerHTML +=
-        '<div style="text-align:center; color: #aaa"><span style="color: #f03; margin-right: 8px">✘</span>Does not use euro</div>';
+        '<div style="text-align:center; color: #aaa"><span style="color: #f03; margin-right: 8px">✘</span>Does not use Euro</div>';
     }
 
     // Return element with custom content
