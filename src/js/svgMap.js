@@ -376,7 +376,7 @@ function svgMapWrapper(svgPanZoom) {
         var color = this.getColor(
           this.options.colorMax,
           this.options.colorMin,
-          ratio || 1
+          ratio || ratio === 0 ? ratio : 1
         );
         element.setAttribute('fill', color);
       }.bind(this)
