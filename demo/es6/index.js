@@ -74,6 +74,11 @@ var svgMapEuroCurrency = new svgMap({
   colorNoData: '#E2E2E2',
   thresholdMax: 1,
   thresholdMin: 0,
+  initialZoom: 3,
+  initialPan: {
+    x: 420,
+    y: 50
+  },
   onGetTooltip: function (tooltipDiv, countryID, countryValues) {
     // Geting the list of countries
     var countries = svgMapEuroCurrency.countries;

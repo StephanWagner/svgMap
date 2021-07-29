@@ -80,6 +80,8 @@ You can pass the following options into svgMap:
 
 * `initialZoom` (`float`) Initial zoom level. Default: `1.06`
 
+* `initialPan` (`object`) Initial pan on x and y axis, e.g. `{ x: 120, y: 60 }`
+
 * `zoomScaleSensitivity` (`float`) Sensitivity when zooming. Default: `0.2`
 
 * `mouseWheelZoomEnabled` (`boolean`) Enables or disables zooming with the scroll wheel. Default: `true`

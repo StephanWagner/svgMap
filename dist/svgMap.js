@@ -19,6 +19,12 @@ function svgMapWrapper(svgPanZoom) {
       // Initial zoom
       initialZoom: 1.06,
 
+      // Initial pan
+      initialPan: {
+        x: 0,
+        y: 0
+      },
+
       // Zoom sensitivity
       zoomScaleSensitivity: 0.2,
 
@@ -852,8 +858,16 @@ function svgMapWrapper(svgPanZoom) {
       }
     });
 
-    // Init pan zoom
-    this.mapPanZoom.zoom(this.options.initialZoom);
+    if (this.options.initialPan.x != 0 || this.options.initialPan.y != 0) {
+      // Init zoom and pan
+      this.mapPanZoom.zoomAtPointBy(this.options.initialZoom, {
+        x: this.options.initialPan.x,
+        y: this.options.initialPan.y
+      });
+    } else {
+      // Init zoom
+      this.mapPanZoom.zoom(this.options.initialZoom);
+    }
 
     // Initial zoom statuses
     this.setControlStatuses();
