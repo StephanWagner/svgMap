@@ -23,8 +23,8 @@ import 'svgmap/dist/svgMap.min.css';
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.3.0/dist/svgMap.min.js"></script>
-<link href="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.3.0/dist/svgMap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.4.0/dist/svgMap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.4.0/dist/svgMap.min.css" rel="stylesheet">
 ```
 
 ---
@@ -93,6 +93,10 @@ You can pass the following options into svgMap:
 * `hideFlag` (`boolean`) Decide whether to show the flag option or not
 
 * `noDataText` (`string`) The default text to be shown when no data is present
+
+* `touchLink` (`boolean`) Set to `true` to open the link (see `data.values.link`) on mobile devices, set to `false` (default) to show the tooltip
+
+* `onGetTooltip` (`function`) Called when a tooltip is created to custimize the tooltip content (`function (tooltipDiv, countryID, countryValues) { ... }`)
 
 * `countries` (`object`) Additional options specific to countries:
 
