@@ -42,10 +42,10 @@ function svgMapWrapper(svgPanZoom) {
       // The default text to be shown when no data is present
       noDataText: 'No data available',
 
-      // Click on the link when you touch on a mobile = true. Show info on touch = false (default)
+      // Set to true to open the link on mobile devices, set to false (default) to show the tooltip
       touchLink: false,
 
-      // Called when a tooltip is created. Return a new countryID or an html element
+      // Called when a tooltip is created to custimize the tooltip content
       onGetTooltip: function (tooltipDiv, countryID, countryValues) {
         return null;
       },
