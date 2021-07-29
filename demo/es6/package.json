@@ -9,7 +9,7 @@
     "svgmap": "^2.3.0"
   },
   "devDependencies": {
-    "snowpack": "^3.5.9"
+    "snowpack": "^3.8.3"
   },
   "scripts": {
     "start": "snowpack dev"
