@@ -3,9 +3,7 @@ var svgMapDataGPD = {
     gdp: {
       name: 'GDP per capita',
       format: '{0} USD',
-      thousandSeparator: ',',
-      thresholdMax: 50000,
-      thresholdMin: 1000
+      thousandSeparator: ','
     },
     change: {
       name: 'Change to year before',
@@ -15,7 +13,7 @@ var svgMapDataGPD = {
       name: 'Purchasing Power Parity',
       format: '{0} USD',
       thousandSeparator: ',',
-      thresholdMax: 50000,
+      thresholdMax: 60000,
       thresholdMin: 1000
     },
     changeAdjusted: {
