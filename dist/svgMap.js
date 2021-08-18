@@ -36,6 +36,9 @@ function svgMapWrapper(svgPanZoom) {
       colorMin: '#FFE5D9',
       colorNoData: '#E2E2E2',
 
+      // Color attribute for setting a manual color in the data object
+      manualColorAttribute: 'color',
+
       // The flag type can be 'image' or 'emoji'
       flagType: 'image',
 
@@ -373,6 +376,10 @@ function svgMapWrapper(svgPanZoom) {
         }
         if (!data.values[countryID]) {
           element.setAttribute('fill', this.options.colorNoData);
+          return;
+        }
+        if (typeof(data.values[countryID][data.manualColorAttribute]) != "undefined") {
+          element.setAttribute('fill', data.values[countryID][data.manualColorAttribute]);
           return;
         }
         var value = Math.max(

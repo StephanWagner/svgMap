@@ -88,6 +88,8 @@ You can pass the following options into svgMap:
 
 * `colorMax`, `colorMin`, `colorNoData` (`string`) The color values in hex for highest value `colorMax`, lowest value `colorMin` and no data available `colorNoData`. Default: `#CC0033` for `colorMax`, `#FFE5D9` for `colorMin`, `#E2E2E2` for `colorNoData`
 
+* `manualColorAttribute` (`string`) Allows setting a custom color in the data per country. If this key is present in the data for a country, set the color to its value. Default: `color`
+
 * `flagType` (`'emoji'`, `'image'`) The type of the flag in the tooltip. Default: `image`
 
 * `flagURL` (`string`) The URL to the flags when using flag type `image`. The placeholder `{0}` will get replaced with the lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. Default: `https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg`
@@ -119,6 +121,8 @@ You can pass the following options into svgMap:
   * `applyData` (`string`) The ID (key) of the data that will be used for coloring
 
   * `values` (`object`) An object with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code as key and the chart data for each country as value
+
+    * `color` (`string`) When set to a hex color, set the country to that color (`color` can be changed with `manualColorAttribute`).
 
   * `values.link` (`string`) An URL to redirect to when clicking the country
 
