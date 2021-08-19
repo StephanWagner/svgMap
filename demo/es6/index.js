@@ -42,31 +42,43 @@ var svgMapEuroCurrency = new svgMap({
     },
     applyData: 'euro',
     values: {
-      AT: { euro: 1 },
-      BE: { euro: 1 },
-      CY: { euro: 1 },
-      EE: { euro: 1 },
-      FI: { euro: 1 },
-      FR: { euro: 1 },
-      DE: { euro: 1 },
-      GR: { euro: 1 },
-      IE: { euro: 1 },
-      IT: { euro: 1 },
-      LV: { euro: 1 },
-      LT: { euro: 1 },
-      LU: { euro: 1 },
-      MT: { euro: 1 },
-      NL: { euro: 1 },
-      PT: { euro: 1 },
-      ES: { euro: 1 },
-      SI: { euro: 1 },
-      SK: { euro: 1 },
-      XK: { euro: 1 },
-      ME: { euro: 1 },
-      AD: { euro: 1 },
-      MC: { euro: 1 },
-      SM: { euro: 1 },
-      VA: { euro: 1 }
+      AT: { euro: 1, eurozone: 1 }, // Austria
+      BE: { euro: 1, eurozone: 1 }, // Belgium
+      CY: { euro: 1, eurozone: 1 }, // Cyprus
+      EE: { euro: 1, eurozone: 1 }, // Estonia
+      FI: { euro: 1, eurozone: 1 }, // Finland
+      FR: { euro: 1, eurozone: 1 }, // France
+      DE: { euro: 1, eurozone: 1 }, // Germany
+      GR: { euro: 1, eurozone: 1 }, // Greece
+      IE: { euro: 1, eurozone: 1 }, // Ireland
+      IT: { euro: 1, eurozone: 1 }, // Italy
+      LV: { euro: 1, eurozone: 1 }, // Latvia
+      LT: { euro: 1, eurozone: 1 }, // Lithuania
+      LU: { euro: 1, eurozone: 1 }, // Luxembourg
+      MT: { euro: 1, eurozone: 1 }, // Malta
+      NL: { euro: 1, eurozone: 1 }, // Netherlands
+      PT: { euro: 1, eurozone: 1 }, // Portugal
+      ES: { euro: 1, eurozone: 1 }, // Spain
+      SI: { euro: 1, eurozone: 1 }, // Slovenia
+      SK: { euro: 1, eurozone: 1 }, // Slovakia
+
+      // Countries using euro but not in eurozone
+      XK: { euro: 1, eurozone: 0, color: '#528FCC' }, // Kosovo
+      ME: { euro: 1, eurozone: 0, color: '#528FCC' }, // Montenegro
+      AD: { euro: 1, eurozone: 0, color: '#528FCC' }, // Andorra
+      MC: { euro: 1, eurozone: 0, color: '#528FCC' }, // Monaco
+      SM: { euro: 1, eurozone: 0, color: '#528FCC' }, // San Marino
+      VA: { euro: 1, eurozone: 0, color: '#528FCC' }, // Vatican City
+
+      // Countries in eurozone but not using euro
+      BG: { euro: 0, eurozone: 1, color: '#a6d2ff' }, // Bulgaria
+      CZ: { euro: 0, eurozone: 1, color: '#a6d2ff' }, // Czech Republic
+      DK: { euro: 0, eurozone: 1, color: '#a6d2ff' }, // Denmark
+      HR: { euro: 0, eurozone: 1, color: '#a6d2ff' }, // Croatia
+      HU: { euro: 0, eurozone: 1, color: '#a6d2ff' }, // Hungary
+      PL: { euro: 0, eurozone: 1, color: '#a6d2ff' }, // Poland
+      RO: { euro: 0, eurozone: 1, color: '#a6d2ff' }, // Romania
+      SE: { euro: 0, eurozone: 1, color: '#a6d2ff' } // Sweden
     }
   },
   colorMin: '#E2E2E2',
@@ -85,7 +97,7 @@ var svgMapEuroCurrency = new svgMap({
 
     // Create tooltip content element
     var tooltipContentElement = document.createElement('div');
-    tooltipContentElement.style.padding = '10px 15px';
+    tooltipContentElement.style.padding = '16px 24px';
 
     // Fill content
     var innerHTML =
@@ -93,12 +105,20 @@ var svgMapEuroCurrency = new svgMap({
       countries[countryID] +
       '</div>';
 
-    if (countryValues && countryValues.euro == 1) {
+    if (countryValues && countryValues.eurozone == 1) {
       innerHTML +=
-        '<div style="text-align:center"><span style="color: #6d0; margin-right: 8px">✔</span>Uses Euro</div>';
+        '<div style="margin-bottom: 8px"><span style="color: #6d0; display: inline-block; margin-right: 4px; width: 20px; text-align: center">✔</span>Part of eurozone</div>';
     } else {
       innerHTML +=
-        '<div style="text-align:center; color: #aaa"><span style="color: #f03; margin-right: 8px">✘</span>Does not use Euro</div>';
+        '<div style="margin-bottom: 8px; color: #aaa"><span style="color: #f03; display: inline-block; margin-right: 4px; width: 20px; text-align: center">✘</span>Not a part of eurozone</div>';
+    }
+
+    if (countryValues && countryValues.euro == 1) {
+      innerHTML +=
+        '<div style="margin-bottom: 8px"><span style="color: #6d0; display: inline-block; margin-right: 4px; width: 20px; text-align: center">✔</span>Uses Euro</div>';
+    } else {
+      innerHTML +=
+        '<div style="margin-bottom: 8px; color: #aaa"><span style="color: #f03; display: inline-block; margin-right: 4px; width: 20px; text-align: center">✘</span>Does not use Euro</div>';
     }
 
     // Return element with custom content
