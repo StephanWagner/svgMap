@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "index.js",
   "dependencies": {
-    "svgmap": "*"
+    "svgmap": "2.6.0"
   },
   "devDependencies": {
     "snowpack": "^3.8.3"
