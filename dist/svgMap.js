@@ -378,8 +378,8 @@ function svgMapWrapper(svgPanZoom) {
           element.setAttribute('fill', this.options.colorNoData);
           return;
         }
-        if (typeof(data.values[countryID][data.manualColorAttribute]) != "undefined") {
-          element.setAttribute('fill', data.values[countryID][data.manualColorAttribute]);
+        if (typeof(data.values[countryID][this.options.manualColorAttribute]) != "undefined") {
+          element.setAttribute('fill', data.values[countryID][this.options.manualColorAttribute]);
           return;
         }
         var value = Math.max(
