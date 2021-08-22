@@ -75,7 +75,12 @@
   width: 11px;
   height: 3px;
 }
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:after {
+@media (hover: hover) {
+  .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:after {
+    background: #111;
+  }
+}
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:active:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:active:after {
   background: #111;
 }
 .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:after {
@@ -101,10 +106,14 @@
 .svgMap-map-wrapper .svgMap-country[data-link] {
   cursor: pointer;
 }
-.svgMap-map-wrapper .svgMap-country:hover, .svgMap-map-wrapper .svgMap-country.svgMap-active {
-  stroke: #333;
+@media (hover: hover) {
+  .svgMap-map-wrapper .svgMap-country:hover {
+    stroke: #333;
+    stroke-width: 1.5;
+  }
 }
 .svgMap-map-wrapper .svgMap-country.svgMap-active {
+  stroke: #333;
   stroke-width: 1.5;
 }
 

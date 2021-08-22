@@ -85,7 +85,16 @@
         height: 3px;
       }
 
-      &:hover {
+      @media (hover: hover) {
+        &:hover {
+          &:before,
+          &:after {
+            background: $textColor;
+          }
+        }
+      }
+
+      &:active {
         &:before,
         &:after {
           background: $textColor;
@@ -127,12 +136,15 @@
       cursor: pointer;
     }
 
-    &:hover,
-    &.svgMap-active {
-      stroke: $mapActiveStrokeColor;
+    @media (hover: hover) {
+      &:hover {
+        stroke: $mapActiveStrokeColor;
+        stroke-width: $mapActiveStrokeWidth;
+      }
     }
 
     &.svgMap-active {
+      stroke: $mapActiveStrokeColor;
       stroke-width: $mapActiveStrokeWidth;
     }
   }

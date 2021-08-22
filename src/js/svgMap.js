@@ -380,14 +380,8 @@ function svgMapWrapper(svgPanZoom) {
           element.setAttribute('fill', this.options.colorNoData);
           return;
         }
-        if (
-          typeof data.values[countryID].color !=
-          'undefined'
-        ) {
-          element.setAttribute(
-            'fill',
-            data.values[countryID].color
-          );
+        if (typeof data.values[countryID].color != 'undefined') {
+          element.setAttribute('fill', data.values[countryID].color);
           return;
         }
         var value = Math.max(
@@ -728,6 +722,12 @@ function svgMapWrapper(svgPanZoom) {
     delete mapPaths['RU-WITH-CRIMEA'];
     delete mapPaths['UA-WITHOUT-CRIMEA'];
 
+    // Expose touchmove function
+
+    this.touchmoveEvent = function (e) {
+      this.moveTooltip(e);
+    }.bind(this);
+
     // Add map elements
     Object.keys(mapPaths).forEach(
       function (countryID) {
@@ -751,16 +751,12 @@ function svgMapWrapper(svgPanZoom) {
 
         this.mapImage.appendChild(countryElement);
 
-        ['mouseenter', 'touchdown'].forEach(
-          function (event) {
-            countryElement.addEventListener(
-              event,
-              function () {
-                countryElement.closest('g').appendChild(countryElement);
-              }.bind(this),
-              { passive: true }
-            );
-          }.bind(this)
+        countryElement.addEventListener(
+          'mouseenter',
+          function () {
+            this.mapImage.appendChild(countryElement);
+          }.bind(this),
+          { passive: true }
         );
 
         // Tooltip events
@@ -768,6 +764,9 @@ function svgMapWrapper(svgPanZoom) {
         countryElement.addEventListener(
           'touchstart',
           function (e) {
+            countryElement.parentNode.appendChild(countryElement);
+            countryElement.classList.add('svgMap-active');
+
             var countryID = countryElement.getAttribute('data-id');
             var countryLink = countryElement.getAttribute('data-link');
             if (this.options.touchLink) {
@@ -779,6 +778,10 @@ function svgMapWrapper(svgPanZoom) {
             this.setTooltipContent(this.getTooltipContent(countryID));
             this.showTooltip(e);
             this.moveTooltip(e);
+
+            countryElement.addEventListener('touchmove', this.touchmoveEvent, {
+              passive: true
+            });
           }.bind(this),
           { passive: true }
         );
@@ -786,6 +789,7 @@ function svgMapWrapper(svgPanZoom) {
         countryElement.addEventListener(
           'mouseenter',
           function (e) {
+            countryElement.parentNode.appendChild(countryElement);
             var countryID = countryElement.getAttribute('data-id');
             this.setTooltipContent(this.getTooltipContent(countryID));
             this.showTooltip(e);
@@ -828,17 +832,30 @@ function svgMapWrapper(svgPanZoom) {
           });
         }
 
-        // Hide tooltip when event is mouseleave or touchend
-        ['mouseleave', 'touchend'].forEach(
-          function (event) {
-            countryElement.addEventListener(
-              event,
-              function () {
-                this.hideTooltip();
-              }.bind(this),
+        // Hide tooltip when mouse leaves the country area
+        countryElement.addEventListener(
+          'mouseleave',
+          function () {
+            this.hideTooltip();
+          }.bind(this),
+          { passive: true }
+        );
+
+        // Hide tooltip when touch ends
+        countryElement.addEventListener(
+          'touchend',
+          function () {
+            this.hideTooltip();
+            countryElement.classList.remove('svgMap-active');
+            !this.ttt ? (this.ttt = 1) : this.ttt++;
+
+            countryElement.removeEventListener(
+              'touchmove',
+              this.touchmoveEvent,
               { passive: true }
             );
-          }.bind(this)
+          }.bind(this),
+          { passive: true }
         );
       }.bind(this)
     );
@@ -856,8 +873,12 @@ function svgMapWrapper(svgPanZoom) {
       zoomScaleSensitivity: this.options.zoomScaleSensitivity,
       controlIconsEnabled: false,
       mouseWheelZoomEnabled: this.options.mouseWheelZoomEnabled, // TODO Only with key pressed
+      // preventMouseEventsDefault: false, // TODO
       onZoom: function () {
         me.setControlStatuses();
+      },
+      beforeZoom: function () {
+        // TODO
       },
       beforePan: function (oldPan, newPan) {
         var gutterWidth = me.mapWrapper.offsetWidth * 0.85;
