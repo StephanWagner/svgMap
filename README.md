@@ -83,32 +83,32 @@ You can pass the following options into svgMap:
 | `initialPan` | `object` | | Initial pan on x and y axis (e.g. `{ x: 30, y: 60 }`) |
 | `zoomScaleSensitivity` | `float` | `0.2` | Sensitivity when zooming |
 | `mouseWheelZoomEnabled` | `boolean` | `true` | Enables or disables zooming with the scroll wheel |
-| `mouseWheelZoomWithKey` | `boolean` | `false` | Allow zooming only when one of the following keys is pressed: 'shift', 'control', 'alt' (Windows), 'command' (MacOS), 'option' (MacOS) |
-| `mouseWheelKeyMessage` | `string` | `'Press the [ALT] key to zoom'` | The message to show for non MacOS systems |
-| `mouseWheelKeyMessageMac` | `string ` | `Press the [COMMAND] key to zoom` | The message to show for MacOS |
-| `colorMax` | `string` | `#CC0033` | Color for highest value |
-| `colorMin` | `string` | `#FFE5D9` | Color for lowest value |
-| `colorNoData` | `string` | `#E2E2E2` | Color when there is no data |
+| `mouseWheelZoomWithKey` | `boolean` | `false` | Allow zooming only when one of the following keys is pressed: SHIFT, CONTROL, ALT, COMMAND, OPTION |
+| `mouseWheelKeyMessage` | `string` | `'Press the [ALT] key to zoom'` | The message when trying to scroll without a key |
+| `mouseWheelKeyMessageMac` | `string ` | `Press the [COMMAND] key to zoom` | The message when trying to scroll without a key on MacOS |
+| `colorMax` | `string` | `'#CC0033'` | Color for highest value |
+| `colorMin` | `string` | `'#FFE5D9'` | Color for lowest value |
+| `colorNoData` | `string` | `'#E2E2E2'` | Color when there is no data |
 | `flagType` | `'image'`, `'emoji'` | `'image'` | The type of the flag in the tooltip |
-| `flagURL` | `string` | | The URL to the flags when using flag type `image`. The placeholder `{0}` will get replaced with the lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. Default: `https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg` |
+| `flagURL` | `string` | | The URL to the flags when using flag type `'image'`. The placeholder `{0}` will get replaced with the lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. Default: `'https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg'` |
 | `hideFlag` | `boolean` | `false` | Hide the flag in tooltips |
 | `noDataText` | `string` | `'No data available'` | The text to be shown when no data is present |
-| `touchLink` | `boolean` | `false` | Set to `true` to open the link (see `data.values.link`) on mobile devices. By default the tooltip will be shown |
+| `touchLink` | `boolean` | `false` | Set to `true` to open the link (see `data.values.link`) on mobile devices, by default the tooltip will be shown |
 | `onGetTooltip` | `function` | | Called when a tooltip is created to custimize the tooltip content (`function (tooltipDiv, countryID, countryValues) { return 'Custom HTML'; }`) |
 | `countries` | `object` | | Additional options specific to countries: |
 | &nbsp;&nbsp;&nbsp;`↳ EH` | `boolean` | `true` | When set to `false`, Western Sahara (EH) will be combined with Morocco (MA) |
-| &nbsp;&nbsp;&nbsp;`↳ Crimea` | `'UA'`, `'RU'` | `UA` | Crimea: Set to 'RU' to make the Crimea part of Russia, by default it is part of the Ukraine |
+| &nbsp;&nbsp;&nbsp;`↳ Crimea` | `'UA'`, `'RU'` | `'UA'` | Crimea: Set to 'RU' to make the Crimea part of Russia, by default it is part of the Ukraine |
 | `data` | `object` | | The chart data to use for coloring and to show in the tooltip. Use a unique data-id as key and provide following options as value: |
 | &nbsp;&nbsp;&nbsp;`↳ name` | `string` | | The name of the data, it will be shown in the tooltip |
 | &nbsp;&nbsp;&nbsp;`↳ format` | `string` | | The format for the data value, `{0}` will be replaced with the actual value |
-| &nbsp;&nbsp;&nbsp;`↳ thousandSeparator` | `string` | `,` | The character to use as thousand separator |
+| &nbsp;&nbsp;&nbsp;`↳ thousandSeparator` | `string` | `','` | The character to use as thousand separator |
 | &nbsp;&nbsp;&nbsp;`↳ thresholdMax` | `number` | `null` | Maximal value to use for coloring calculations |
 | &nbsp;&nbsp;&nbsp;`↳ thresholdMin` | `number` | `0` | Minimum value to use for coloring calculations |
 | &nbsp;&nbsp;&nbsp;`↳ applyData` | `string` | | The ID (key) of the data that will be used for coloring |
 | &nbsp;&nbsp;&nbsp;`↳ values` | `object` | | An object with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code as key and the chart data for each country as value |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`↳ color` | `string` | | Forces a color for this country |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`↳ link` | `string` | | An URL to redirect to when clicking the country |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`↳ linkTarget` | `string` | | The target of the link. By default the link will be opened in the same tab. Use `_blank` to open the link in a new tab |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`↳ linkTarget` | `string` | | The target of the link. By default the link will be opened in the same tab. Use `'_blank'` to open the link in a new tab |
 | `countryNames` | `object` | | An object with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code as key and the country name as value |
 
 ---
