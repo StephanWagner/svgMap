@@ -74,61 +74,39 @@ https://stephanwagner.me/create-world-map-charts-with-svgmap#svgMapDemoGDP
 
 You can pass the following options into svgMap:
 
-* `targetElementID` (`string`) The ID of the element where the world map will render (Required)
-
-* `minZoom`, `maxZoom` (`float`) Minimal and maximal zoom level. Default: `1` for `minZoom`, `25` for `maxZoom`
-
-* `initialZoom` (`float`) Initial zoom level. Default: `1.06`
-
-* `initialPan` (`object`) Initial pan on x and y axis, e.g. `{ x: 120, y: 60 }`
-
-* `zoomScaleSensitivity` (`float`) Sensitivity when zooming. Default: `0.2`
-
-* `mouseWheelZoomEnabled` (`boolean`) Enables or disables zooming with the scroll wheel. Default: `true`
-
-* `colorMax`, `colorMin`, `colorNoData` (`string`) The color values in hex for highest value `colorMax`, lowest value `colorMin` and no data available `colorNoData`. Default: `#CC0033` for `colorMax`, `#FFE5D9` for `colorMin`, `#E2E2E2` for `colorNoData`
-
-* `manualColorAttribute` (`string`) Allows setting a custom color in the data per country. If this key is present in the data for a country, set the color to its value. Default: `color`
-
-* `flagType` (`'emoji'`, `'image'`) The type of the flag in the tooltip. Default: `image`
-
-* `flagURL` (`string`) The URL to the flags when using flag type `image`. The placeholder `{0}` will get replaced with the lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. Default: `https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg`
-
-* `hideFlag` (`boolean`) Decide whether to show the flag option or not
-
-* `noDataText` (`string`) The default text to be shown when no data is present
-
-* `touchLink` (`boolean`) Set to `true` to open the link (see `data.values.link`) on mobile devices, set to `false` (default) to show the tooltip
-
-* `onGetTooltip` (`function`) Called when a tooltip is created to custimize the tooltip content (`function (tooltipDiv, countryID, countryValues) { ... }`)
-
-* `countries` (`object`) Additional options specific to countries:
-
-  * `EH` (`boolean`) When set to `false`, Western Sahara (EH) will be combined with Morocco (MA)
-
-* `data` (`object`) The chart data to use for coloring and to show in the tooltip. Use a unique data-id as key and provide following options as value:
-
-  * `name` (`string`) The name of the data, it will be shown in the tooltip
-
-  * `format` (`string`) The format for the data value, `{0}` will be replaced with the actual value
-
-  * `thousandSeparator` (`string`) The character to use as thousand separator
-
-  * `thresholdMax` (`number`) Maximal value to use for coloring calculations
-
-  * `thresholdMin` (`number`) Minimum value to use for coloring calculations
-
-  * `applyData` (`string`) The ID (key) of the data that will be used for coloring
-
-  * `values` (`object`) An object with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code as key and the chart data for each country as value
-
-    * `color` (`string`) When set to a hex color, set the country to that color (`color` can be changed with `manualColorAttribute`)
-
-  * `values.link` (`string`) An URL to redirect to when clicking the country
-
-  * `values.linkTarget` (`string`) The target of the link. By default the link will be opened in the same tab. Use `_blank` to open the link in a new tab
-
-* `countryNames` (`object`) An object with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code as key and the country name as value
+| Option      | Type | Default |  |
+| --- | --- | --- | --- |
+| `targetElementID` | `string` | | The ID of the element where the world map will render (Required) |
+| `minZoom` | `float` | `1` | Minimal zoom level |
+| `maxZoom` | `float` | `25` | Maximal zoom level |
+| `initialZoom` | `float` | `1.06` | Initial zoom level |
+| `initialPan` | `object` | | Initial pan on x and y axis (e.g. `{ x: 30, y: 60 }`) |
+| `zoomScaleSensitivity` | `float` | `0.2` | Sensitivity when zooming |
+| `mouseWheelZoomEnabled` | `boolean` | `true` | Enables or disables zooming with the scroll wheel |
+| `colorMax` | `string` | `#CC0033` | Color for highest value |
+| `colorMin` | `string` | `#FFE5D9` | Color for lowest value |
+| `colorNoData` | `string` | `#E2E2E2` | Color when there is no data |
+| `flagType` | `'image'`, `'emoji'` | `'image'` | The type of the flag in the tooltip |
+| `flagURL` | `string` | | The URL to the flags when using flag type `image`. The placeholder `{0}` will get replaced with the lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. Default: `https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg` |
+| `hideFlag` | `boolean` | `false` | Hide the flag in tooltips |
+| `noDataText` | `string` | `No data available` | The text to be shown when no data is present |
+| `touchLink` | `boolean` | `false` | Set to `true` to open the link (see `data.values.link`) on mobile devices. By default the tooltip will be shown |
+| `onGetTooltip` | `function` | | Called when a tooltip is created to custimize the tooltip content (`function (tooltipDiv, countryID, countryValues) { ... }`) |
+| `countries` | `object` | | Additional options specific to countries: |
+| &nbsp;&nbsp;&nbsp;`↳ EH` | `boolean` | `true` | When set to `false`, Western Sahara (EH) will be combined with Morocco (MA) |
+| &nbsp;&nbsp;&nbsp;`↳ Crimea` | `'UA'`, `'RU'` | `UA` | Crimea: Set to 'RU' to make the Crimea part of Russia, by default it is part of the Ukraine |
+| `data` | `object` | | The chart data to use for coloring and to show in the tooltip. Use a unique data-id as key and provide following options as value: |
+| &nbsp;&nbsp;&nbsp;`↳ name` | `string` | | The name of the data, it will be shown in the tooltip |
+| &nbsp;&nbsp;&nbsp;`↳ format` | `string` | | The format for the data value, `{0}` will be replaced with the actual value |
+| &nbsp;&nbsp;&nbsp;`↳ thousandSeparator` | `string` | `,` | The character to use as thousand separator |
+| &nbsp;&nbsp;&nbsp;`↳ thresholdMax` | `number` | `null` | Maximal value to use for coloring calculations |
+| &nbsp;&nbsp;&nbsp;`↳ thresholdMin` | `number` | `0` | Minimum value to use for coloring calculations |
+| &nbsp;&nbsp;&nbsp;`↳ applyData` | `string` | | The ID (key) of the data that will be used for coloring |
+| &nbsp;&nbsp;&nbsp;`↳ values` | `object` | | An object with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code as key and the chart data for each country as value |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`↳ color` | `string` | | Forces a color for this country |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`↳ link` | `string` | | An URL to redirect to when clicking the country |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`↳ linkTarget` | `string` | | The target of the link. By default the link will be opened in the same tab. Use `_blank` to open the link in a new tab |
+| `countryNames` | `object` | `xxx` | An object with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code as key and the country name as value |
 
 ---
 
