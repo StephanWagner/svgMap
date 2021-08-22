@@ -24,7 +24,7 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-uglify": "^3.0.2",
     "jest": "^27.0.6",
-    "sass": "^1.36.0"
+    "sass": "^1.38.0"
   },
   "dependencies": {
     "svg-pan-zoom": "^3.6.1"
