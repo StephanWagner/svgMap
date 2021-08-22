@@ -89,9 +89,9 @@ You can pass the following options into svgMap:
 | `flagType` | `'image'`, `'emoji'` | `'image'` | The type of the flag in the tooltip |
 | `flagURL` | `string` | | The URL to the flags when using flag type `image`. The placeholder `{0}` will get replaced with the lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. Default: `https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg` |
 | `hideFlag` | `boolean` | `false` | Hide the flag in tooltips |
-| `noDataText` | `string` | `No data available` | The text to be shown when no data is present |
+| `noDataText` | `string` | `'No data available'` | The text to be shown when no data is present |
 | `touchLink` | `boolean` | `false` | Set to `true` to open the link (see `data.values.link`) on mobile devices. By default the tooltip will be shown |
-| `onGetTooltip` | `function` | | Called when a tooltip is created to custimize the tooltip content (`function (tooltipDiv, countryID, countryValues) { ... }`) |
+| `onGetTooltip` | `function` | | Called when a tooltip is created to custimize the tooltip content (`function (tooltipDiv, countryID, countryValues) { return 'Custom HTML'; }`) |
 | `countries` | `object` | | Additional options specific to countries: |
 | &nbsp;&nbsp;&nbsp;`↳ EH` | `boolean` | `true` | When set to `false`, Western Sahara (EH) will be combined with Morocco (MA) |
 | &nbsp;&nbsp;&nbsp;`↳ Crimea` | `'UA'`, `'RU'` | `UA` | Crimea: Set to 'RU' to make the Crimea part of Russia, by default it is part of the Ukraine |
@@ -106,7 +106,7 @@ You can pass the following options into svgMap:
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`↳ color` | `string` | | Forces a color for this country |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`↳ link` | `string` | | An URL to redirect to when clicking the country |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`↳ linkTarget` | `string` | | The target of the link. By default the link will be opened in the same tab. Use `_blank` to open the link in a new tab |
-| `countryNames` | `object` | `xxx` | An object with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code as key and the country name as value |
+| `countryNames` | `object` | | An object with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code as key and the country name as value |
 
 ---
 
@@ -127,15 +127,3 @@ svgMap uses [svg-pan-zoom](https://github.com/ariutta/svg-pan-zoom) by [Anders R
 The country flag images are from [country-flags](https://github.com/hjnilsson/country-flags) by [Hampus Nilsson](https://github.com/hjnilsson).
 
 Most data in the demos was taken from [Wikipedia](https://www.wikipedia.org).
-
----
-
-## Appendix - Internet Explorer 11 Support
-
-The library uses both `Object.assign` and `classlist.add`, which are not supported by IE11. In order to make this library work in IE11, you need to use a polyfill, which adds this functionalty to the browser. You can create a bundle by going to https://polyfill.io/v3/, or can use the pre-defined one below, which adds both of these two polyfills.
-
-```html
-<script src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.classList%2CObject.assign"></script>
-```
-
-Ensure to include this script before the svgMap scripts.
