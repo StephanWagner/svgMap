@@ -122,8 +122,8 @@ To create your own translations, check out [country-list](https://github.com/ump
 
 If you need more detailed maps or more options for your data, there is a great open source project called [datawrapper](https://github.com/datawrapper/datawrapper) out there, with a lot more power than svgMap.
 
-svgMap uses [svg-pan-zoom](https://github.com/ariutta/svg-pan-zoom) by [Anders Riutta](https://github.com/ariutta).
+svgMap uses [svg-pan-zoom](https://github.com/bumbu/svg-pan-zoom) by [Anders Riutta](https://github.com/ariutta) (now maintained by [bumpu](https://github.com/bumpu)).
 
-The country flag images are from [country-flags](https://github.com/hjnilsson/country-flags) by [Hampus Nilsson](https://github.com/hjnilsson).
+The country flag images are from [country-flags](https://github.com/hampusborgos/country-flags) by [Hampus Joakim Borgos](https://github.com/hampusborgos).
 
 Most data in the demos was taken from [Wikipedia](https://www.wikipedia.org).
