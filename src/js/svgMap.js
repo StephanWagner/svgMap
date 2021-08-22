@@ -722,9 +722,9 @@ function svgMapWrapper(svgPanZoom) {
     delete mapPaths['RU-WITH-CRIMEA'];
     delete mapPaths['UA-WITHOUT-CRIMEA'];
 
-    // Expose touchmove function
+    // Expose tooltipMove function
 
-    this.touchmoveEvent = function (e) {
+    this.tooltipMoveEvent = function (e) {
       this.moveTooltip(e);
     }.bind(this);
 
@@ -751,14 +751,6 @@ function svgMapWrapper(svgPanZoom) {
 
         this.mapImage.appendChild(countryElement);
 
-        countryElement.addEventListener(
-          'mouseenter',
-          function () {
-            this.mapImage.appendChild(countryElement);
-          }.bind(this),
-          { passive: true }
-        );
-
         // Tooltip events
         // Add tooltip when touch is used
         countryElement.addEventListener(
@@ -779,9 +771,13 @@ function svgMapWrapper(svgPanZoom) {
             this.showTooltip(e);
             this.moveTooltip(e);
 
-            countryElement.addEventListener('touchmove', this.touchmoveEvent, {
-              passive: true
-            });
+            countryElement.addEventListener(
+              'touchmove',
+              this.tooltipMoveEvent,
+              {
+                passive: true
+              }
+            );
           }.bind(this),
           { passive: true }
         );
@@ -793,14 +789,13 @@ function svgMapWrapper(svgPanZoom) {
             var countryID = countryElement.getAttribute('data-id');
             this.setTooltipContent(this.getTooltipContent(countryID));
             this.showTooltip(e);
-          }.bind(this),
-          { passive: true }
-        );
-
-        countryElement.addEventListener(
-          'mousemove',
-          function (e) {
-            this.moveTooltip(e);
+            countryElement.addEventListener(
+              'mousemove',
+              this.tooltipMoveEvent,
+              {
+                passive: true
+              }
+            );
           }.bind(this),
           { passive: true }
         );
@@ -837,6 +832,13 @@ function svgMapWrapper(svgPanZoom) {
           'mouseleave',
           function () {
             this.hideTooltip();
+            countryElement.removeEventListener(
+              'mousemove',
+              this.tooltipMoveEvent,
+              {
+                passive: true
+              }
+            );
           }.bind(this),
           { passive: true }
         );
@@ -847,11 +849,9 @@ function svgMapWrapper(svgPanZoom) {
           function () {
             this.hideTooltip();
             countryElement.classList.remove('svgMap-active');
-            !this.ttt ? (this.ttt = 1) : this.ttt++;
-
             countryElement.removeEventListener(
               'touchmove',
-              this.touchmoveEvent,
+              this.tooltipMoveEvent,
               { passive: true }
             );
           }.bind(this),
@@ -873,12 +873,24 @@ function svgMapWrapper(svgPanZoom) {
       zoomScaleSensitivity: this.options.zoomScaleSensitivity,
       controlIconsEnabled: false,
       mouseWheelZoomEnabled: this.options.mouseWheelZoomEnabled, // TODO Only with key pressed
-      // preventMouseEventsDefault: false, // TODO
+      preventMouseEventsDefault: true,
       onZoom: function () {
         me.setControlStatuses();
       },
       beforeZoom: function () {
-        // TODO
+        // element = document.getElementById('TEST');
+        // if (!element) {
+        //   let element = document.createElement('div');
+        //   element.setAttribute('id', 'TEST');
+        //   element.style.position = 'fixed';
+        //   element.style.top = '0px';
+        //   element.style.left = '0px';
+        //   element.style.right = '0px';
+        //   element.style.bottom = '0px';
+        //   element.style.background = 'rgba(0, 0, 0, .75)';
+        //   document.body.appendChild(element);
+        //   return false;
+        // }
       },
       beforePan: function (oldPan, newPan) {
         var gutterWidth = me.mapWrapper.offsetWidth * 0.85;
