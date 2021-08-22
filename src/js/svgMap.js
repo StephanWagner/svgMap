@@ -381,12 +381,12 @@ function svgMapWrapper(svgPanZoom) {
           return;
         }
         if (
-          typeof data.values[countryID][this.options.manualColorAttribute] !=
+          typeof data.values[countryID].color !=
           'undefined'
         ) {
           element.setAttribute(
             'fill',
-            data.values[countryID][this.options.manualColorAttribute]
+            data.values[countryID].color
           );
           return;
         }
