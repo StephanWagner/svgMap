@@ -83,6 +83,9 @@ You can pass the following options into svgMap:
 | `initialPan` | `object` | | Initial pan on x and y axis (e.g. `{ x: 30, y: 60 }`) |
 | `zoomScaleSensitivity` | `float` | `0.2` | Sensitivity when zooming |
 | `mouseWheelZoomEnabled` | `boolean` | `true` | Enables or disables zooming with the scroll wheel |
+| `mouseWheelZoomWithKey` | `boolean` | `false` | Allow zooming only when one of the following keys is pressed: 'shift', 'control', 'alt' (Windows), 'command' (MacOS), 'option' (MacOS) |
+| `mouseWheelKeyMessage` | `string` | `'Press the [ALT] key to zoom'` | The message to show for non MacOS systems |
+| `mouseWheelKeyMessageMac` | `string ` | `Press the [COMMAND] key to zoom` | The message to show for MacOS |
 | `colorMax` | `string` | `#CC0033` | Color for highest value |
 | `colorMin` | `string` | `#FFE5D9` | Color for lowest value |
 | `colorNoData` | `string` | `#E2E2E2` | Color when there is no data |

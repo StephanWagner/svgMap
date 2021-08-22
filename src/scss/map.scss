@@ -1,3 +1,43 @@
+.svgMap-wrapper,
+.svgMap-container {
+  position: relative;
+}
+
+.svgMap-block-zoom-notice {
+  position: absolute;
+  z-index: 2;
+  top: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  opacity: 0;
+  color: #fff;
+  transition: opacity 250ms;
+
+  .svgMap-block-zoom-notice-active & {
+    pointer-events: all;
+    top: 0;
+    opacity: 1;
+  }
+
+  > div {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0 32px;
+    transform: translateY(-50%);
+    font-size: 28px;
+
+    @media (max-width: 900px) {
+      font-size: 22px;
+    }
+  }
+}
+
 .svgMap-map-wrapper {
   position: relative;
   width: 100%;
@@ -77,7 +117,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         background: #666;
-        transition: background-color 0.2s;
+        transition: background-color 250ms;
       }
 
       &:before {
@@ -130,7 +170,7 @@
     stroke-width: 1;
     stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
-    transition: fill 0.2s, stroke 0.2s;
+    transition: fill 250ms, stroke 250ms;
 
     &[data-link] {
       cursor: pointer;

@@ -31,6 +31,15 @@ function svgMapWrapper(svgPanZoom) {
       // Zoom with mousewheel
       mouseWheelZoomEnabled: true,
 
+      // Allow zooming only when one of the following keys is pressed: 'shift', 'control', 'alt' (Windows), 'command' (MacOS), 'option' (MacOS)
+      mouseWheelZoomWithKey: false,
+
+      // The message to show for non MacOS systems
+      mouseWheelKeyMessage: 'Press the [ALT] key to zoom',
+
+      // The message to show for MacOS
+      mouseWheelKeyMessageMac: 'Press the [COMMAND] key to zoom',
+
       // Data colors
       colorMax: '#CC0033',
       colorMin: '#FFE5D9',
@@ -88,8 +97,28 @@ function svgMapWrapper(svgPanZoom) {
     // Global id
     this.id = this.options.targetElementID;
 
-    // Cache wrapper element
+    // Wrapper element
     this.wrapper = document.getElementById(this.options.targetElementID);
+    this.wrapper.classList.add('svgMap-wrapper');
+
+    // Container element
+    this.container = document.createElement('div');
+    this.container.classList.add('svgMap-container');
+    this.wrapper.appendChild(this.container);
+
+    // Block scrolling when option is enabled
+    if (
+      this.options.mouseWheelZoomEnabled &&
+      this.options.mouseWheelZoomWithKey
+    ) {
+      this.addMouseWheelZoomNotice();
+      this.addMouseWheelZoomWithKeyEvents();
+    }
+
+    // Map container element
+    this.mapContainer = document.createElement('div');
+    this.mapContainer.classList.add('svgMap-map-container');
+    this.container.appendChild(this.mapContainer);
 
     // Create the map
     this.createMap();
@@ -660,7 +689,7 @@ function svgMapWrapper(svgPanZoom) {
     this.mapWrapper = this.createElement(
       'div',
       'svgMap-map-wrapper',
-      this.wrapper
+      this.mapContainer
     );
     this.mapImage = document.createElementNS(
       'http://www.w3.org/2000/svg',
@@ -873,25 +902,10 @@ function svgMapWrapper(svgPanZoom) {
       maxZoom: this.options.maxZoom,
       zoomScaleSensitivity: this.options.zoomScaleSensitivity,
       controlIconsEnabled: false,
-      mouseWheelZoomEnabled: this.options.mouseWheelZoomEnabled, // TODO Only with key pressed
+      mouseWheelZoomEnabled: this.options.mouseWheelZoomEnabled,
       preventMouseEventsDefault: true,
       onZoom: function () {
         me.setControlStatuses();
-      },
-      beforeZoom: function () {
-        // element = document.getElementById('TEST');
-        // if (!element) {
-        //   let element = document.createElement('div');
-        //   element.setAttribute('id', 'TEST');
-        //   element.style.position = 'fixed';
-        //   element.style.top = '0px';
-        //   element.style.left = '0px';
-        //   element.style.right = '0px';
-        //   element.style.bottom = '0px';
-        //   element.style.background = 'rgba(0, 0, 0, .75)';
-        //   document.body.appendChild(element);
-        //   return false;
-        // }
       },
       beforePan: function (oldPan, newPan) {
         var gutterWidth = me.mapWrapper.offsetWidth * 0.85;
@@ -1043,6 +1057,126 @@ function svgMapWrapper(svgPanZoom) {
       return false;
     }
     this.mapPanZoom[direction == 'in' ? 'zoomIn' : 'zoomOut']();
+  };
+
+  // Add elements to show the zoom with keys notice
+
+  svgMap.prototype.addMouseWheelZoomNotice = function () {
+    var noticeWrapper = document.createElement('div');
+    noticeWrapper.classList.add('svgMap-block-zoom-notice');
+
+    var noticeContainer = document.createElement('div');
+    noticeContainer.innerHTML =
+      navigator.appVersion.indexOf('Mac') != -1
+        ? this.options.mouseWheelKeyMessageMac
+        : this.options.mouseWheelKeyMessage;
+
+    noticeWrapper.append(noticeContainer);
+    this.wrapper.append(noticeWrapper);
+  };
+
+  // Show the zoom with keys notice
+
+  svgMap.prototype.showMouseWheelZoomNotice = function (duration) {
+    if (this.mouseWheelNoticeJustHidden) {
+      return;
+    }
+
+    this.autoHideMouseWheelNoticeTimeout &&
+      clearTimeout(this.autoHideMouseWheelNoticeTimeout);
+    this.autoHideMouseWheelNoticeTimeout = setTimeout(
+      function () {
+        this.hideMouseWheelZoomNotice();
+      }.bind(this),
+      duration || 2400
+    );
+
+    this.wrapper.classList.add('svgMap-block-zoom-notice-active');
+  };
+
+  // Hide the zoom with keys notice
+
+  svgMap.prototype.hideMouseWheelZoomNotice = function () {
+    this.wrapper.classList.remove('svgMap-block-zoom-notice-active');
+    this.autoHideMouseWheelNoticeTimeout &&
+      clearTimeout(this.autoHideMouseWheelNoticeTimeout);
+  };
+
+  // Block shing the zoom wheel notice for some time
+
+  svgMap.prototype.blockMouseWheelZoomNotice = function (duration) {
+    this.mouseWheelNoticeJustHidden = true;
+    this.mouseWheelNoticeJustHiddenTimeout &&
+      clearTimeout(this.mouseWheelNoticeJustHiddenTimeout);
+    this.mouseWheelNoticeJustHiddenTimeout = setTimeout(
+      function () {
+        this.mouseWheelNoticeJustHidden = false;
+      }.bind(this),
+      duration || 600
+    );
+  };
+
+  // Add the events when you are only allowed to scrool with a key pressed
+
+  svgMap.prototype.addMouseWheelZoomWithKeyEvents = function () {
+    // Add events to wrapper
+    this.wrapper.addEventListener(
+      'wheel',
+      function (ev) {
+        if (!document.body.classList.contains('svgMap-zoom-key-pressed')) {
+          this.showMouseWheelZoomNotice();
+        } else {
+          this.hideMouseWheelZoomNotice();
+          this.blockMouseWheelZoomNotice();
+        }
+      }.bind(this),
+      {
+        passive: true
+      }
+    );
+
+    // Add with keydown
+    document.addEventListener(
+      'keydown',
+      function (ev) {
+        if (
+          ev.key == 'Alt' ||
+          ev.key == 'Control' ||
+          ev.key == 'Meta' ||
+          ev.key == 'Shift'
+        ) {
+          document.body.classList.add('svgMap-zoom-key-pressed');
+          this.hideMouseWheelZoomNotice();
+          this.blockMouseWheelZoomNotice();
+        }
+      }.bind(this)
+    );
+
+    // Fallback with wheel as sometimes it wont trigger when window is out of focus
+    this.wrapper.addEventListener('wheel', function (ev) {
+      if (ev.altKey || ev.ctrlKey || ev.metaKey || ev.shiftKey) {
+        document.body.classList.add('svgMap-zoom-key-pressed');
+        // TODO wont be removed when window out of focus
+      }
+    });
+
+    // Only add following events to the document once
+    if (document.body.classList.contains('svgMap-key-events-added')) {
+      return false;
+    }
+    document.body.classList.add('svgMap-key-events-added');
+
+    // Remove with keyup
+    document.addEventListener('keyup', function (ev) {
+      if (
+        ev.key == 'Alt' ||
+        ev.key == 'Control' ||
+        ev.key == 'Meta' ||
+        ev.key == 'Shift'
+      ) {
+        document.body.classList.remove('svgMap-zoom-key-pressed');
+      }
+    });
   };
 
   // Map paths

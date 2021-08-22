@@ -1,4 +1,43 @@
 /*! svgMap | https://github.com/StephanWagner/svgMap | MIT License | Copyright Stephan Wagner | https://stephanwagner.me */
+.svgMap-wrapper,
+.svgMap-container {
+  position: relative;
+}
+
+.svgMap-block-zoom-notice {
+  position: absolute;
+  z-index: 2;
+  top: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  opacity: 0;
+  color: #fff;
+  transition: opacity 250ms;
+}
+.svgMap-block-zoom-notice-active .svgMap-block-zoom-notice {
+  pointer-events: all;
+  top: 0;
+  opacity: 1;
+}
+.svgMap-block-zoom-notice > div {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 0 32px;
+  transform: translateY(-50%);
+  font-size: 28px;
+}
+@media (max-width: 900px) {
+  .svgMap-block-zoom-notice > div {
+    font-size: 22px;
+  }
+}
+
 .svgMap-map-wrapper {
   position: relative;
   width: 100%;
@@ -69,7 +108,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background: #666;
-  transition: background-color 0.2s;
+  transition: background-color 250ms;
 }
 .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:before {
   width: 11px;
@@ -101,7 +140,7 @@
   stroke-width: 1;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  transition: fill 0.2s, stroke 0.2s;
+  transition: fill 250ms, stroke 250ms;
 }
 .svgMap-map-wrapper .svgMap-country[data-link] {
   cursor: pointer;

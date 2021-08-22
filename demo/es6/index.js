@@ -15,7 +15,9 @@ import dataPopulation from './data/population';
 new svgMap({
   targetElementID: 'svgMapPopulation',
   data: dataPopulation,
-  flagType: 'emoji'
+  flagType: 'emoji',
+  mouseWheelZoomEnabled: true,
+  mouseWheelZoomWithKey: true
 });
 
 // Demo person height in German
@@ -29,7 +31,11 @@ new svgMap({
   colorMin: '#FFF0F9',
   colorMax: '#730B62',
   hideFlag: true,
-  noDataText: 'Keine Daten vorhanden'
+  noDataText: 'Keine Daten vorhanden',
+  mouseWheelZoomEnabled: true,
+  mouseWheelZoomWithKey: true,
+  mouseWheelKeyMessage: 'Bitte [ALT] drücken um zu zoomen',
+  mouseWheelKeyMessageMac: 'Bitte [COMMAND] drücken um zu zoomen'
 });
 
 // Demo EURO as currency
@@ -91,6 +97,8 @@ var svgMapEuroCurrency = new svgMap({
     x: 420,
     y: 50
   },
+  mouseWheelZoomEnabled: true,
+  mouseWheelZoomWithKey: true,
   onGetTooltip: function (tooltipDiv, countryID, countryValues) {
     // Geting the list of countries
     var countries = svgMapEuroCurrency.countries;
