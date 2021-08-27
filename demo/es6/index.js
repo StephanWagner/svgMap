@@ -109,6 +109,12 @@ var svgMapEuroCurrency = new svgMap({
 
     // Fill content
     var innerHTML =
+      '<div style="margin: 0 0 10px; text-align: center"><img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@latest/svg/{0}.svg" alt="" style="height: 40px; width: auto; border: 2px solid #eee"></div>'.replace(
+        '{0}',
+        countryID.toLowerCase()
+      );
+
+    innerHTML +=
       '<div style="min-width: 180px; font-weight: bold; margin: 0 0 15px; text-align: center">' +
       countries[countryID] +
       '</div>';
