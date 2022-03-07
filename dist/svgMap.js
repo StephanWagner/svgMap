@@ -845,7 +845,17 @@ function svgMapWrapper(svgPanZoom) {
               this.options.data.values[countryID]['linkTarget']
             );
           }
-          countryElement.addEventListener('click', function (e) {
+
+          let dragged = false;
+          countryElement.addEventListener('mousedown', function(){dragged = false});
+          countryElement.addEventListener('touchstart', function(){dragged = false});
+          countryElement.addEventListener('mousemove', function(){dragged = true});
+          countryElement.addEventListener('touchmove', function(){dragged = true});
+          const clickHandler = function (e) {
+            if (dragged) {
+                return;
+            }
+
             const link = countryElement.getAttribute('data-link');
             const target = countryElement.getAttribute('data-link-target');
 
@@ -854,7 +864,10 @@ function svgMapWrapper(svgPanZoom) {
             } else {
               window.location.href = link;
             }
-          });
+          }
+
+          countryElement.addEventListener('click', clickHandler);
+          countryElement.addEventListener('touchend', clickHandler);
         }
 
         // Hide tooltip when mouse leaves the country area
