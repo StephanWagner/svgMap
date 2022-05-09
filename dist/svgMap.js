@@ -64,6 +64,9 @@ function svgMapWrapper(svgPanZoom) {
       // Set to true to open the link on mobile devices, set to false (default) to show the tooltip
       touchLink: false,
 
+      // Set to true to show the to show a zoom reset button
+      showZoomReset: true,
+
       // Called when a tooltip is created to custimize the tooltip content
       onGetTooltip: function (tooltipDiv, countryID, countryValues) {
         return null;
@@ -710,25 +713,27 @@ function svgMapWrapper(svgPanZoom) {
       'svgMap-map-controls-zoom',
       mapControlsWrapper
     );
-    ['in', 'out'].forEach(
+    ['in', 'out', 'reset'].forEach(
       function (item) {
-        var zoomControlName =
-          'zoomControl' + item.charAt(0).toUpperCase() + item.slice(1);
-        this[zoomControlName] = this.createElement(
-          'button',
-          'svgMap-control-button svgMap-zoom-button svgMap-zoom-' +
+        if (item === 'reset' && this.options.showZoomReset || item !== 'reset') {
+          var zoomControlName =
+            'zoomControl' + item.charAt(0).toUpperCase() + item.slice(1);
+          this[zoomControlName] = this.createElement(
+            'button',
+            'svgMap-control-button svgMap-zoom-button svgMap-zoom-' +
             item +
             '-button',
-          zoomContainer
-        );
-        this[zoomControlName].type = 'button';
-        this[zoomControlName].addEventListener(
-          'click',
-          function () {
-            this.zoomMap(item);
-          }.bind(this),
-          { passive: true }
-        );
+            zoomContainer
+          );
+          this[zoomControlName].type = 'button';
+          this[zoomControlName].addEventListener(
+            'click',
+            function () {
+              this.zoomMap(item);
+            }.bind(this),
+            { passive: true }
+          );
+        }
       }.bind(this)
     );
 
@@ -847,13 +852,13 @@ function svgMapWrapper(svgPanZoom) {
           }
 
           let dragged = false;
-          countryElement.addEventListener('mousedown', function(){dragged = false});
-          countryElement.addEventListener('touchstart', function(){dragged = false});
-          countryElement.addEventListener('mousemove', function(){dragged = true});
-          countryElement.addEventListener('touchmove', function(){dragged = true});
+          countryElement.addEventListener('mousedown', function () { dragged = false });
+          countryElement.addEventListener('touchstart', function () { dragged = false });
+          countryElement.addEventListener('mousemove', function () { dragged = true });
+          countryElement.addEventListener('touchmove', function () { dragged = true });
           const clickHandler = function (e) {
             if (dragged) {
-                return;
+              return;
             }
 
             const link = countryElement.getAttribute('data-link');
@@ -982,7 +987,7 @@ function svgMapWrapper(svgPanZoom) {
       var flagContainer = this.createElement(
         'div',
         'svgMap-tooltip-flag-container svgMap-tooltip-flag-container-' +
-          this.options.flagType,
+        this.options.flagType,
         tooltipContentWrapper
       );
 
@@ -1048,6 +1053,8 @@ function svgMapWrapper(svgPanZoom) {
     this.zoomControlIn.setAttribute('aria-disabled', 'false');
     this.zoomControlOut.classList.remove('svgMap-disabled');
     this.zoomControlOut.setAttribute('aria-disabled', 'false');
+    this.zoomControlReset.classList.remove('svgMap-disabled');
+    this.zoomControlReset.setAttribute('aria-disabled', 'false');
 
     if (this.mapPanZoom.getZoom().toFixed(3) <= this.options.minZoom) {
       this.zoomControlOut.classList.add('svgMap-disabled');
@@ -1056,6 +1063,11 @@ function svgMapWrapper(svgPanZoom) {
     if (this.mapPanZoom.getZoom().toFixed(3) >= this.options.maxZoom) {
       this.zoomControlIn.classList.add('svgMap-disabled');
       this.zoomControlIn.setAttribute('aria-disabled', 'true');
+    }
+    if (this.mapPanZoom.getZoom().toFixed(3)  == this.options.initialZoom) {
+      console.log(123)
+      this.zoomControlReset.classList.add('svgMap-disabled');
+      this.zoomControlReset.setAttribute('aria-disabled', 'true');
     }
   };
 
@@ -1069,7 +1081,11 @@ function svgMapWrapper(svgPanZoom) {
     ) {
       return false;
     }
-    this.mapPanZoom[direction == 'in' ? 'zoomIn' : 'zoomOut']();
+    if(direction === 'reset') {
+      this.mapPanZoom.zoom(this.options.initialZoom);
+    } else {
+      this.mapPanZoom[direction == 'in' ? 'zoomIn' : 'zoomOut']();
+    }
   };
 
   // Add elements to show the zoom with keys notice
@@ -1984,15 +2000,15 @@ function svgMapWrapper(svgPanZoom) {
     ratio = parseFloat(ratio).toFixed(1);
     var r = Math.ceil(
       parseInt(color1.substring(0, 2), 16) * ratio +
-        parseInt(color2.substring(0, 2), 16) * (1 - ratio)
+      parseInt(color2.substring(0, 2), 16) * (1 - ratio)
     );
     var g = Math.ceil(
       parseInt(color1.substring(2, 4), 16) * ratio +
-        parseInt(color2.substring(2, 4), 16) * (1 - ratio)
+      parseInt(color2.substring(2, 4), 16) * (1 - ratio)
     );
     var b = Math.ceil(
       parseInt(color1.substring(4, 6), 16) * ratio +
-        parseInt(color2.substring(4, 6), 16) * (1 - ratio)
+      parseInt(color2.substring(4, 6), 16) * (1 - ratio)
     );
     return '#' + this.getHex(r) + this.getHex(g) + this.getHex(b);
   };
