@@ -81,6 +81,7 @@ You can pass the following options into svgMap:
 | `maxZoom` | `float` | `25` | Maximal zoom level |
 | `initialZoom` | `float` | `1.06` | Initial zoom level |
 | `initialPan` | `object` | | Initial pan on x and y axis (e.g. `{ x: 30, y: 60 }`) |
+| `showContinentSelector` | `boolean` | `false` | Show continent selector |
 | `zoomScaleSensitivity` | `float` | `0.2` | Sensitivity when zooming |
 | `mouseWheelZoomEnabled` | `boolean` | `true` | Enables or disables zooming with the scroll wheel |
 | `mouseWheelZoomWithKey` | `boolean` | `false` | Allow zooming only when one of the following keys is pressed: SHIFT, CONTROL, ALT, COMMAND, OPTION |

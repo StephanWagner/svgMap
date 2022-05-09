@@ -75,7 +75,10 @@ function svgMapWrapper(svgPanZoom) {
 
         // Crimea: Set to 'RU' to make the Crimea part of Russia, by default it is part of the Ukraine
         Crimea: 'UA'
-      }
+      },
+
+      // Set to true to show a drop down menu with the continents
+      showContinentSelector: false,
     };
 
     this.options = Object.assign({}, defaultOptions, options || {});
@@ -678,6 +681,69 @@ function svgMapWrapper(svgPanZoom) {
     ZW: '🇿🇼'
   };
 
+  svgMap.prototype.continents = {
+    "EA": {
+      "iso": "EA",
+      "name": "World"
+    },
+    "AF": {
+      "iso": "AF",
+      "name": "Africa",
+      "pan": {
+        x: 454, y: 250
+      },
+      "zoom": 1.90
+    },
+    "AS": {
+      "iso": "AS",
+      "name": "Asia",
+      "pan": {
+        x: 904, y: 80
+      },
+      "zoom": 1.8
+    },
+    "EU": {
+      "iso": "EU",
+      "name": "Europe",
+      "pan": {
+        x: 404, y: 80
+      },
+      "zoom": 5
+    },
+    "NA": {
+      "iso": "NA",
+      "name": "North America",
+      "pan": {
+        x: 104, y: 55
+      },
+      "zoom": 2.6
+    },
+
+    "MA": {
+      "iso": "MA",
+      "name": "Middle America",
+      "pan": {
+        x: 104, y: 200
+      },
+      "zoom": 2.6
+    },
+    "SA": {
+      "iso": "SA",
+      "name": "South America",
+      "pan": {
+        x: 104, y: 340
+      },
+      "zoom": 2.2
+    },
+    "OC": {
+      "iso": "OC",
+      "name": "Oceania",
+      "pan": {
+        x: 954, y: 350
+      },
+      "zoom": 1.90
+    },
+  }
   // Create the SVG map
 
   svgMap.prototype.createMap = function () {
@@ -698,6 +764,7 @@ function svgMapWrapper(svgPanZoom) {
     this.mapImage.classList.add('svgMap-map-image');
     this.mapWrapper.appendChild(this.mapImage);
 
+
     // Add controls
     var mapControlsWrapper = this.createElement(
       'div',
@@ -716,8 +783,8 @@ function svgMapWrapper(svgPanZoom) {
         this[zoomControlName] = this.createElement(
           'button',
           'svgMap-control-button svgMap-zoom-button svgMap-zoom-' +
-            item +
-            '-button',
+          item +
+          '-button',
           zoomContainer
         );
         this[zoomControlName].type = 'button';
@@ -735,6 +802,40 @@ function svgMapWrapper(svgPanZoom) {
     this.zoomControlIn.setAttribute('aria-label', 'Zoom in');
     this.zoomControlOut.setAttribute('aria-label', 'Zoom out');
 
+    if (this.options.showContinentSelector) {
+      // Add continent controls
+      var mapContinentControlsWrapper = this.createElement(
+        'div',
+        'svgMap-map-continent-controls-wrapper',
+        this.mapWrapper
+      );
+      this["continentSelect"] = this.createElement(
+        'select',
+        'svgMap-continent-select',
+        mapContinentControlsWrapper
+      );
+      var that = this;
+      Object.keys(svgMap.prototype.continents).forEach(
+        function (item) {
+          that.createElement(
+            'option',
+            'svgMap-continent-option svgMap-continent-iso-' + svgMap.prototype.continents[item].iso,
+            that["continentSelect"],
+            svgMap.prototype.continents[item].name
+          );
+        }
+      );
+
+      this.continentSelect.addEventListener(
+        'click',
+        function (e) {
+          const continent = Array.from(e.target.classList).find(element => element.includes("svgMap-continent-iso"));
+          if (continent) this.zoomContinent(continent.substr(continent.length - 2));
+        }.bind(that),
+        { passive: true }
+      );
+      this.mapContinentControlsWrapper.setAttribute('aria-label', 'Select continent');
+    }
     // Fix countries
     var mapPaths = Object.assign({}, this.mapPaths);
 
@@ -846,13 +947,13 @@ function svgMapWrapper(svgPanZoom) {
           }
 
           let dragged = false;
-          countryElement.addEventListener('mousedown', function(){dragged = false});
-          countryElement.addEventListener('touchstart', function(){dragged = false});
-          countryElement.addEventListener('mousemove', function(){dragged = true});
-          countryElement.addEventListener('touchmove', function(){dragged = true});
+          countryElement.addEventListener('mousedown', function () { dragged = false });
+          countryElement.addEventListener('touchstart', function () { dragged = false });
+          countryElement.addEventListener('mousemove', function () { dragged = true });
+          countryElement.addEventListener('touchmove', function () { dragged = true });
           const clickHandler = function (e) {
             if (dragged) {
-                return;
+              return;
             }
 
             const link = countryElement.getAttribute('data-link');
@@ -981,7 +1082,7 @@ function svgMapWrapper(svgPanZoom) {
       var flagContainer = this.createElement(
         'div',
         'svgMap-tooltip-flag-container svgMap-tooltip-flag-container-' +
-          this.options.flagType,
+        this.options.flagType,
         tooltipContentWrapper
       );
 
@@ -1069,6 +1170,18 @@ function svgMapWrapper(svgPanZoom) {
       return false;
     }
     this.mapPanZoom[direction == 'in' ? 'zoomIn' : 'zoomOut']();
+  };
+
+  // Zoom to Contient
+
+  svgMap.prototype.zoomContinent = function (contientIso) {
+    const continent = this.continents[contientIso];
+    // this.mapPanZoom.reset();
+    if (continent.iso == "EA") this.mapPanZoom.reset()
+    else if (continent.pan) {
+      this.mapPanZoom.reset()
+      this.mapPanZoom.zoomAtPoint(continent.zoom, continent.pan);
+    }
   };
 
   // Add elements to show the zoom with keys notice
@@ -1983,15 +2096,15 @@ function svgMapWrapper(svgPanZoom) {
     ratio = parseFloat(ratio).toFixed(1);
     var r = Math.ceil(
       parseInt(color1.substring(0, 2), 16) * ratio +
-        parseInt(color2.substring(0, 2), 16) * (1 - ratio)
+      parseInt(color2.substring(0, 2), 16) * (1 - ratio)
     );
     var g = Math.ceil(
       parseInt(color1.substring(2, 4), 16) * ratio +
-        parseInt(color2.substring(2, 4), 16) * (1 - ratio)
+      parseInt(color2.substring(2, 4), 16) * (1 - ratio)
     );
     var b = Math.ceil(
       parseInt(color1.substring(4, 6), 16) * ratio +
-        parseInt(color2.substring(4, 6), 16) * (1 - ratio)
+      parseInt(color2.substring(4, 6), 16) * (1 - ratio)
     );
     return '#' + this.getHex(r) + this.getHex(g) + this.getHex(b);
   };
