@@ -1081,7 +1081,17 @@ function svgMapWrapper(svgPanZoom) {
       return false;
     }
     if(direction === 'reset') {
-      this.mapPanZoom.zoom(this.options.initialZoom);
+      this.mapPanZoom.reset();
+      if (this.options.initialPan.x != 0 || this.options.initialPan.y != 0) {
+        // Init zoom and pan
+        this.mapPanZoom.zoomAtPointBy(this.options.initialZoom, {
+          x: this.options.initialPan.x,
+          y: this.options.initialPan.y
+        });
+      } else {
+        // Init zoom
+        this.mapPanZoom.zoom(this.options.initialZoom);
+      }
     } else {
       this.mapPanZoom[direction == 'in' ? 'zoomIn' : 'zoomOut']();
     }
