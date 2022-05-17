@@ -111,7 +111,7 @@
     &.svgMap-zoom-button {
       &:before,
       &:after {
-        content: '';
+        content: "";
         position: absolute;
         top: 50%;
         left: 50%;
@@ -123,6 +123,12 @@
       &:before {
         width: 11px;
         height: 3px;
+      }
+      &.svgMap-zoom-reset-button::before {
+        width: 11px;
+        height: 11px;
+        background: none;
+        border: 2px solid #666;
       }
 
       @media (hover: hover) {
@@ -145,6 +151,12 @@
         &:before,
         &:after {
           background: #ccc;
+        }
+      }
+      &.svgMap-zoom-reset-button {
+        &.svgMap-disabled:before {
+          border: 2px solid #ccc;
+          background: none;
         }
       }
     }
