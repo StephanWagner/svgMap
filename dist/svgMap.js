@@ -64,6 +64,9 @@ function svgMapWrapper(svgPanZoom) {
       // Set to true to open the link on mobile devices, set to false (default) to show the tooltip
       touchLink: false,
 
+      // Set to true to show the to show a zoom reset button
+      showZoomReset: true,
+
       // Called when a tooltip is created to custimize the tooltip content
       onGetTooltip: function (tooltipDiv, countryID, countryValues) {
         return null;
@@ -777,25 +780,27 @@ function svgMapWrapper(svgPanZoom) {
       'svgMap-map-controls-zoom',
       mapControlsWrapper
     );
-    ['in', 'out'].forEach(
+    ['in', 'out', 'reset'].forEach(
       function (item) {
-        var zoomControlName =
-          'zoomControl' + item.charAt(0).toUpperCase() + item.slice(1);
-        this[zoomControlName] = this.createElement(
-          'button',
-          'svgMap-control-button svgMap-zoom-button svgMap-zoom-' +
-          item +
-          '-button',
-          zoomContainer
-        );
-        this[zoomControlName].type = 'button';
-        this[zoomControlName].addEventListener(
-          'click',
-          function () {
-            this.zoomMap(item);
-          }.bind(this),
-          { passive: true }
-        );
+        if (item === 'reset' && this.options.showZoomReset || item !== 'reset') {
+          var zoomControlName =
+            'zoomControl' + item.charAt(0).toUpperCase() + item.slice(1);
+          this[zoomControlName] = this.createElement(
+            'button',
+            'svgMap-control-button svgMap-zoom-button svgMap-zoom-' +
+            item +
+            '-button',
+            zoomContainer
+          );
+          this[zoomControlName].type = 'button';
+          this[zoomControlName].addEventListener(
+            'click',
+            function () {
+              this.zoomMap(item);
+            }.bind(this),
+            { passive: true }
+          );
+        }
       }.bind(this)
     );
 
@@ -1149,6 +1154,8 @@ function svgMapWrapper(svgPanZoom) {
     this.zoomControlIn.setAttribute('aria-disabled', 'false');
     this.zoomControlOut.classList.remove('svgMap-disabled');
     this.zoomControlOut.setAttribute('aria-disabled', 'false');
+    this.zoomControlReset.classList.remove('svgMap-disabled');
+    this.zoomControlReset.setAttribute('aria-disabled', 'false');
 
     if (this.mapPanZoom.getZoom().toFixed(3) <= this.options.minZoom) {
       this.zoomControlOut.classList.add('svgMap-disabled');
@@ -1157,6 +1164,11 @@ function svgMapWrapper(svgPanZoom) {
     if (this.mapPanZoom.getZoom().toFixed(3) >= this.options.maxZoom) {
       this.zoomControlIn.classList.add('svgMap-disabled');
       this.zoomControlIn.setAttribute('aria-disabled', 'true');
+    }
+    if (this.mapPanZoom.getZoom().toFixed(3)  == this.options.initialZoom) {
+      console.log(123)
+      this.zoomControlReset.classList.add('svgMap-disabled');
+      this.zoomControlReset.setAttribute('aria-disabled', 'true');
     }
   };
 
@@ -1170,7 +1182,21 @@ function svgMapWrapper(svgPanZoom) {
     ) {
       return false;
     }
-    this.mapPanZoom[direction == 'in' ? 'zoomIn' : 'zoomOut']();
+    if(direction === 'reset') {
+      this.mapPanZoom.reset();
+      if (this.options.initialPan.x != 0 || this.options.initialPan.y != 0) {
+        // Init zoom and pan
+        this.mapPanZoom.zoomAtPointBy(this.options.initialZoom, {
+          x: this.options.initialPan.x,
+          y: this.options.initialPan.y
+        });
+      } else {
+        // Init zoom
+        this.mapPanZoom.zoom(this.options.initialZoom);
+      }
+    } else {
+      this.mapPanZoom[direction == 'in' ? 'zoomIn' : 'zoomOut']();
+    }
   };
 
   // Zoom to Contient

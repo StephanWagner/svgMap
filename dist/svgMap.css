@@ -114,6 +114,12 @@
   width: 11px;
   height: 3px;
 }
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-zoom-reset-button::before {
+  width: 11px;
+  height: 11px;
+  background: none;
+  border: 2px solid #666;
+}
 @media (hover: hover) {
   .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:after {
     background: #111;
@@ -124,6 +130,10 @@
 }
 .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:after {
   background: #ccc;
+}
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-zoom-reset-button.svgMap-disabled:before {
+  border: 2px solid #ccc;
+  background: none;
 }
 .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-in-button {
   margin: 1px 0 1px 1px;

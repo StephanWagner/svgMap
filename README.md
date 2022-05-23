@@ -83,6 +83,7 @@ You can pass the following options into svgMap:
 | `initialPan` | `object` | | Initial pan on x and y axis (e.g. `{ x: 30, y: 60 }`) |
 | `showContinentSelector` | `boolean` | `false` | Show continent selector |
 | `zoomScaleSensitivity` | `float` | `0.2` | Sensitivity when zooming |
+| `showZoomReset` | `boolean` | `false` | Show zoom reset button |
 | `mouseWheelZoomEnabled` | `boolean` | `true` | Enables or disables zooming with the scroll wheel |
 | `mouseWheelZoomWithKey` | `boolean` | `false` | Allow zooming only when one of the following keys is pressed: SHIFT, CONTROL, ALT, COMMAND, OPTION |
 | `mouseWheelKeyMessage` | `string` | `'Press the [ALT] key to zoom'` | The message when trying to scroll without a key |
