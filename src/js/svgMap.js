@@ -833,7 +833,7 @@ function svgMapWrapper(svgPanZoom) {
       );
 
       this.continentSelect.addEventListener(
-        'click',
+        'change',
         function (e) {
           const continent = e.target.value;
           if (continent) this.zoomContinent(e.target.value);
@@ -1203,6 +1203,7 @@ function svgMapWrapper(svgPanZoom) {
   // Zoom to Contient
 
   svgMap.prototype.zoomContinent = function (contientIso) {
+    
     const continent = this.continents[contientIso];
     if (continent.iso == "EA") this.mapPanZoom.reset()
     else if (continent.pan) {
