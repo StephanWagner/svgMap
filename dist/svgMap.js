@@ -65,7 +65,7 @@ function svgMapWrapper(svgPanZoom) {
       touchLink: false,
 
       // Set to true to show the to show a zoom reset button
-      showZoomReset: true,
+      showZoomReset: false,
 
       // Called when a tooltip is created to custimize the tooltip content
       onGetTooltip: function (tooltipDiv, countryID, countryValues) {
@@ -823,24 +823,25 @@ function svgMapWrapper(svgPanZoom) {
       var that = this;
       Object.keys(svgMap.prototype.continents).forEach(
         function (item) {
-          that.createElement(
+          let element = that.createElement(
             'option',
             'svgMap-continent-option svgMap-continent-iso-' + svgMap.prototype.continents[item].iso,
             that["continentSelect"],
             svgMap.prototype.continents[item].name
           );
+          element.value = item
         }
       );
 
       this.continentSelect.addEventListener(
         'click',
         function (e) {
-          const continent = Array.from(e.target.classList).find(element => element.includes("svgMap-continent-iso"));
-          if (continent) this.zoomContinent(continent.substr(continent.length - 2));
+          const continent = e.target.value;
+          if (continent) this.zoomContinent(e.target.value);
         }.bind(that),
         { passive: true }
       );
-      this.mapContinentControlsWrapper.setAttribute('aria-label', 'Select continent');
+      mapContinentControlsWrapper.setAttribute('aria-label', 'Select continent');
     }
     // Fix countries
     var mapPaths = Object.assign({}, this.mapPaths);
@@ -1154,8 +1155,10 @@ function svgMapWrapper(svgPanZoom) {
     this.zoomControlIn.setAttribute('aria-disabled', 'false');
     this.zoomControlOut.classList.remove('svgMap-disabled');
     this.zoomControlOut.setAttribute('aria-disabled', 'false');
-    this.zoomControlReset.classList.remove('svgMap-disabled');
-    this.zoomControlReset.setAttribute('aria-disabled', 'false');
+    if (this.options.showZoomReset) {
+      this.zoomControlReset.classList.remove('svgMap-disabled');
+      this.zoomControlReset.setAttribute('aria-disabled', 'false');
+    }
 
     if (this.mapPanZoom.getZoom().toFixed(3) <= this.options.minZoom) {
       this.zoomControlOut.classList.add('svgMap-disabled');
@@ -1165,8 +1168,7 @@ function svgMapWrapper(svgPanZoom) {
       this.zoomControlIn.classList.add('svgMap-disabled');
       this.zoomControlIn.setAttribute('aria-disabled', 'true');
     }
-    if (this.mapPanZoom.getZoom().toFixed(3)  == this.options.initialZoom) {
-      console.log(123)
+    if (this.options.showZoomReset && this.mapPanZoom.getZoom().toFixed(3) == this.options.initialZoom) {
       this.zoomControlReset.classList.add('svgMap-disabled');
       this.zoomControlReset.setAttribute('aria-disabled', 'true');
     }
@@ -1182,7 +1184,7 @@ function svgMapWrapper(svgPanZoom) {
     ) {
       return false;
     }
-    if(direction === 'reset') {
+    if (direction === 'reset') {
       this.mapPanZoom.reset();
       if (this.options.initialPan.x != 0 || this.options.initialPan.y != 0) {
         // Init zoom and pan
@@ -1203,7 +1205,6 @@ function svgMapWrapper(svgPanZoom) {
 
   svgMap.prototype.zoomContinent = function (contientIso) {
     const continent = this.continents[contientIso];
-    // this.mapPanZoom.reset();
     if (continent.iso == "EA") this.mapPanZoom.reset()
     else if (continent.pan) {
       this.mapPanZoom.reset()
