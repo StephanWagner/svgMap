@@ -65,7 +65,7 @@ function svgMapWrapper(svgPanZoom) {
       touchLink: false,
 
       // Set to true to show the to show a zoom reset button
-      showZoomReset: true,
+      showZoomReset: false,
 
       // Called when a tooltip is created to custimize the tooltip content
       onGetTooltip: function (tooltipDiv, countryID, countryValues) {
@@ -79,7 +79,10 @@ function svgMapWrapper(svgPanZoom) {
 
         // Crimea: Set to 'RU' to make the Crimea part of Russia, by default it is part of the Ukraine
         Crimea: 'UA'
-      }
+      },
+
+      // Set to true to show a drop down menu with the continents
+      showContinentSelector: false,
     };
 
     this.options = Object.assign({}, defaultOptions, options || {});
@@ -682,6 +685,69 @@ function svgMapWrapper(svgPanZoom) {
     ZW: '🇿🇼'
   };
 
+  svgMap.prototype.continents = {
+    "EA": {
+      "iso": "EA",
+      "name": "World"
+    },
+    "AF": {
+      "iso": "AF",
+      "name": "Africa",
+      "pan": {
+        x: 454, y: 250
+      },
+      "zoom": 1.90
+    },
+    "AS": {
+      "iso": "AS",
+      "name": "Asia",
+      "pan": {
+        x: 904, y: 80
+      },
+      "zoom": 1.8
+    },
+    "EU": {
+      "iso": "EU",
+      "name": "Europe",
+      "pan": {
+        x: 404, y: 80
+      },
+      "zoom": 5
+    },
+    "NA": {
+      "iso": "NA",
+      "name": "North America",
+      "pan": {
+        x: 104, y: 55
+      },
+      "zoom": 2.6
+    },
+
+    "MA": {
+      "iso": "MA",
+      "name": "Middle America",
+      "pan": {
+        x: 104, y: 200
+      },
+      "zoom": 2.6
+    },
+    "SA": {
+      "iso": "SA",
+      "name": "South America",
+      "pan": {
+        x: 104, y: 340
+      },
+      "zoom": 2.2
+    },
+    "OC": {
+      "iso": "OC",
+      "name": "Oceania",
+      "pan": {
+        x: 954, y: 350
+      },
+      "zoom": 1.90
+    },
+  }
   // Create the SVG map
 
   svgMap.prototype.createMap = function () {
@@ -701,6 +767,7 @@ function svgMapWrapper(svgPanZoom) {
     this.mapImage.setAttribute('viewBox', '0 0 2000 1001');
     this.mapImage.classList.add('svgMap-map-image');
     this.mapWrapper.appendChild(this.mapImage);
+
 
     // Add controls
     var mapControlsWrapper = this.createElement(
@@ -741,6 +808,41 @@ function svgMapWrapper(svgPanZoom) {
     this.zoomControlIn.setAttribute('aria-label', 'Zoom in');
     this.zoomControlOut.setAttribute('aria-label', 'Zoom out');
 
+    if (this.options.showContinentSelector) {
+      // Add continent controls
+      var mapContinentControlsWrapper = this.createElement(
+        'div',
+        'svgMap-map-continent-controls-wrapper',
+        this.mapWrapper
+      );
+      this["continentSelect"] = this.createElement(
+        'select',
+        'svgMap-continent-select',
+        mapContinentControlsWrapper
+      );
+      var that = this;
+      Object.keys(svgMap.prototype.continents).forEach(
+        function (item) {
+          let element = that.createElement(
+            'option',
+            'svgMap-continent-option svgMap-continent-iso-' + svgMap.prototype.continents[item].iso,
+            that["continentSelect"],
+            svgMap.prototype.continents[item].name
+          );
+          element.value = item
+        }
+      );
+
+      this.continentSelect.addEventListener(
+        'change',
+        function (e) {
+          const continent = e.target.value;
+          if (continent) this.zoomContinent(e.target.value);
+        }.bind(that),
+        { passive: true }
+      );
+      mapContinentControlsWrapper.setAttribute('aria-label', 'Select continent');
+    }
     // Fix countries
     var mapPaths = Object.assign({}, this.mapPaths);
 
@@ -1053,8 +1155,10 @@ function svgMapWrapper(svgPanZoom) {
     this.zoomControlIn.setAttribute('aria-disabled', 'false');
     this.zoomControlOut.classList.remove('svgMap-disabled');
     this.zoomControlOut.setAttribute('aria-disabled', 'false');
-    this.zoomControlReset.classList.remove('svgMap-disabled');
-    this.zoomControlReset.setAttribute('aria-disabled', 'false');
+    if (this.options.showZoomReset) {
+      this.zoomControlReset.classList.remove('svgMap-disabled');
+      this.zoomControlReset.setAttribute('aria-disabled', 'false');
+    }
 
     if (this.mapPanZoom.getZoom().toFixed(3) <= this.options.minZoom) {
       this.zoomControlOut.classList.add('svgMap-disabled');
@@ -1064,8 +1168,7 @@ function svgMapWrapper(svgPanZoom) {
       this.zoomControlIn.classList.add('svgMap-disabled');
       this.zoomControlIn.setAttribute('aria-disabled', 'true');
     }
-    if (this.mapPanZoom.getZoom().toFixed(3)  == this.options.initialZoom) {
-      console.log(123)
+    if (this.options.showZoomReset && this.mapPanZoom.getZoom().toFixed(3) == this.options.initialZoom) {
       this.zoomControlReset.classList.add('svgMap-disabled');
       this.zoomControlReset.setAttribute('aria-disabled', 'true');
     }
@@ -1081,7 +1184,7 @@ function svgMapWrapper(svgPanZoom) {
     ) {
       return false;
     }
-    if(direction === 'reset') {
+    if (direction === 'reset') {
       this.mapPanZoom.reset();
       if (this.options.initialPan.x != 0 || this.options.initialPan.y != 0) {
         // Init zoom and pan
@@ -1095,6 +1198,18 @@ function svgMapWrapper(svgPanZoom) {
       }
     } else {
       this.mapPanZoom[direction == 'in' ? 'zoomIn' : 'zoomOut']();
+    }
+  };
+
+  // Zoom to Contient
+
+  svgMap.prototype.zoomContinent = function (contientIso) {
+    
+    const continent = this.continents[contientIso];
+    if (continent.iso == "EA") this.mapPanZoom.reset()
+    else if (continent.pan) {
+      this.mapPanZoom.reset()
+      this.mapPanZoom.zoomAtPoint(continent.zoom, continent.pan);
     }
   };
 

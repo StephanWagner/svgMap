@@ -175,6 +175,17 @@
     }
   }
 
+  // Contient controls 
+  .svgMap-map-continent-controls-wrapper{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    display: flex;
+    border-radius: 2px;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  }
+
   // Countries
 
   .svgMap-country {
