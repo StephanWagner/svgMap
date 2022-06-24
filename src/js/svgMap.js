@@ -131,9 +131,6 @@ function svgMapWrapper(svgPanZoom) {
     // Apply map data
     this.applyData(this.options.data);
 
-    // Reset Zoom on resize
-    window.addEventListener('resize', this.mapReset.bind(this));
-
   };
 
   // Countries
@@ -1064,6 +1061,11 @@ function svgMapWrapper(svgPanZoom) {
 
     // Initial zoom statuses
     this.setControlStatuses();
+    
+    // Reset Zoom on resize
+      const resizeObserver = new ResizeObserver(() =>this.mapReset() );
+      resizeObserver.observe(this.mapWrapper);
+      
   };
 
   // Create the tooltip content
