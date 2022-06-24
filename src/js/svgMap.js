@@ -130,6 +130,10 @@ function svgMapWrapper(svgPanZoom) {
 
     // Apply map data
     this.applyData(this.options.data);
+
+    // Reset Zoom on resize
+    window.addEventListener('resize', this.mapReset.bind(this));
+
   };
 
   // Countries
@@ -1177,6 +1181,7 @@ function svgMapWrapper(svgPanZoom) {
 
   svgMap.prototype.zoomMap = function (direction) {
     if (
+      direction !== 'reset' &&
       this[
         'zoomControl' + direction.charAt(0).toUpperCase() + direction.slice(1)
       ].classList.contains('svgMap-disabled')
@@ -1200,10 +1205,16 @@ function svgMapWrapper(svgPanZoom) {
     }
   };
 
+  // Zoom reset
+  svgMap.prototype.mapReset = function () {
+    this.mapPanZoom.resize()
+    this.zoomMap('reset')
+  }
+
   // Zoom to Contient
 
   svgMap.prototype.zoomContinent = function (contientIso) {
-    
+
     const continent = this.continents[contientIso];
     if (continent.iso == "EA") this.mapPanZoom.reset()
     else if (continent.pan) {
