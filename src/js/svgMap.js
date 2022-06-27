@@ -130,6 +130,7 @@ function svgMapWrapper(svgPanZoom) {
 
     // Apply map data
     this.applyData(this.options.data);
+
   };
 
   // Countries
@@ -693,7 +694,7 @@ function svgMapWrapper(svgPanZoom) {
       "iso": "AF",
       "name": "Africa",
       "pan": {
-        x: 454, y: 250
+        x: 0.5, y: 0.7
       },
       "zoom": 1.90
     },
@@ -701,7 +702,7 @@ function svgMapWrapper(svgPanZoom) {
       "iso": "AS",
       "name": "Asia",
       "pan": {
-        x: 904, y: 80
+        x: 1, y: 0.2
       },
       "zoom": 1.8
     },
@@ -709,15 +710,15 @@ function svgMapWrapper(svgPanZoom) {
       "iso": "EU",
       "name": "Europe",
       "pan": {
-        x: 404, y: 80
+        x: 0.5, y: 0.2
       },
-      "zoom": 5
+      "zoom": 4
     },
     "NA": {
       "iso": "NA",
       "name": "North America",
       "pan": {
-        x: 104, y: 55
+        x: 0.1, y: 0.2
       },
       "zoom": 2.6
     },
@@ -726,7 +727,7 @@ function svgMapWrapper(svgPanZoom) {
       "iso": "MA",
       "name": "Middle America",
       "pan": {
-        x: 104, y: 200
+        x: 0.1, y: 0.5
       },
       "zoom": 2.6
     },
@@ -734,7 +735,7 @@ function svgMapWrapper(svgPanZoom) {
       "iso": "SA",
       "name": "South America",
       "pan": {
-        x: 104, y: 340
+        x: 0.15, y: 0.9
       },
       "zoom": 2.2
     },
@@ -742,7 +743,7 @@ function svgMapWrapper(svgPanZoom) {
       "iso": "OC",
       "name": "Oceania",
       "pan": {
-        x: 954, y: 350
+        x: 1, y: 0.9
       },
       "zoom": 1.90
     },
@@ -1060,6 +1061,11 @@ function svgMapWrapper(svgPanZoom) {
 
     // Initial zoom statuses
     this.setControlStatuses();
+    
+    // Reset Zoom on resize
+      const resizeObserver = new ResizeObserver(() =>this.mapReset() );
+      resizeObserver.observe(this.mapWrapper);
+      
   };
 
   // Create the tooltip content
@@ -1177,6 +1183,7 @@ function svgMapWrapper(svgPanZoom) {
 
   svgMap.prototype.zoomMap = function (direction) {
     if (
+      direction !== 'reset' &&
       this[
         'zoomControl' + direction.charAt(0).toUpperCase() + direction.slice(1)
       ].classList.contains('svgMap-disabled')
@@ -1200,15 +1207,25 @@ function svgMapWrapper(svgPanZoom) {
     }
   };
 
+  // Zoom reset
+  svgMap.prototype.mapReset = function () {
+    this.mapPanZoom.resize()
+    this.zoomMap('reset')
+  }
+
   // Zoom to Contient
 
   svgMap.prototype.zoomContinent = function (contientIso) {
-    
+
     const continent = this.continents[contientIso];
     if (continent.iso == "EA") this.mapPanZoom.reset()
     else if (continent.pan) {
+      let pan ={
+        x:this.mapWrapper.offsetWidth*continent.pan.x,
+        y:this.mapWrapper.offsetHeight*continent.pan.y,
+      } 
       this.mapPanZoom.reset()
-      this.mapPanZoom.zoomAtPoint(continent.zoom, continent.pan);
+      this.mapPanZoom.zoomAtPoint(continent.zoom, pan);
     }
   };
 
