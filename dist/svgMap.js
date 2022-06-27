@@ -57,6 +57,9 @@ function svgMapWrapper(svgPanZoom) {
 
       // Decide whether to show the flag option or not
       hideFlag: false,
+      
+      // Whether attributes with no data should be displayed
+      hideMissingData: false,
 
       // The default text to be shown when no data is present
       noDataText: 'No data available',
@@ -1132,14 +1135,16 @@ function svgMapWrapper(svgPanZoom) {
         function (key) {
           var item = this.options.data.data[key];
           var value = this.options.data.values[countryID][key];
-          item.floatingNumbers && (value = value.toFixed(1));
-          item.thousandSeparator &&
-            (value = this.numberWithCommas(value, item.thousandSeparator));
-          value = item.format
-            ? item.format.replace('{0}', '<span>' + value + '</span>')
-            : '<span>' + value + '</span>';
-          tooltipContentTable +=
-            '<tr><td>' + (item.name || '') + '</td><td>' + value + '</td></tr>';
+          if ((value !== undefined && this.options.hideMissingData === true) || this.options.hideMissingData === false) {
+            item.floatingNumbers && (value = value.toFixed(1));
+            item.thousandSeparator &&
+              (value = this.numberWithCommas(value, item.thousandSeparator));
+            value = item.format
+              ? item.format.replace('{0}', '<span>' + value + '</span>')
+              : '<span>' + value + '</span>';
+            tooltipContentTable +=
+              '<tr><td>' + (item.name || '') + '</td><td>' + value + '</td></tr>';
+          }
         }.bind(this)
       );
       tooltipContentTable += '</table>';
