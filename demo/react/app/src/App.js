@@ -11,8 +11,6 @@ class App extends Component {
   componentDidMount() {
     if (!this.svgMap) {
 
-      console.log(this.state);
-
       var mySvgMap = new svgMap({
         targetElementID: 'svgMap',
         data: {
