@@ -99,7 +99,6 @@ You can pass the following options into svgMap:
 | `onGetTooltip` | `function` | | Called when a tooltip is created to custimize the tooltip content (`function (tooltipDiv, countryID, countryValues) { return 'Custom HTML'; }`) |
 | `countries` | `object` | | Additional options specific to countries: |
 | &nbsp;&nbsp;&nbsp;`↳ EH` | `boolean` | `true` | When set to `false`, Western Sahara (EH) will be combined with Morocco (MA) |
-| &nbsp;&nbsp;&nbsp;`↳ Crimea` | `'UA'`, `'RU'` | `'UA'` | Crimea: Set to 'RU' to make the Crimea part of Russia, by default it is part of the Ukraine |
 | `data` | `object` | | The chart data to use for coloring and to show in the tooltip. Use a unique data-id as key and provide following options as value: |
 | &nbsp;&nbsp;&nbsp;`↳ name` | `string` | | The name of the data, it will be shown in the tooltip |
 | &nbsp;&nbsp;&nbsp;`↳ format` | `string` | | The format for the data value, `{0}` will be replaced with the actual value |
