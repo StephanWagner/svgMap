@@ -13,7 +13,7 @@ $blockZoomNoticeBackgroundColor: rgba(0, 0, 0, 0.8);
 $mapControlsColor: #fff;
 $mapControlsBackgroundColor: #111;
 $mapControlsDisabledColor: #ccc;
-$mapControlsBoxShadowColor: rgba(0, 0, 0, 0.1);
+$mapControlsBoxShadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 
 // Map Tooltip
 $mapTooltipColor: #111;
@@ -22,7 +22,7 @@ $mapTooltipFlagBackgroundColor: rgba(0, 0, 0, 0.15);
 $mapTooltipBoxShadowColor: rgba(0, 0, 0, 0.2);
 
 // Continent Controls
-$continentControlsBoxShadowColor: rgba(0, 0, 0, 0.1);
+$continentControlsBoxShadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 
 // Country
 $countryStrokeColor: #fff;
