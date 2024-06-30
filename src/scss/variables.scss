@@ -1,28 +1,28 @@
 // General
-$textColor: #111;
-$textColorLight: #777;
+$textColor: #111 !default;
+$textColorLight: #777 !default;
 
 // Map
-$oceanColor: #d9ecff;
-$mapActiveStrokeColor: #333;
-$mapActiveStrokeWidth: 1.5;
-$blockZoomNoticeColor: #fff;
-$blockZoomNoticeBackgroundColor: rgba(0, 0, 0, 0.8);
+$oceanColor: #d9ecff !default;
+$mapActiveStrokeColor: #333 !default;
+$mapActiveStrokeWidth: 1.5 !default;
+$blockZoomNoticeColor: #fff !default;
+$blockZoomNoticeBackgroundColor: rgba(0, 0, 0, 0.8) !default;
 
 // Map Controls
 $mapControlsColor: #fff;
-$mapControlsBackgroundColor: #111;
-$mapControlsDisabledColor: #ccc;
-$mapControlsBoxShadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+$mapControlsBackgroundColor: #111 !default;
+$mapControlsDisabledColor: #ccc !default;
+$mapControlsBoxShadow: 0 0 0 2px rgba(0, 0, 0, 0.1) !default;
 
 // Map Tooltip
-$mapTooltipColor: #111;
-$mapTooltipBackgroundColor: #fff;
-$mapTooltipFlagBackgroundColor: rgba(0, 0, 0, 0.15);
-$mapTooltipBoxShadowColor: rgba(0, 0, 0, 0.2);
+$mapTooltipColor: #111 !default;
+$mapTooltipBackgroundColor: #fff !default;
+$mapTooltipFlagBackgroundColor: rgba(0, 0, 0, 0.15) !default;
+$mapTooltipBoxShadowColor: rgba(0, 0, 0, 0.2) !default;
 
 // Continent Controls
-$continentControlsBoxShadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+$continentControlsBoxShadow: 0 0 0 2px rgba(0, 0, 0, 0.1) !default;
 
 // Country
-$countryStrokeColor: #fff;
+$countryStrokeColor: #fff !default;
