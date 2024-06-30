@@ -137,7 +137,6 @@ You can overwrite the following scss variables to customize the style of the map
 | $countryStrokeColor             | #fff                         |
 ---
 
-
 ## Localize
 
 Use the option `countryNames` to translate country names. In the folder `demo/html/local` or `demo/es6/local` you can find translations in following languages: Arabic, Chinese, English, French, German, Hindi, Portuguese, Russian, Spanish, Urdu.
