@@ -103,7 +103,7 @@
     height: 10px;
     width: 30px;
 
-    &:after {
+    &::after {
       content: '';
       width: 20px;
       height: 20px;

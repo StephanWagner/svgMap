@@ -74,7 +74,7 @@
     display: flex;
     overflow: hidden;
     border-radius: 2px;
-    box-shadow:  $mapControlsBoxShadow;
+    box-shadow: $mapControlsBoxShadow;
   }
 
   .svgMap-map-controls-zoom,
@@ -90,7 +90,7 @@
   }
 
   .svgMap-control-button {
-    background-color: $mapControlsBackgroundColor;;
+    background-color: $mapControlsBackgroundColor;
     border: none;
     border-radius: 0;
     color: $mapControlsColor;
@@ -104,79 +104,98 @@
     -moz-appearance: none;
     appearance: none;
     cursor: pointer;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     position: relative;
 
     &.svgMap-zoom-button {
-      &:before,
-      &:after {
+      &::before,
+      &::after {
         content: "";
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: $mapControlsBackgroundColor;
+        background: $mapControlsIconColor;
         transition: background-color 250ms;
       }
 
-      &:before {
+      &::before {
         width: 11px;
         height: 3px;
-      }
-      &.svgMap-zoom-reset-button::before {
-        width: 11px;
-        height: 11px;
-        background: none;
-        border: 2px solid $mapControlsBackgroundColor;
       }
 
       @media (hover: hover) {
         &:hover {
-          &:before,
-          &:after {
-            background: $mapControlsBackgroundColor;
+          &::before,
+          &::after {
+            background: $mapControlsIconColorActive;
           }
         }
       }
 
       &:active {
-        &:before,
-        &:after {
-          background: $mapControlsBackgroundColor;
+        &::before,
+        &::after {
+          background: $mapControlsIconColorActive;
+        }
+      }
+
+      &.svgMap-zoom-reset-button {
+        &::before {
+          width: 11px;
+          height: 11px;
+          background: none;
+          border: 2px solid $mapControlsIconColor;
+          transition: border-color 250ms;
+        }
+
+        @media (hover: hover) {
+          &:hover {
+            &::before {
+              background: none;
+              border-color: $mapControlsIconColorActive;
+            }
+          }
+        }
+
+        &:active {
+          &::before {
+            background: none;
+            border-color: $mapControlsIconColorActive;
+          }
         }
       }
 
       &.svgMap-disabled {
-        &:before,
-        &:after {
+        &::before,
+        &::after {
           background: $mapControlsDisabledColor;
         }
       }
+
       &.svgMap-zoom-reset-button {
-        &.svgMap-disabled:before {
-          border: 2px solid $mapControlsDisabledColor;
-          background: none;
+        &.svgMap-disabled {
+          cursor: default;
+
+          &::before {
+            border: 2px solid $mapControlsDisabledColor;
+            background: none;
+          }
         }
       }
     }
 
     &.svgMap-zoom-in-button {
-      margin: 1px 0 1px 1px;
-
-      &:after {
+      &::after {
         width: 3px;
         height: 11px;
       }
     }
-
-    &.svgMap-zoom-out-button {
-      margin: 1px 1px 1px 0;
-    }
   }
 
-  // Contient controls 
-  .svgMap-map-continent-controls-wrapper{
+  // Contient controls
+  .svgMap-map-continent-controls-wrapper {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -193,7 +212,9 @@
     stroke-width: 1;
     stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
-    transition: fill 250ms, stroke 250ms;
+    transition:
+      fill 250ms,
+      stroke 250ms;
 
     &[data-link] {
       cursor: pointer;

@@ -83,10 +83,10 @@
   margin-right: 0;
 }
 .svgMap-map-wrapper .svgMap-control-button {
-  background-color: transparent;
+  background-color: #fff;
   border: none;
   border-radius: 0;
-  color: inherit;
+  color: #fff;
   font: inherit;
   line-height: inherit;
   margin: 0;
@@ -97,53 +97,61 @@
   -moz-appearance: none;
   appearance: none;
   cursor: pointer;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   position: relative;
 }
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:after {
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button::before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button::after {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #666;
+  background: #ccc;
   transition: background-color 250ms;
 }
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:before {
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button::before {
   width: 11px;
   height: 3px;
+}
+@media (hover: hover) {
+  .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover::before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover::after {
+    background: #000;
+  }
+}
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:active::before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:active::after {
+  background: #000;
 }
 .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-zoom-reset-button::before {
   width: 11px;
   height: 11px;
   background: none;
-  border: 2px solid #666;
+  border: 2px solid #ccc;
+  transition: border-color 250ms;
 }
 @media (hover: hover) {
-  .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:after {
-    background: #111;
+  .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-zoom-reset-button:hover::before {
+    background: none;
+    border-color: #000;
   }
 }
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:active:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:active:after {
-  background: #111;
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-zoom-reset-button:active::before {
+  background: none;
+  border-color: #000;
 }
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:after {
-  background: #ccc;
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled::before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled::after {
+  background: #eee;
 }
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-zoom-reset-button.svgMap-disabled:before {
-  border: 2px solid #ccc;
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-zoom-reset-button.svgMap-disabled {
+  cursor: default;
+}
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-zoom-reset-button.svgMap-disabled::before {
+  border: 2px solid #eee;
   background: none;
 }
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-in-button {
-  margin: 1px 0 1px 1px;
-}
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-in-button:after {
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-in-button::after {
   width: 3px;
   height: 11px;
-}
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-out-button {
-  margin: 1px 1px 1px 0;
 }
 .svgMap-map-wrapper .svgMap-map-continent-controls-wrapper {
   position: absolute;
@@ -182,7 +190,7 @@
   border-radius: 2px;
   background: #fff;
   transform: translate(-50%, -100%);
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #111;
   display: none;
   pointer-events: none;
   min-width: 60px;
@@ -190,7 +198,7 @@
 .svgMap-tooltip.svgMap-tooltip-flipped {
   transform: translate(-50%, 0);
   border-bottom: 0;
-  border-top: 1px solid #000;
+  border-top: 1px solid #111;
 }
 .svgMap-tooltip.svgMap-active {
   display: block;
@@ -266,12 +274,12 @@
   height: 10px;
   width: 30px;
 }
-.svgMap-tooltip .svgMap-tooltip-pointer:after {
+.svgMap-tooltip .svgMap-tooltip-pointer::after {
   content: "";
   width: 20px;
   height: 20px;
   background: #fff;
-  border: 1px solid #000;
+  border: 1px solid #111;
   position: absolute;
   bottom: 6px;
   left: 50%;

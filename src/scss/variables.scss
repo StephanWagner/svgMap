@@ -11,8 +11,10 @@ $blockZoomNoticeBackgroundColor: rgba(0, 0, 0, 0.8) !default;
 
 // Map Controls
 $mapControlsColor: #fff;
-$mapControlsBackgroundColor: #111 !default;
-$mapControlsDisabledColor: #ccc !default;
+$mapControlsBackgroundColor: #fff !default;
+$mapControlsIconColor: #ccc !default;
+$mapControlsIconColorActive: #000 !default;
+$mapControlsDisabledColor: #eee !default;
 $mapControlsBoxShadow: 0 0 0 2px rgba(0, 0, 0, 0.1) !default;
 
 // Map Tooltip

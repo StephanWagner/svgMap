@@ -126,8 +126,10 @@ You can overwrite the following scss variables to customize the style of the map
 | $blockZoomNoticeColor           | #fff                         |
 | $blockZoomNoticeBackgroundColor | rgba(0, 0, 0, 0.8)           |
 | $mapControlsColor               | #fff                         |
-| $mapControlsBackgroundColor     | #111                         |
-| $mapControlsDisabledColor       | #ccc                         |
+| $mapControlsBackgroundColor     | #fff                         |
+| $mapControlsIconColor           | #ccc                         |
+| $mapControlsIconColorActive     | #000                         |
+| $mapControlsDisabledColor       | #eee                         |
 | $mapControlsBoxShadow           | 0 0 0 2px rgba(0, 0, 0, 0.1) |
 | $mapTooltipColor                | #111                         |
 | $mapTooltipBackgroundColor      | #fff                         |
