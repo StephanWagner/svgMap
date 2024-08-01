@@ -10,10 +10,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: $blockZoomNoticeBackgroundColor;
   pointer-events: none;
   opacity: 0;
-  color: #fff;
+  color: $blockZoomNoticeColor;
   transition: opacity 250ms;
 
   .svgMap-block-zoom-notice-active & {
@@ -74,7 +74,7 @@
     display: flex;
     overflow: hidden;
     border-radius: 2px;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    box-shadow:  $mapControlsBoxShadow;
   }
 
   .svgMap-map-controls-zoom,
@@ -82,7 +82,7 @@
     display: flex;
     margin-right: 5px;
     overflow: hidden;
-    background: #fff;
+    background: $mapControlsBackgroundColor;
 
     &:last-child {
       margin-right: 0;
@@ -90,10 +90,10 @@
   }
 
   .svgMap-control-button {
-    background-color: transparent;
+    background-color: $mapControlsBackgroundColor;;
     border: none;
     border-radius: 0;
-    color: inherit;
+    color: $mapControlsColor;
     font: inherit;
     line-height: inherit;
     margin: 0;
@@ -116,7 +116,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: #666;
+        background: $mapControlsBackgroundColor;
         transition: background-color 250ms;
       }
 
@@ -128,14 +128,14 @@
         width: 11px;
         height: 11px;
         background: none;
-        border: 2px solid #666;
+        border: 2px solid $mapControlsBackgroundColor;
       }
 
       @media (hover: hover) {
         &:hover {
           &:before,
           &:after {
-            background: $textColor;
+            background: $mapControlsBackgroundColor;
           }
         }
       }
@@ -143,19 +143,19 @@
       &:active {
         &:before,
         &:after {
-          background: $textColor;
+          background: $mapControlsBackgroundColor;
         }
       }
 
       &.svgMap-disabled {
         &:before,
         &:after {
-          background: #ccc;
+          background: $mapControlsDisabledColor;
         }
       }
       &.svgMap-zoom-reset-button {
         &.svgMap-disabled:before {
-          border: 2px solid #ccc;
+          border: 2px solid $mapControlsDisabledColor;
           background: none;
         }
       }
@@ -183,13 +183,13 @@
     z-index: 1;
     display: flex;
     border-radius: 2px;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    box-shadow: $continentControlsBoxShadow;
   }
 
   // Countries
 
   .svgMap-country {
-    stroke: #fff;
+    stroke: $countryStrokeColor;
     stroke-width: 1;
     stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
