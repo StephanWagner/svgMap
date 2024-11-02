@@ -2148,8 +2148,8 @@ function svgMapWrapper(svgPanZoom) {
     // Use canvas to parse the color
     ctx.fillStyle = color;
 
+    // computed color is full hex code in the case of one color only
     return ctx.fillStyle
-    // computed color is full hex code
   }
 
 
