@@ -412,7 +412,7 @@ function svgMapWrapper(svgPanZoom) {
           return;
         }
         if (!data.values[countryID]) {
-          element.setAttribute('fill', this.options.colorNoData);
+          element.setAttribute('fill', this.toHex(this.options.colorNoData));
           return;
         }
         if (typeof data.values[countryID].color != 'undefined') {
@@ -2126,8 +2126,13 @@ function svgMapWrapper(svgPanZoom) {
     return '#' + this.getHex(r) + this.getHex(g) + this.getHex(b);
   };
 
-  // convert color to hex to allow users of the map to pass in
-  // colors in formats other than full hex value.
+  /**
+   * convert color to hex to allow users of the map to pass in
+   * colors in formats other than full hex value.
+   * @param color
+   * @param element
+   * @returns {string}
+   */
   svgMap.prototype.toHex = function (color, element = document.documentElement) {
 
     // Resolve CSS variables
@@ -2143,8 +2148,8 @@ function svgMapWrapper(svgPanZoom) {
     // Use canvas to parse the color
     ctx.fillStyle = color;
 
+    return ctx.fillStyle
     // computed color is full hex code
-    return ctx.fillStyle;
   }
 
 
