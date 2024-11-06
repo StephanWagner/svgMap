@@ -412,7 +412,7 @@ function svgMapWrapper(svgPanZoom) {
           return;
         }
         if (!data.values[countryID]) {
-          element.setAttribute('fill', this.options.colorNoData);
+          element.setAttribute('fill', this.toHex(this.options.colorNoData));
           return;
         }
         if (typeof data.values[countryID].color != 'undefined') {
@@ -425,8 +425,8 @@ function svgMapWrapper(svgPanZoom) {
         );
         var ratio = Math.max(0, Math.min(1, (value - min) / (max - min)));
         var color = this.getColor(
-          this.options.colorMax,
-          this.options.colorMin,
+          this.toHex(this.options.colorMax),
+          this.toHex(this.options.colorMin),
           ratio || ratio === 0 ? ratio : 1
         );
         element.setAttribute('fill', color);
@@ -2125,6 +2125,33 @@ function svgMapWrapper(svgPanZoom) {
     );
     return '#' + this.getHex(r) + this.getHex(g) + this.getHex(b);
   };
+
+  /**
+   * convert color to hex to allow users of the map to pass in
+   * colors in formats other than full hex value.
+   * @param color
+   * @param element
+   * @returns {string}
+   */
+  svgMap.prototype.toHex = function (color, element = document.documentElement) {
+
+    // Resolve CSS variables
+    if (color.startsWith('var(')) {
+      const cssVar = color.slice(4, -1).trim().replaceAll(/["']+/g, '');
+      color = getComputedStyle(element).getPropertyValue(cssVar).trim();
+    }
+
+    // Create an offscreen canvas
+    const canvas = new OffscreenCanvas(1, 1);
+    const ctx = canvas.getContext('2d');
+
+    // Use canvas to parse the color
+    ctx.fillStyle = color;
+
+    // computed color is full hex code in the case of one color only
+    return ctx.fillStyle
+  }
+
 
   // Get a hex value
 
