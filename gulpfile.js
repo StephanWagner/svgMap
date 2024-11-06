@@ -22,8 +22,6 @@ var scripts = [{
   name: 'svgMap',
   src: [
     './src/js/svgMap.js',
-    './src/js/data/**/*.js',
-    './src/js/svgMap/**/*.js',
     './src/js/umd.js'
   ],
   dest: './dist/'
