@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 .svgMap-tooltip {
   box-shadow: 0 0 3px $mapTooltipBoxShadowColor;
   position: absolute;
