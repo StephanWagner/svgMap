@@ -77,6 +77,10 @@
     overflow: hidden;
     border-radius: 2px;
     box-shadow: $mapControlsBoxShadow;
+
+    &.svgMap-disabled {
+      display: none;
+    }
   }
 
   .svgMap-map-controls-zoom,
