@@ -71,6 +71,9 @@
   border-radius: 2px;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
+.svgMap-map-wrapper .svgMap-map-controls-wrapper.svgMap-disabled {
+  display: none;
+}
 .svgMap-map-wrapper .svgMap-map-controls-zoom,
 .svgMap-map-wrapper .svgMap-map-controls-move {
   display: flex;

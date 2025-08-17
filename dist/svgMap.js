@@ -12,6 +12,9 @@ function svgMapWrapper(svgPanZoom) {
       // The element to render the map in
       targetElementID: '',
 
+      // Allow user to zoom and pan
+      allowInteraction: true,
+
       // Minimum and maximum zoom
       minZoom: 1,
       maxZoom: 25,
@@ -27,6 +30,9 @@ function svgMapWrapper(svgPanZoom) {
 
       // Zoom sensitivity
       zoomScaleSensitivity: 0.2,
+
+      // Zoom with double-click
+      dblClickZoomEnabled: true,
 
       // Zoom with mousewheel
       mouseWheelZoomEnabled: true,
@@ -114,6 +120,7 @@ function svgMapWrapper(svgPanZoom) {
 
     // Block scrolling when option is enabled
     if (
+      this.options.allowInteraction &&
       this.options.mouseWheelZoomEnabled &&
       this.options.mouseWheelZoomWithKey
     ) {
@@ -795,8 +802,10 @@ function svgMapWrapper(svgPanZoom) {
           this[zoomControlName].type = 'button';
           this[zoomControlName].addEventListener(
             'click',
-            function () {
-              this.zoomMap(item);
+            function() {
+              if (this.options.allowInteraction) {
+                this.zoomMap(item);
+              }
             }.bind(this),
             { passive: true }
           );
@@ -804,11 +813,16 @@ function svgMapWrapper(svgPanZoom) {
       }.bind(this)
     );
 
+    if (!this.options.allowInteraction) {
+      mapControlsWrapper.classList.add('svgMap-disabled');
+      mapControlsWrapper.setAttribute('aria-disabled', 'true');
+    }
+
     // Add accessible names to zoom controls
     this.zoomControlIn.setAttribute('aria-label', 'Zoom in');
     this.zoomControlOut.setAttribute('aria-label', 'Zoom out');
 
-    if (this.options.showContinentSelector) {
+    if (this.options.allowInteraction && this.options.showContinentSelector) {
       // Add continent controls
       var mapContinentControlsWrapper = this.createElement(
         'div',
@@ -1008,14 +1022,16 @@ function svgMapWrapper(svgPanZoom) {
 
     // Init pan zoom
     this.mapPanZoom = svgPanZoom(this.mapImage, {
-      zoomEnabled: true,
+      zoomEnabled: this.options.allowInteraction,
+      panEnabled: this.options.allowInteraction,
       fit: true,
       center: true,
       minZoom: this.options.minZoom,
       maxZoom: this.options.maxZoom,
       zoomScaleSensitivity: this.options.zoomScaleSensitivity,
       controlIconsEnabled: false,
-      mouseWheelZoomEnabled: this.options.mouseWheelZoomEnabled,
+      dblClickZoomEnabled: this.options.allowInteraction ? this.options.dblClickZoomEnabled : false,
+      mouseWheelZoomEnabled: this.options.allowInteraction ? this.options.mouseWheelZoomEnabled : false,
       preventMouseEventsDefault: true,
       onZoom: function () {
         me.setControlStatuses();
