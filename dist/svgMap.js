@@ -51,8 +51,8 @@ function svgMapWrapper(svgPanZoom) {
       colorMin: '#FFE5D9',
       colorNoData: '#E2E2E2',
 
-      // Color attribute for setting a manual color in the data object
-      manualColorAttribute: 'color',
+      // Ratio type for the color scale, can be 'linear' or 'log' for logarithmic or a custom function (value, min, max) => ratio
+      ratioType: 'linear',
 
       // The flag type can be 'image' or 'emoji'
       flagType: 'image',
@@ -431,16 +431,44 @@ function svgMapWrapper(svgPanZoom) {
           min,
           parseInt(data.values[countryID][data.applyData], 10)
         );
-        var ratio = Math.max(0, Math.min(1, (value - min) / (max - min)));
+
         var color = this.getColor(
           this.toHex(this.options.colorMax),
           this.toHex(this.options.colorMin),
-          ratio || ratio === 0 ? ratio : 1
+          this.calculateColorRatio(value, min, max, this.options.ratioType)
         );
         element.setAttribute('fill', color);
       }.bind(this)
     );
   };
+
+  svgMap.prototype.calculateColorRatio = function (value, min, max, ratioType)  {
+    var range = max - min;
+    var positionInRange = value - min;
+
+    if (range === 0 || positionInRange === 0) {
+      return 0;
+    }
+
+    if (ratioType === 'log') {
+      var logValue = Math.log(positionInRange + 1);
+      var logMin = Math.log(1);
+      var logMax = Math.log(range + 1);
+      var ratio = Math.max(0, Math.min(1, (logValue - logMin) / (logMax - logMin)));
+      return ratio || ratio === 0 ? ratio : 1;
+    }
+
+    if (ratioType === 'linear') {
+      var ratio = Math.max(0, Math.min(1, positionInRange / range));
+      return ratio || ratio === 0 ? ratio : 1;
+    }
+
+    if (typeof ratioType === 'function') {
+      return ratioType(value, min, max);
+    }
+
+    return 1;
+  }
 
   // Emoji flags
 
