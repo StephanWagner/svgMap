@@ -434,7 +434,7 @@ function svgMapWrapper(svgPanZoom) {
         var color = this.getColor(
           this.toHex(this.options.colorMax),
           this.toHex(this.options.colorMin),
-          this.calculateColorRatio(value, min, max, data.options.ratioType)
+          this.calculateColorRatio(value, min, max, this.options.ratioType)
         );
         element.setAttribute('fill', color);
       }.bind(this)
