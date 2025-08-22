@@ -50,9 +50,6 @@ function svgMapWrapper(svgPanZoom) {
       colorMin: '#FFE5D9',
       colorNoData: '#E2E2E2',
 
-      // Color attribute for setting a manual color in the data object
-      manualColorAttribute: 'color',
-
       // The flag type can be 'image' or 'emoji'
       flagType: 'image',
 
