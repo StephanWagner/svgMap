@@ -430,16 +430,32 @@ function svgMapWrapper(svgPanZoom) {
           min,
           parseInt(data.values[countryID][data.applyData], 10)
         );
-        var ratio = Math.max(0, Math.min(1, (value - min) / (max - min)));
+
         var color = this.getColor(
           this.toHex(this.options.colorMax),
           this.toHex(this.options.colorMin),
-          ratio || ratio === 0 ? ratio : 1
+          this.calculateColorRatio(value, min, max)
         );
         element.setAttribute('fill', color);
       }.bind(this)
     );
   };
+
+  svgMap.prototype.calculateColorRatio = function (value, min, max)  {
+    var range = max - min;
+    var positionInRange = value - min;
+
+    if(range === 0 || positionInRange === 0) {
+      return 0;
+    }
+
+    var logValue = Math.log(positionInRange + 1);
+    var logMin = Math.log(1);
+    var logMax = Math.log(range + 1);
+    var ratio = Math.max(0, Math.min(1, (logValue - logMin) / (logMax - logMin)));
+
+    return ratio || ratio === 0 ? ratio : 1;
+  }
 
   // Emoji flags
 
