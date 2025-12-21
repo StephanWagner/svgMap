@@ -214,6 +214,7 @@
   // Countries
 
   .svgMap-country {
+    fill: $colorNoData;
     stroke: $countryStrokeColor;
     stroke-width: 1;
     stroke-linejoin: round;
