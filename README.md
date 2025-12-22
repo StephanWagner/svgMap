@@ -85,6 +85,7 @@ You can pass the following options into svgMap:
 | `showContinentSelector` | `boolean` | `false` | Show continent selector |
 | `zoomScaleSensitivity` | `float` | `0.2` | Sensitivity when zooming |
 | `showZoomReset` | `boolean` | `false` | Show zoom reset button |
+| `resetZoomOnResize` | `boolean` | `false` | Reset map zoom on resize |
 | `zoomButtonsPosition` | `string` | `'bottomLeft'` | Position of the zoom buttons. Possible values: `'topLeft'`, `'topRight'`, `'bottomLeft'`, `'bottomRight'` |
 | `mouseWheelZoomEnabled` | `boolean` | `true` | Enables or disables zooming with the scroll wheel |
 | `mouseWheelZoomWithKey` | `boolean` | `false` | Allow zooming only when one of the following keys is pressed: SHIFT, CONTROL, ALT, COMMAND, OPTION |

@@ -92,6 +92,9 @@ function svgMapWrapper(svgPanZoom) {
 
       // Set to true to show a drop down menu with the continents
       showContinentSelector: false,
+
+      // Reset zoom on resize
+      resetZoomOnResize: false,
     };
 
     this.options = Object.assign({}, defaultOptions, options || {});
@@ -1102,6 +1105,12 @@ function svgMapWrapper(svgPanZoom) {
 
     // Initial zoom statuses
     this.setControlStatuses();
+
+    // Zoom reset on resize
+    if (this.options.resetZoomOnResize) {
+      const resizeObserver = new ResizeObserver(() => this.mapReset());
+      resizeObserver.observe(this.mapWrapper);
+    }
   };
 
   // Create the tooltip content
@@ -1243,6 +1252,12 @@ function svgMapWrapper(svgPanZoom) {
       this.mapPanZoom[direction == 'in' ? 'zoomIn' : 'zoomOut']();
     }
   };
+
+  // Zoom reset
+  svgMap.prototype.mapReset = function () {
+    this.mapPanZoom.resize()
+    this.zoomMap('reset')
+  }
 
   // Zoom to Contient
 
