@@ -70,13 +70,28 @@
 
   .svgMap-map-controls-wrapper {
     position: absolute;
-    bottom: 10px;
-    left: 10px;
     z-index: 1;
     display: flex;
     overflow: hidden;
     border-radius: 2px;
     box-shadow: $mapControlsBoxShadow;
+
+    &.svgMap-controls-position-bottomLeft {
+      bottom: 10px;
+      left: 10px;
+    }
+    &.svgMap-controls-position-bottomRight {
+      bottom: 10px;
+      right: 10px;
+    }
+    &.svgMap-controls-position-topLeft {
+      top: 10px;
+      left: 10px;
+    }
+    &.svgMap-controls-position-topRight {
+      top: 10px;
+      right: 10px;
+    }
 
     &.svgMap-disabled {
       display: none;

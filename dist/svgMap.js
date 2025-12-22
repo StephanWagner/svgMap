@@ -46,6 +46,9 @@ function svgMapWrapper(svgPanZoom) {
       // The message to show for MacOS
       mouseWheelKeyMessageMac: 'Press the [COMMAND] key to zoom',
 
+      // Position of the zoom buttons
+      zoomButtonsPosition: 'bottomLeft',
+
       // Data colors
       colorMax: '#CC0033',
       colorMin: '#FFE5D9',
@@ -406,9 +409,9 @@ function svgMapWrapper(svgPanZoom) {
     });
 
     data.data[data.applyData].thresholdMax &&
-      (max = Math.min(max, data.data[data.applyData].thresholdMax));
+    (max = Math.min(max, data.data[data.applyData].thresholdMax));
     data.data[data.applyData].thresholdMin &&
-      (min = Math.max(min, data.data[data.applyData].thresholdMin));
+    (min = Math.max(min, data.data[data.applyData].thresholdMin));
 
     // Loop through countries and set colors
     Object.keys(this.countries).forEach(
@@ -810,6 +813,7 @@ function svgMapWrapper(svgPanZoom) {
       'svgMap-map-controls-wrapper',
       this.mapWrapper
     );
+    mapControlsWrapper.classList.add('svgMap-controls-position-' + this.options.zoomButtonsPosition);
     var zoomContainer = this.createElement(
       'div',
       'svgMap-map-controls-zoom',
@@ -1172,7 +1176,7 @@ function svgMapWrapper(svgPanZoom) {
           if ((value !== undefined && this.options.hideMissingData === true) || this.options.hideMissingData === false) {
             item.floatingNumbers && (value = value.toFixed(1));
             item.thousandSeparator &&
-              (value = this.numberWithCommas(value, item.thousandSeparator));
+            (value = this.numberWithCommas(value, item.thousandSeparator));
             value = item.format
               ? item.format.replace('{0}', '<span>' + value + '</span>')
               : '<span>' + value + '</span>';
@@ -1218,8 +1222,8 @@ function svgMapWrapper(svgPanZoom) {
   svgMap.prototype.zoomMap = function (direction) {
     if (
       this[
-        'zoomControl' + direction.charAt(0).toUpperCase() + direction.slice(1)
-      ].classList.contains('svgMap-disabled')
+      'zoomControl' + direction.charAt(0).toUpperCase() + direction.slice(1)
+        ].classList.contains('svgMap-disabled')
     ) {
       return false;
     }
@@ -1276,7 +1280,7 @@ function svgMapWrapper(svgPanZoom) {
     }
 
     this.autoHideMouseWheelNoticeTimeout &&
-      clearTimeout(this.autoHideMouseWheelNoticeTimeout);
+    clearTimeout(this.autoHideMouseWheelNoticeTimeout);
     this.autoHideMouseWheelNoticeTimeout = setTimeout(
       function () {
         this.hideMouseWheelZoomNotice();
@@ -1292,7 +1296,7 @@ function svgMapWrapper(svgPanZoom) {
   svgMap.prototype.hideMouseWheelZoomNotice = function () {
     this.wrapper.classList.remove('svgMap-block-zoom-notice-active');
     this.autoHideMouseWheelNoticeTimeout &&
-      clearTimeout(this.autoHideMouseWheelNoticeTimeout);
+    clearTimeout(this.autoHideMouseWheelNoticeTimeout);
   };
 
   // Block shing the zoom wheel notice for some time
@@ -1300,7 +1304,7 @@ function svgMapWrapper(svgPanZoom) {
   svgMap.prototype.blockMouseWheelZoomNotice = function (duration) {
     this.mouseWheelNoticeJustHidden = true;
     this.mouseWheelNoticeJustHiddenTimeout &&
-      clearTimeout(this.mouseWheelNoticeJustHiddenTimeout);
+    clearTimeout(this.mouseWheelNoticeJustHiddenTimeout);
     this.mouseWheelNoticeJustHiddenTimeout = setTimeout(
       function () {
         this.mouseWheelNoticeJustHidden = false;

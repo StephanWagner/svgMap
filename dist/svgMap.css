@@ -63,13 +63,27 @@
 }
 .svgMap-map-wrapper .svgMap-map-controls-wrapper {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
   z-index: 1;
   display: flex;
   overflow: hidden;
   border-radius: 2px;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+.svgMap-map-wrapper .svgMap-map-controls-wrapper.svgMap-controls-position-bottomLeft {
+  bottom: 10px;
+  left: 10px;
+}
+.svgMap-map-wrapper .svgMap-map-controls-wrapper.svgMap-controls-position-bottomRight {
+  bottom: 10px;
+  right: 10px;
+}
+.svgMap-map-wrapper .svgMap-map-controls-wrapper.svgMap-controls-position-topLeft {
+  top: 10px;
+  left: 10px;
+}
+.svgMap-map-wrapper .svgMap-map-controls-wrapper.svgMap-controls-position-topRight {
+  top: 10px;
+  right: 10px;
 }
 .svgMap-map-wrapper .svgMap-map-controls-wrapper.svgMap-disabled {
   display: none;
