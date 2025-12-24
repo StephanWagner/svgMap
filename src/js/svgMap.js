@@ -934,6 +934,10 @@ function svgMapWrapper(svgPanZoom) {
         countryElement.addEventListener(
           'touchstart',
           function (e) {
+            var activeCountries = document.querySelectorAll('.svgMap-active');
+            activeCountries.forEach(function (element) {
+              element.classList.remove('svgMap-active');
+            });
             countryElement.parentNode.appendChild(countryElement);
             countryElement.classList.add('svgMap-active');
 
