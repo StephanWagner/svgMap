@@ -938,13 +938,6 @@ function svgMapWrapper(svgPanZoom) {
             countryElement.classList.add('svgMap-active');
 
             var countryID = countryElement.getAttribute('data-id');
-            var countryLink = countryElement.getAttribute('data-link');
-            if (this.options.touchLink) {
-              if (countryLink) {
-                window.location.href = countryLink;
-                return;
-              }
-            }
             this.setTooltipContent(this.getTooltipContent(countryID));
             this.showTooltip(e);
             this.moveTooltip(e);
@@ -1022,7 +1015,9 @@ function svgMapWrapper(svgPanZoom) {
         countryElement.addEventListener(
           'mouseleave',
           function () {
-            this.hideTooltip();
+            this.tooltipTimeout = setTimeout(function() {
+              this.hideTooltip();
+            }.bind(this), 300);
             countryElement.removeEventListener(
               'mousemove',
               this.tooltipMoveEvent,
@@ -1038,17 +1033,65 @@ function svgMapWrapper(svgPanZoom) {
         countryElement.addEventListener(
           'touchend',
           function () {
-            this.hideTooltip();
-            countryElement.classList.remove('svgMap-active');
-            countryElement.removeEventListener(
-              'touchmove',
-              this.tooltipMoveEvent,
-              { passive: true }
-            );
+            // Do not hide the tooltip, so it stays open on mobile
+          }.bind(this),
+          { passive: true }
+        );
+
+        // Show/hide tooltip on click
+        countryElement.addEventListener(
+          'click',
+          function (e) {
+            e.stopPropagation();
+            var countryID = countryElement.getAttribute('data-id');
+            if (countryElement.getAttribute('data-tooltip-open') === 'true') {
+              this.hideTooltip();
+              countryElement.setAttribute('data-tooltip-open', 'false');
+            } else {
+              this.setTooltipContent(this.getTooltipContent(countryID));
+              this.showTooltip(e);
+              countryElement.setAttribute('data-tooltip-open', 'true');
+            }
           }.bind(this),
           { passive: true }
         );
       }.bind(this)
+    );
+
+    // Hide tooltip on touch outside
+    document.addEventListener(
+      'touchend',
+      function (e) {
+        if (e.target.closest('.svgMap-country') || e.target.closest('.svgMap-tooltip')) {
+          return;
+        }
+        this.hideTooltip();
+        var openTooltips = document.querySelectorAll(
+          '[data-tooltip-open="true"]'
+        );
+        openTooltips.forEach(function (element) {
+          element.setAttribute('data-tooltip-open', 'false');
+        });
+      }.bind(this),
+      { passive: true }
+    );
+
+    // Hide tooltip on click outside
+    document.addEventListener(
+      'click',
+      function (e) {
+        if (e.target.closest('.svgMap-country') || e.target.closest('.svgMap-tooltip')) {
+          return;
+        }
+        this.hideTooltip();
+        var openTooltips = document.querySelectorAll(
+          '[data-tooltip-open="true"]'
+        );
+        openTooltips.forEach(function (element) {
+          element.setAttribute('data-tooltip-open', 'false');
+        });
+      }.bind(this),
+      { passive: true }
     );
 
     // Expose instance
@@ -2063,6 +2106,22 @@ function svgMapWrapper(svgPanZoom) {
       'div',
       'svgMap-tooltip-pointer',
       this.tooltip
+    );
+
+    this.tooltip.addEventListener(
+      'mouseenter',
+      function () {
+        clearTimeout(this.tooltipTimeout);
+      }.bind(this),
+      { passive: true }
+    );
+
+    this.tooltip.addEventListener(
+      'mouseleave',
+      function () {
+        this.hideTooltip();
+      }.bind(this),
+      { passive: true }
     );
   };
 
