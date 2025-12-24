@@ -957,6 +957,7 @@ function svgMapWrapper(svgPanZoom) {
           'mouseenter',
           function (e) {
             countryElement.parentNode.appendChild(countryElement);
+            countryElement.classList.add('svgMap-active');
             var countryID = countryElement.getAttribute('data-id');
             this.setTooltipContent(this.getTooltipContent(countryID));
             this.showTooltip(e);
@@ -1018,6 +1019,7 @@ function svgMapWrapper(svgPanZoom) {
             this.tooltipTimeout = setTimeout(function() {
               this.hideTooltip();
             }.bind(this), 300);
+            countryElement.classList.remove('svgMap-active');
             countryElement.removeEventListener(
               'mousemove',
               this.tooltipMoveEvent,
@@ -1072,6 +1074,10 @@ function svgMapWrapper(svgPanZoom) {
         openTooltips.forEach(function (element) {
           element.setAttribute('data-tooltip-open', 'false');
         });
+        var activeCountries = document.querySelectorAll('.svgMap-active');
+        activeCountries.forEach(function (element) {
+          element.classList.remove('svgMap-active');
+        });
       }.bind(this),
       { passive: true }
     );
@@ -1089,6 +1095,10 @@ function svgMapWrapper(svgPanZoom) {
         );
         openTooltips.forEach(function (element) {
           element.setAttribute('data-tooltip-open', 'false');
+        });
+        var activeCountries = document.querySelectorAll('.svgMap-active');
+        activeCountries.forEach(function (element) {
+          element.classList.remove('svgMap-active');
         });
       }.bind(this),
       { passive: true }
