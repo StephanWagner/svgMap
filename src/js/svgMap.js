@@ -1027,9 +1027,7 @@ function svgMapWrapper(svgPanZoom) {
         countryElement.addEventListener(
           'mouseleave',
           function () {
-            this.tooltipTimeout = setTimeout(function() {
-              this.hideTooltip();
-            }.bind(this), 300);
+            this.hideTooltip();
             countryElement.classList.remove('svgMap-active');
             countryElement.removeEventListener(
               'mousemove',
@@ -2132,7 +2130,6 @@ function svgMapWrapper(svgPanZoom) {
     this.tooltip.addEventListener(
       'mouseenter',
       function () {
-        clearTimeout(this.tooltipTimeout);
       }.bind(this),
       { passive: true }
     );
