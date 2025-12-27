@@ -425,11 +425,11 @@ function svgMapWrapper(svgPanZoom) {
           return;
         }
         if (!data.values[countryID]) {
-          element.setAttribute('fill', this.toHex(this.options.colorNoData));
+          element.style.setProperty('--svg-map-country-fill', this.toHex(this.options.colorNoData));
           return;
         }
         if (typeof data.values[countryID].color != 'undefined') {
-          element.setAttribute('fill', data.values[countryID].color);
+          element.style.setProperty('--svg-map-country-fill', data.values[countryID].color);
           return;
         }
         var value = Math.max(
@@ -442,7 +442,7 @@ function svgMapWrapper(svgPanZoom) {
           this.toHex(this.options.colorMin),
           this.calculateColorRatio(value, min, max, this.options.ratioType)
         );
-        element.setAttribute('fill', color);
+        element.style.setProperty('--svg-map-country-fill', color);
       }.bind(this)
     );
   };
@@ -1027,9 +1027,7 @@ function svgMapWrapper(svgPanZoom) {
         countryElement.addEventListener(
           'mouseleave',
           function () {
-            this.tooltipTimeout = setTimeout(function() {
-              this.hideTooltip();
-            }.bind(this), 300);
+            this.hideTooltip();
             countryElement.classList.remove('svgMap-active');
             countryElement.removeEventListener(
               'mousemove',
@@ -2132,7 +2130,6 @@ function svgMapWrapper(svgPanZoom) {
     this.tooltip.addEventListener(
       'mouseenter',
       function () {
-        clearTimeout(this.tooltipTimeout);
       }.bind(this),
       { passive: true }
     );

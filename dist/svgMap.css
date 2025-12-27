@@ -180,7 +180,7 @@
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 .svgMap-map-wrapper .svgMap-country {
-  fill: #E2E2E2;
+  fill: var(--svg-map-country-fill, #E2E2E2);
   stroke: #fff;
   stroke-width: 1;
   stroke-linejoin: round;
