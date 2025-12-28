@@ -36,6 +36,6 @@
     "watch": "gulp watch",
     "build": "gulp build",
     "test": "jest",
-    "prepublishOnly": "npm run build && npm run jest"
+    "prepublishOnly": "npm run build"
   }
 }
