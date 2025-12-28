@@ -34,3 +34,6 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
+
+# dist
+dist

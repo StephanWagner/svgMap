@@ -10,6 +10,9 @@
     "world-map",
     "chart"
   ],
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/StephanWagner/svgMap.git"
@@ -32,6 +35,7 @@
   "scripts": {
     "watch": "gulp watch",
     "build": "gulp build",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "npm run build && npm run jest"
   }
 }
