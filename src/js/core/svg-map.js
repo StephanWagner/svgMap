@@ -887,13 +887,14 @@ export default class svgMap {
         mapContinentControlsWrapper
       );
       var that = this;
-      Object.keys(svgMap.prototype.continents).forEach(function (item) {
+
+      Object.keys(this.continents).forEach(function (item) {
         let element = that.createElement(
           'option',
           'svgMap-continent-option svgMap-continent-iso-' +
-            svgMap.prototype.continents[item].iso,
+            that.continents[item].iso,
           that['continentSelect'],
-          svgMap.prototype.continents[item].name
+          that.continents[item].name
         );
         element.value = item;
       });
