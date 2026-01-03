@@ -8,6 +8,6 @@
   "quoteProps": "consistent",
   "trailingComma": "none",
   "bracketSpacing": true,
-  "jsxBracketSameLine": false,
+  "bracketSameLine": false,
   "arrowParens": "always"
 }
