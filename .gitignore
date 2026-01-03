@@ -1,11 +1,14 @@
-# CSS and JS maps
+# Build output
+dist/
+
+# Source maps
 *.js.map
 *.css.map
 
-# npm
-node_modules
+# Dependencies
+node_modules/
 
-# OS generated files
+# OS files
 .DS_Store
 .DS_Store?
 ._*
@@ -14,26 +17,15 @@ node_modules
 ehthumbs.db
 Thumbs.db
 
-# Tool specific files
-# vim
+# Editor / IDE
 *~
 *.swp
 *.swo
-# sublime text & textmate
-*.sublime-*
-*.stTheme.cache
-*.tmlanguage.cache
-*.tmPreferences.cache
-# Eclipse
-.settings/*
-# JetBrains, aka PHPStorm, IntelliJ IDEA
-.idea/*
-# NetBeans
-nbproject/*
-# Visual Studio Code
-.vscode
-# Sass preprocessor
-.sass-cache/
 
-# dist
-dist
+.idea/
+.vscode/
+.settings/
+nbproject/
+
+# Sass
+.sass-cache/
