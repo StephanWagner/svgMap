@@ -16,15 +16,15 @@ npm install --save svgmap
 
 ```javascript
 import svgMap from 'svgmap';
-import 'svgmap/dist/svgmap.css';
+import 'svgmap/dist/svg-map.css';
 ```
 
 ### CDN
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/svgmap@v2.18.0/dist/svgMap.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/svgmap@v2.18.0/dist/svgMap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/svgmap@v2.18.0/dist/svg-map.umd.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/svgmap@v2.18.0/dist/svg-map.min.css" rel="stylesheet">
 ```
 
 ---

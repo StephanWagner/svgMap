@@ -3,6 +3,7 @@ import terser from '@rollup/plugin-terser';
 import postcss from 'rollup-plugin-postcss';
 import fs from 'fs';
 import path from 'path';
+import { minify } from 'csso';
 
 const name = 'svgMap';
 
@@ -69,23 +70,29 @@ export default {
     resolve(),
     postcss({
       extract: 'svg-map.css',
-      minimize: true,
-      sourceMap: true,
+      minimize: false,
+      sourceMap: false,
       use: [['sass', { includePaths: ['src'] }]]
     }),
+    {
+      name: 'minify-css',
+      writeBundle() {
+        const dist = 'dist';
+        const input = path.join(dist, 'svg-map.css');
+        const output = path.join(dist, 'svg-map.min.css');
+        const css = fs.readFileSync(input, 'utf8');
+        const result = minify(css);
+        fs.writeFileSync(output, result.css);
+      }
+    },
 
     // Legacy CSS pre 2.18.0
     {
       name: 'legacy-css-alias',
       writeBundle() {
         const dist = 'dist';
-        const src = path.join(dist, 'svg-map.css');
-
-        const targets = ['svgMap.css', 'svgMap.min.css'];
-
-        for (const file of targets) {
-          fs.copyFileSync(src, path.join(dist, file));
-        }
+        fs.copyFileSync(`${dist}/svg-map.min.css`, `${dist}/svgMap.min.css`);
+        fs.copyFileSync(`${dist}/svg-map.css`, `${dist}/svgMap.css`);
       }
     }
   ]
